@@ -1,0 +1,22 @@
+/* Outline */
+.button-outlined {
+  @apply bg-transparent font-semibold py-2 px-4 border border-base active:border-gray-400 rounded-lg my-2;
+}
+
+.button-outlined:focus {
+  @apply outline-none;
+}
+
+.button-outlined:hover {
+  @apply border-gray-500;
+}
+
+/* Filled */
+.button-filled {
+  @apply font-bold border  py-2 px-4 rounded-md transition-colors duration-300 ease-in-out outline-none;
+}
+
+/* Icon */
+.button-icon {
+  @apply font-bold py-2 px-4 rounded-md border inline-flex items-center transition-colors duration-300 ease-in-out outline-none;
+}

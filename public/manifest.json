@@ -1,0 +1,11 @@
+{
+  "name": "next JS web APP",
+  "short_name": "Next PWA",
+  "theme_color": "#ffffff",
+  "background_color": "#050924",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "splash_pages": null
+}

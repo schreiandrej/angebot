@@ -1,0 +1,37 @@
+import { format, differenceInCalendarDays } from 'date-fns'
+
+export const getData = (preisliste, postleitzahl, searchedDate) => {
+  const labels = []
+  const values = []
+  const arr = []
+
+  // Die Daten in der Datenbank laufen immer bis zum Ende des Jahre, deswegen muss die Ausgabe bis zum heutigen Tag gekürzt werden.
+  const realArrayLegnth = differenceInCalendarDays(
+    new Date('2021-12-31'),
+    new Date()
+  )
+
+  let endOfpreisliste = preisliste.length - realArrayLegnth
+
+  for (let i = endOfpreisliste - 1; i !== 0; i--) {
+    arr.push(preisliste[endOfpreisliste - i])
+  }
+
+  // Arrays für das Chart aufbereiten
+  arr.map((item) => {
+    labels.push(format(new Date(item['Datum']), 'dd.MM.yy'))
+    values.push(item[postleitzahl])
+  })
+
+  // Das gesuchte Datum für die Ausgabe formatiern
+  const date = format(new Date(searchedDate), 'dd.MM.yy')
+
+  // Preis heute
+  const today = values[values.length - 1]
+
+  // Preis suche für das gesuchte Datum
+  const dateIndex = labels.indexOf(date)
+  const preis = values[dateIndex]
+
+  return { values, labels, date, postleitzahl, preis, today }
+}
