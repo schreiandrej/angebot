@@ -10,7 +10,7 @@ export const DarkModeToggle = ({ className }) => {
   }, [theme])
 
   return (
-    <label className={`${className} absolute top-5 right-5 `}>
+    <label className={`${className} absolute top-8 right-8 z-20 `}>
       <input
         type='checkbox'
         defaultChecked={true}

@@ -14,7 +14,7 @@ export default function Home({ result, articles, preisliste, weatherData }) {
   const [showWeather, setShowWether] = useState(false)
 
   return (
-    <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-3 p-4 lg:h-screen h w-full realative bg-primary text-primaryText'>
+    <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-3 p-4 lg:h-screen w-full realative bg-base text-base'>
       <Calculator className='col-start-4 col-end-8 row-start-1 row-end-5 ' />
       <Vorkasse className='col-span-3 row-start-1 row-end-7' />
       <News
