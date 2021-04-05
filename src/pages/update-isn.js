@@ -67,8 +67,8 @@ export default function UpdateISN() {
   }
 
   return (
-    <main className='flex h-screen w-full justify-center items-center bg-primary text-primaryText'>
-      <form className='flex flex-col gap-10 items-center justify-center border border-primary rounded-md p-10'>
+    <main className='flex h-screen w-full justify-center items-center'>
+      <form className='flex flex-col gap-10 items-center justify-center border border-base rounded-md p-10'>
         <div>
           <DatePicker
             selected={searchedDate}
@@ -91,7 +91,7 @@ export default function UpdateISN() {
             className='w-min-full text-center'
           />
         </div>
-        <hr className='border border-primary w-full' />
+        <hr className='border border-base w-full' />
         <Input
           type='text'
           name='30-34'
@@ -137,7 +137,7 @@ export default function UpdateISN() {
           labelStyles='left-[30%]'
           register={register({ required: 'Bitte den Preis eingeben!' })}
         />
-        <hr className='border border-primary w-full' />
+        <hr className='border border-base w-full' />
         <button
           type='submit'
           className='button-outlined w-full'

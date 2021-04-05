@@ -1,14 +1,14 @@
 .dark {
   /* background variables */
   --color-background-base: #000000;
-  --color-background-accent: #0a050a;
+  --color-background-accent: #000000;
   /* text variables*/
   --color-text-base: #eeebe6;
   --color-text-inverted: #0d1d22;
   --color-text-hover: #a0a0a0;
   --color-text-heading: #d6943c;
   /* border variables */
-  --color-border-base: #46443a;
+  --color-border-base: #25241e;
   --color-border-hover: #c4c4c4;
   --color-border-active: #ffffff;
   /* ring variables */
@@ -19,19 +19,19 @@
 
 .light {
   /* background variables */
-  --color-background-base: #ffffff;
-  --color-background-accent: #052b3a;
+  --color-background-base: #000000;
+  --color-background-accent: #000000;
   /* text variables*/
   --color-text-base: #d3d3d3;
   --color-text-inverted: var(--color-background-base);
   --color-text-hover: #c22124;
-  --color-text-heading: #e8a628;
+  --color-text-heading: #28abe8;
   /* border variables */
-  --color-border-base: #f98365;
-  --color-border-hover: #c22124;
-  --color-border-active: #e8a628;
+  --color-border-base: #131c3b;
+  --color-border-hover: #154a68;
+  --color-border-active: #117f8d;
   /* ring variables */
-  --color-ring-base: #f98365;
-  --color-ring-hover: #c22124;
-  --color-ring-active: #e8a628;
+  --color-ring-base: #6580f9;
+  --color-ring-hover: #212cc2;
+  --color-ring-active: #1f758b;
 }

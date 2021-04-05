@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { sub, format } from 'date-fns'
 import { options } from '@/components/priceChart/options'
-import { getData } from '@/components/priceChart/sortData'
+import { useSortData } from '@/hooks/useSortData'
 import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
 import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
@@ -28,13 +28,18 @@ export const LineChart = ({ className, preisliste }) => {
         data: chartData.values,
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgba(217, 119, 32, 0.2)',
+        borderColor: 'rgba(40, 171, 232,0.5)',
+        tension: 0.1,
       },
     ],
   }
 
   const onSubmit = (data) => {
-    const lineData = getData(preisliste, data.postleitzahlSelect, searchedDate)
+    const lineData = useSortData(
+      preisliste,
+      data.postleitzahlSelect,
+      searchedDate
+    )
     setChartData({
       values: lineData.values,
       labels: lineData.labels,
@@ -51,7 +56,7 @@ export const LineChart = ({ className, preisliste }) => {
   )
 
   useEffect(() => {
-    const lineData = getData(preisliste, 30, searchedDate)
+    const lineData = useSortData(preisliste, 30, searchedDate)
     setChartData({
       values: lineData.values,
       labels: lineData.labels,
@@ -105,12 +110,6 @@ export const LineChart = ({ className, preisliste }) => {
           </button>
         </div>
       </form>
-      <div className='absolute flex flex-col text-md top-3 left-5 hover:text-gray-500'>
-        {chartData.date}
-        <Link href='/update-isn'>
-          <a>ISN: {chartData.preis} Ct./l</a>
-        </Link>
-      </div>
     </Container>
   )
 }

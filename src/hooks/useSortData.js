@@ -1,6 +1,6 @@
 import { format, differenceInCalendarDays } from 'date-fns'
 
-export const getData = (preisliste, postleitzahl, searchedDate) => {
+export const useSortData = (preisliste, postleitzahl, searchedDate) => {
   const labels = []
   const values = []
   const arr = []
