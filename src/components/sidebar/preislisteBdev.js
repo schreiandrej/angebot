@@ -1,3 +1,5 @@
+import { Title } from '@/components/base/title'
+
 export const PreislisteBdev = ({ preisebdev }) => {
   const convert = (numberString) =>
     new Intl.NumberFormat('de-DE', {
@@ -6,14 +8,16 @@ export const PreislisteBdev = ({ preisebdev }) => {
     }).format(parseFloat(numberString.replace(',', '.')))
   return (
     <div className='text-lg w-full'>
-      <h4 className='text-2xl mb-6'>Preise des BDEV: </h4>
+      <Title className='text-2xl mb-6'>Preise des BDEV: </Title>
       <ul>
         {preisebdev.map((item, index) => (
           <li
             key={index}
             className='flex flex-row items-center justify-between'
           >
-            <span className='flex-grow'>{Object.keys(item)[0]}</span>
+            <span className='flex-grow text-heading'>
+              {Object.keys(item)[0]}
+            </span>
             <span className='flex-shrink text-xs'>
               {item[Object.keys(item)[0]].plz.split(',').length > 4
                 ? item[Object.keys(item)[0]].plz.slice(-22)

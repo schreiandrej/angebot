@@ -50,7 +50,7 @@ export const Vorkasse = ({ className }) => {
 
   return (
     <Container className={`${className}`}>
-      <Title className='mb-4'>vorkasse</Title>
+      <Title className='mb-4'>Vorkasse</Title>
       <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
         <div className='w-full relative'>
           <Input
@@ -96,30 +96,32 @@ export const Vorkasse = ({ className }) => {
             </p>
           )}
         </div>
-        <Select
-          label='Zuschlag'
-          name='zuschlag'
-          register={register}
-          inputStyles='w-full'
-          options={[
-            { option: '', value: 0 },
-            { option: 'Teilmenge', value: 30 },
-            { option: 'Mindermenge', value: 165 },
-          ]}
-        />
-
-        <div className='flex gap-2 items-center w-full justify-end'>
-          <input
-            type='checkbox'
-            id='adr'
-            name='adr'
-            className={`text-transparent rounded-sm`}
-            ref={register}
-            defaultChecked
+        <div className='flex w-full'>
+          <Select
+            label='Zuschlag'
+            name='zuschlag'
+            register={register}
+            inputStyles='w-full'
+            options={[
+              { option: '', value: 0 },
+              { option: 'Teilmenge', value: 30 },
+              { option: 'Mindermenge', value: 165 },
+            ]}
           />
-          <label htmlFor='adr' className=' text-xs'>
-            ADR-Zuschlag
-          </label>
+
+          <div className='flex gap-2 items-center w-full justify-end'>
+            <input
+              type='checkbox'
+              id='adr'
+              name='adr'
+              className={`text-transparent rounded-sm`}
+              ref={register}
+              defaultChecked
+            />
+            <label htmlFor='adr' className=' text-xs'>
+              ADR-Zuschlag
+            </label>
+          </div>
         </div>
 
         <div className=' flex flex-row my-4 gap-2'>

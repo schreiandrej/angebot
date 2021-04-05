@@ -5,8 +5,8 @@
   /* text variables*/
   --color-text-base: #eeebe6;
   --color-text-inverted: #0d1d22;
-  --color-text-hover: #a0a0a0;
-  --color-text-heading: #d6943c;
+  --color-text-hover: #865c2d;
+  --color-text-heading: #ee9f91;
   /* border variables */
   --color-border-base: #25241e;
   --color-border-hover: #c4c4c4;
@@ -24,14 +24,14 @@
   /* text variables*/
   --color-text-base: #d3d3d3;
   --color-text-inverted: var(--color-background-base);
-  --color-text-hover: #c22124;
-  --color-text-heading: #28abe8;
+  --color-text-hover: #2e92a3;
+  --color-text-heading: #1f5d97;
   /* border variables */
   --color-border-base: #131c3b;
   --color-border-hover: #154a68;
-  --color-border-active: #117f8d;
+  --color-border-active: #18c0d6;
   /* ring variables */
-  --color-ring-base: #6580f9;
-  --color-ring-hover: #212cc2;
+  --color-ring-base: #f9f665;
+  --color-ring-hover: #2bccd1;
   --color-ring-active: #1f758b;
 }

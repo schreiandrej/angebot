@@ -5,6 +5,7 @@ import de from 'date-fns/locale/de'
 import { PreislisteBdev } from './preislisteBdev'
 import { useSortData } from '@/hooks/useSortData'
 import { Container } from '@/components/base/container'
+import { Title } from '@/components/base/title'
 
 export const Sidebar = ({ preisebdev, preisliste, setShowContent }) => {
   const heute = new Date()
@@ -13,10 +14,10 @@ export const Sidebar = ({ preisebdev, preisliste, setShowContent }) => {
 
   return (
     <Container className='items-start justify-between'>
-      <div className=''>
-        <h1 className='text-3xl'>Guten Morgen!</h1>
-        <h2 className='text-2xl'>{format(heute, 'PPPP', { locale: de })}</h2>
-      </div>
+      <Title className=''>
+        <div className='text-3xl'>Guten Morgen!</div>
+        <div className='text-2xl'>{format(heute, 'PPPP', { locale: de })}</div>
+      </Title>
       <ISNPreis isnpreis={preis} setShowContent={setShowContent} />
       <PreislisteBdev preisebdev={preisebdev} />
     </Container>

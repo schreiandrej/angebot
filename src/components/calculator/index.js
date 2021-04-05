@@ -45,7 +45,7 @@ export const Calculator = ({ className }) => {
 
   return (
     <Container className={`${className}`}>
-      <Title className='justify-self-start'>calculator</Title>
+      <Title className='justify-self-start'>Calculator</Title>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className='flex flex-col w-full h-full justify-between'
@@ -63,7 +63,7 @@ export const Calculator = ({ className }) => {
               clearForm={clearForm}
             />
             {errors.calc && (
-              <div className='absolute -top-6 text-sm text-red-600 '>
+              <div className='absolute -top-6 right-0 text-sm text-red-600 '>
                 {errors.calc.message}
               </div>
             )}

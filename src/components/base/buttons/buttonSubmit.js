@@ -11,7 +11,7 @@ export const ButtonSubmit = ({ className }) => {
         stroke='currentColor'
         width='20'
         height='20'
-        className='text-center text-green-700 group-hover:text-green-300 w-full'
+        className='text-center text-green-900 group-hover:text-green-300 w-full'
       >
         <path
           strokeLinecap='round'

@@ -24,9 +24,7 @@ export const DarkModeToggle = ({ className }) => {
         stroke='currentColor'
         width='25'
         height='25'
-        className={` ${
-          toggleState === 'dark' ? 'fill-current' : 'bg-transparent'
-        } absolute absolute-center cursor-pointer opacity-50`}
+        className='text-heading absolute absolute-center cursor-pointer'
       >
         <path
           strokeLinecap='round'

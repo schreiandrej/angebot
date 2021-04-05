@@ -51,7 +51,7 @@ export const Input = ({
       />
       <label
         htmlFor={name}
-        className={`absolute -z-10 left-4 flex items-center focus:outline-none transition-all duration-200 ease-in-out ${
+        className={`absolute z-[-10] left-4 flex items-center focus:outline-none transition-all duration-200 ease-in-out ${
           active ? 'text-xs -top-5' : 'text-sm absoluteY-center'
         } ${labelStyles}`}
       >

@@ -1,7 +1,7 @@
 export const ButtonDelete = ({ className, deleteResults }) => {
   return (
     <button
-      className={`button-outlined group ${className}`}
+      className={`button-outlined group w-full ${className}`}
       type='button'
       onClick={deleteResults}
     >
@@ -12,7 +12,7 @@ export const ButtonDelete = ({ className, deleteResults }) => {
         stroke='currentColor'
         width='20'
         height='20'
-        className='text-center text-red-500 text-opacity-30 group-hover:text-opacity-70'
+        className='text-center text-red-900 text-opacity-50 group-hover:text-opacity-100 w-full'
       >
         <path
           strokeLinecap='round'

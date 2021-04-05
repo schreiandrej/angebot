@@ -7,7 +7,7 @@ import DatePicker from 'react-datepicker'
 
 // TODO => a clear form functionality, Back button,  a better Layout ....
 
-export default function UpdateISN() {
+export const UpdateISN = () => {
   const { register, handleSubmit, errors } = useForm()
   const [searchedDate, setSearchedDate] = useState(new Date())
 
@@ -67,8 +67,8 @@ export default function UpdateISN() {
   }
 
   return (
-    <main className='flex h-screen w-full justify-center items-center'>
-      <form className='flex flex-col gap-10 items-center justify-center border border-base rounded-md p-10'>
+    <Container className=''>
+      <form className='flex flex-col gap-10 items-center justify-center border border-base rounded-md'>
         <div>
           <DatePicker
             selected={searchedDate}
@@ -146,6 +146,6 @@ export default function UpdateISN() {
           update
         </button>
       </form>
-    </main>
+    </Container>
   )
 }

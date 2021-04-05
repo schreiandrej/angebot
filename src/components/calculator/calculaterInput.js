@@ -10,7 +10,7 @@ export const CalcInput = ({ className, register, clearForm }) => {
         autoComplete='off'
         inputStyles='w-full py-4 text-center'
         autoFocus
-        placeholder='1 + 1'
+        placeholder=''
       />
       <svg
         xmlns='http://www.w3.org/2000/svg'
@@ -19,7 +19,7 @@ export const CalcInput = ({ className, register, clearForm }) => {
         stroke='currentColor'
         width='20'
         height='20'
-        className='absolute right-3 absoluteY-center z-10 cursor-pointer text-gray-700 hover:text-gray-500'
+        className='absolute right-3 absoluteY-center z-10 cursor-pointer text-gray-900 hover:text-gray-200'
         onClick={clearForm}
       >
         <path

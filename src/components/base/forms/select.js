@@ -29,11 +29,11 @@ export const Select = ({
   }
 
   return (
-    <div className='relative z-10 w-full'>
+    <div className='relative z-10 w-full '>
       <select
         name={name}
         autoComplete={autoComplete}
-        className={`${inputStyles} w-full z-10 text-sm bg-transparent cursor-text transition-all duration-200 ease-in-out ${
+        className={`${inputStyles} w-full z-10 text-sm bg-transparent cursor-pointer transition-all duration-200 ease-in-out ${
           active ? '' : ''
         }`}
         accept={accept}
@@ -58,7 +58,7 @@ export const Select = ({
       </select>
       <label
         htmlFor={name}
-        className={`${labelStyles} absolute -z-10 left-4 flex items-center focus:outline-none transition-all duration-200 ease-in-out ${
+        className={`${labelStyles} absolute z-[-10] left-4 flex items-center focus:outline-none transition-all duration-200 ease-in-out ${
           active ? 'text-xs -top-5' : 'text-sm absoluteY-center'
         }`}
       >

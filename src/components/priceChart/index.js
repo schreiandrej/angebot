@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
 import { Line } from 'react-chartjs-2'
 import { useForm } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
-import { sub, format } from 'date-fns'
+import { format } from 'date-fns'
 import { options } from '@/components/priceChart/options'
 import { useSortData } from '@/hooks/useSortData'
 import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
@@ -29,7 +28,6 @@ export const LineChart = ({ className, preisliste }) => {
         fill: false,
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgba(40, 171, 232,0.5)',
-        tension: 0.1,
       },
     ],
   }
@@ -40,9 +38,14 @@ export const LineChart = ({ className, preisliste }) => {
       data.postleitzahlSelect,
       searchedDate
     )
+
+    const formattedLabels = lineData.labels.map((item) =>
+      format(new Date(item), 'MMM. yy')
+    )
+
     setChartData({
       values: lineData.values,
-      labels: lineData.labels,
+      labels: formattedLabels,
       date: lineData.date,
       plz: lineData.postleitzahl,
       preis: lineData.preis,
@@ -57,6 +60,9 @@ export const LineChart = ({ className, preisliste }) => {
 
   useEffect(() => {
     const lineData = useSortData(preisliste, 30, searchedDate)
+
+    lineData.labels.map((item) => console.log(item))
+
     setChartData({
       values: lineData.values,
       labels: lineData.labels,
@@ -69,7 +75,7 @@ export const LineChart = ({ className, preisliste }) => {
 
   return (
     <Container className={` ${className} relative`}>
-      <Title>preisentwicklung</Title>
+      <Title className='mb-6'>Preisentwicklung</Title>
       <Line data={data} options={options} />
       <form
         onSubmit={handleSubmit(onSubmit)}
