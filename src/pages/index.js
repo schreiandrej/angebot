@@ -2,23 +2,17 @@ import { useState } from 'react'
 import { Calculator } from '@/components/calculator'
 import { Vorkasse } from '@/components/vorkasse'
 import { LineChart } from '@/components/priceChart'
-import { News } from '@/components/news'
-import { WeatherForcast } from '@/components/weather'
 import scraperBDEV from '@/components/sidebar/scraper'
 import scraperNews from '@/components/news/scraper'
 import { connectToDatabase } from '@/utils/dbConnection'
-import { Sidebar } from '@/components/sidebar/index'
+import { Sidebar } from '@/components/sidebar'
+import { SelectPreislisteBdev } from '@/components/preislisteBdev'
 
-export default function Home({
-  preisebdev,
-  articles,
-  preisliste,
-  weatherData,
-}) {
+export default function Home({ preisebdev, preisliste }) {
   const [showContent, setShowContent] = useState(true)
 
   return (
-    <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-3 lg:h-screen p-4 w-full bg-base text-base'>
+    <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>
       <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
         <Sidebar
           preisebdev={preisebdev}
@@ -27,7 +21,7 @@ export default function Home({
         />
       </div>
       {showContent ? (
-        <div className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-3 lg:h-full w-full realative col-start-5 col-end-13 row-start-1 row-end-7'>
+        <div className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-full w-full realative col-start-5 col-end-13 row-start-1 row-end-7'>
           <div className='col-start-1 col-end-7 row-start-1 row-end-5'>
             <Calculator />
           </div>
@@ -35,7 +29,7 @@ export default function Home({
             <Vorkasse />
           </div>
           <div className='col-start-1 col-end-7 row-start-5 row-end-7'>
-            <News articles={articles} />
+            <SelectPreislisteBdev preisebdev={preisebdev} />
           </div>
         </div>
       ) : (

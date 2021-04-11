@@ -5,8 +5,8 @@
   /* text variables*/
   --color-text-base: #eeebe6;
   --color-text-inverted: #0d1d22;
-  --color-text-hover: #865c2d;
-  --color-text-heading: #ee9f91;
+  --color-text-hover: #9e9e9e;
+  --color-text-heading: #eeebe6;
   /* border variables */
   --color-border-base: #25241e;
   --color-border-hover: #c4c4c4;
@@ -19,19 +19,19 @@
 
 .light {
   /* background variables */
-  --color-background-base: #000000;
-  --color-background-accent: #000000;
+  --color-background-base: #dbdbdb;
+  --color-background-accent: #e4e4e4;
   /* text variables*/
-  --color-text-base: #d3d3d3;
-  --color-text-inverted: var(--color-background-base);
-  --color-text-hover: #2e92a3;
-  --color-text-heading: #1f5d97;
+  --color-text-base: #0f0f0f;
+  --color-text-inverted: #ebebeb;
+  --color-text-hover: #999999;
+  --color-text-heading: #000000;
   /* border variables */
-  --color-border-base: #131c3b;
-  --color-border-hover: #154a68;
-  --color-border-active: #18c0d6;
+  --color-border-base: #949494;
+  --color-border-hover: #c4c4c4;
+  --color-border-active: #ffffff;
   /* ring variables */
-  --color-ring-base: #f9f665;
-  --color-ring-hover: #2bccd1;
-  --color-ring-active: #1f758b;
+  --color-ring-base: #535353;
+  --color-ring-hover: #c4c4c4;
+  --color-ring-active: #2e2e2e;
 }

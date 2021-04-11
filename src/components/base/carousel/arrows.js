@@ -1,7 +1,7 @@
 export const ArrowRight = ({ onClick }) => {
   return (
     <div
-      className='absolute z-10 absoluteY-center -right-4 text-base opacity-25 hover:text-hover hover:opacity-100'
+      className='absolute z-10 absoluteY-center right-0 text-base hover:text-hover opacity-10 hover:opacity-100 cursor-pointer'
       onClick={onClick}
     >
       <svg
@@ -26,7 +26,7 @@ export const ArrowRight = ({ onClick }) => {
 export const ArrowLeft = ({ onClick }) => {
   return (
     <div
-      className='absolute z-10 -left-4 absoluteY-center text-base opacity-25 hover:text-hover hover:opacity-100'
+      className='absolute z-10 left-0 absoluteY-center text-base hover:text-hover opacity-10 hover:opacity-100 cursor-pointer'
       onClick={onClick}
     >
       <svg

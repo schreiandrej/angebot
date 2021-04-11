@@ -34,5 +34,15 @@ export default async function scraperBDEV() {
     }
   }
 
-  return regionen
+  const getOptions = (data) => {
+    return data.map((item, index) => ({
+      id: index + 1,
+      name: Object.keys(item)[0],
+      value: item[Object.keys(item)[0]].netto1000,
+      unavailable: false,
+      plz: item[Object.keys(item)[0]].plz,
+    }))
+  }
+
+  return getOptions(regionen)
 }

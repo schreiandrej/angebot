@@ -1,4 +1,27 @@
 import { Title } from '@/components/base/title'
+import { useState, useEffect } from 'react'
+import { Container } from '../base/container'
+import { ListboxComponent } from '../base/headlessUI/listbox'
+
+// { id: 1, name: 'Durward Reynolds', value: x, unavailable: false }
+
+export const SelectPreislisteBdev = ({ preisebdev }) => {
+  const [selectedOption, setSelectedOption] = useState(preisebdev[0])
+
+  if (!selectedOption) return <div>loading....</div>
+
+  return (
+    <Container className='flex flex-col w-full'>
+      <ListboxComponent
+        options={preisebdev}
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+      />
+      <div>{`PLZ: ${selectedOption.plz}`}</div>
+      <div>{`Preis: ${selectedOption.value}`}</div>
+    </Container>
+  )
+}
 
 export const PreislisteBdev = ({ preisebdev }) => {
   const convert = (numberString) =>

@@ -1,12 +1,10 @@
-import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
-import { Slider } from '@/components/base/slider'
+import { Carousel } from '@/components/base/carousel'
 
 export const News = ({ articles, className }) => {
   return (
     <Container className={`${className}`}>
-      <Title>News</Title>
-      <Slider>
+      <Carousel>
         {articles.map((article, index) => {
           return (
             <h3 className='min-w-full px-4 text-center' key={index}>
@@ -19,7 +17,7 @@ export const News = ({ articles, className }) => {
             </h3>
           )
         })}
-      </Slider>
+      </Carousel>
     </Container>
   )
 }

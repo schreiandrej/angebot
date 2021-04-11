@@ -7,8 +7,16 @@ import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
 import { Input } from '@/components/base/forms/input'
 import { Select } from '@/components/base/forms/select'
+import { ListboxComponent } from '../base/headlessUI/listbox'
+
+const listOptions = [
+  { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
+  { id: 1, name: 'Teilmenge', value: 30, unavailable: false },
+  { id: 1, name: 'Mindermenge', value: 165, unavailable: false },
+]
 
 export const Vorkasse = ({ className }) => {
+  const [selectedOption, setSelectedOption] = useState(listOptions[0])
   const { handleSubmit, reset, register, errors, clearErrors } = useForm()
   const [formState, setFormState] = useState({
     liter: 0,
@@ -70,14 +78,6 @@ export const Vorkasse = ({ className }) => {
               Bitte die Litermenge angeben!
             </p>
           )}
-          {/* {errors?.liter?.type === 'max' && (
-          <p className='text-xs text-red-600'>Die Litermenge ist zu groß!</p>
-        )}
-        {errors?.liter?.type === 'min' && (
-          <p className='text-xs text-red-600'>
-            So wening liefern wir nicht aus!
-          </p>
-        )} */}
         </div>
         <div className='w-full relative'>
           <Input
@@ -97,16 +97,10 @@ export const Vorkasse = ({ className }) => {
           )}
         </div>
         <div className='flex w-full'>
-          <Select
-            label='Zuschlag'
-            name='zuschlag'
-            register={register}
-            inputStyles='w-full'
-            options={[
-              { option: '', value: 0 },
-              { option: 'Teilmenge', value: 30 },
-              { option: 'Mindermenge', value: 165 },
-            ]}
+          <ListboxComponent
+            options={listOptions}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
           />
 
           <div className='flex gap-2 items-center w-full justify-end'>
@@ -123,19 +117,18 @@ export const Vorkasse = ({ className }) => {
             </label>
           </div>
         </div>
-
+        <OutputSection
+          liter={formState.liter}
+          preisProLiter={formState.literpreis}
+          preis={totalAmount}
+          zuschlag={formState.zuschlag}
+          adr={formState.adr}
+        ></OutputSection>
         <div className=' flex flex-row my-4 gap-2'>
           <ButtonSubmit className='w-full' />
           <ButtonDelete clearForm={clearForm} />
         </div>
       </form>
-      <OutputSection
-        liter={formState.liter}
-        preisProLiter={formState.literpreis}
-        preis={totalAmount}
-        zuschlag={formState.zuschlag}
-        adr={formState.adr}
-      ></OutputSection>
     </Container>
   )
 }
