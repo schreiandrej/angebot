@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createApi } from 'unsplash-js'
-import copyImg from 'copy-image-clipboard'
+import { copyImg } from './copyToClipboard'
 
 const unsplashApi = createApi({
   accessKey: '65umxT49424gR-yCnG-e7GDQkE8DkJyrnt0VyorxUs4',
@@ -8,13 +8,20 @@ const unsplashApi = createApi({
 
 const PhotoComp = ({ photo }) => {
   const { user, urls } = photo
+  const imageRef = useRef(null)
+
+  const copyImage = async () => {
+    const imageSrc = imageRef.current?.src
+    if (imageSrc) await copyImg(imageSrc)
+  }
 
   return (
     <div className='relative'>
       <img
         src={urls.regular}
         className='cursor-pointer rounded-lg'
-        onClick={() => copyImg(urls.regular)}
+        ref={imageRef}
+        onClick={copyImage}
       />
       <a
         className='absolute bottom-2 right-2 bg-accent rounded-md px-1'

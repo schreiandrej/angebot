@@ -9,7 +9,6 @@
   "dependencies": {
     "chart.js": "2.9.4",
     "cheerio": "1.0.0-rc.5",
-    "copy-image-clipboard": "1.0.1",
     "date-fns": "2.19.0",
     "mongodb": "3.6.5",
     "next": "10.1.3",
