@@ -42,7 +42,7 @@ export const Vorkasse = ({ className }) => {
       ...formState,
       liter: parseFloat(data.liter),
       literpreis: parseFloat(preis),
-      zuschlag: parseFloat(data.zuschlag),
+      zuschlag: parseFloat(selectedOption.value),
       adr: Boolean(data.adr) === true ? 11 : 0,
     })
   }
@@ -101,6 +101,7 @@ export const Vorkasse = ({ className }) => {
             options={listOptions}
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
+            ref={register}
           />
 
           <div className='flex gap-2 items-center w-full justify-end'>

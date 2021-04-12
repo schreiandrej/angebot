@@ -11,14 +11,14 @@ export const SelectPreislisteBdev = ({ preisebdev }) => {
   if (!selectedOption) return <div>loading....</div>
 
   return (
-    <Container className='flex flex-col w-full'>
+    <Container className='flex flex-col w-full items-center gap-2'>
       <ListboxComponent
         options={preisebdev}
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-      <div>{`PLZ: ${selectedOption.plz}`}</div>
-      <div>{`Preis: ${selectedOption.value}`}</div>
+      <div>{`${selectedOption.plz}`}</div>
+      <div>{`${selectedOption.value}`}</div>
     </Container>
   )
 }
