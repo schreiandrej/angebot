@@ -36,7 +36,7 @@ export const ListboxComponent = ({
           >
             <Listbox.Options
               static
-              className='absolute w-full -top-30 text-center py-2 focus:outline-none bg-base'
+              className='absolute w-full text-center py-2 focus:outline-none bg-base overflow-visible'
             >
               {options.map((option) => (
                 <Listbox.Option

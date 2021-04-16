@@ -1,7 +1,7 @@
 import { Title } from '@/components/base/title'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Container } from '../base/container'
-import { ListboxComponent } from '../base/headlessUI/listbox'
+import { ListboxComponent } from './listboxComponent'
 
 // { id: 1, name: 'Durward Reynolds', value: x, unavailable: false }
 
@@ -11,7 +11,7 @@ export const SelectPreislisteBdev = ({ preisebdev }) => {
   if (!selectedOption) return <div>loading....</div>
 
   return (
-    <Container className='flex flex-col w-full items-center gap-2'>
+    <Container className='hidden md:flex flex-col w-full items-center gap-2 '>
       <ListboxComponent
         options={preisebdev}
         selectedOption={selectedOption}

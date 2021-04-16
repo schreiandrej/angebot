@@ -1,19 +1,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { createApi } from 'unsplash-js'
-import { copyImg } from './copyToClipboard'
 
 const unsplashApi = createApi({
   accessKey: '65umxT49424gR-yCnG-e7GDQkE8DkJyrnt0VyorxUs4',
 })
 
-const PhotoComp = ({ photo }) => {
+const PhotoComp = ({ photo, setChangeImage }) => {
   const { user, urls } = photo
   const imageRef = useRef(null)
-
-  const copyImage = async () => {
-    const imageSrc = imageRef.current?.src
-    if (imageSrc) await copyImg(imageSrc)
-  }
 
   return (
     <div className='relative'>
@@ -21,7 +15,7 @@ const PhotoComp = ({ photo }) => {
         src={urls.regular}
         className='cursor-pointer rounded-lg'
         ref={imageRef}
-        onClick={copyImage}
+        onClick={setChangeImage}
       />
       <a
         className='absolute bottom-2 right-2 bg-accent rounded-md px-1'
@@ -36,6 +30,7 @@ const PhotoComp = ({ photo }) => {
 
 export const CoffePicOfTheDay = () => {
   const [data, setPhotosResponse] = useState(null)
+  const [changeImage, setChangeImage] = useState(false)
 
   useEffect(() => {
     unsplashApi.search
@@ -51,7 +46,7 @@ export const CoffePicOfTheDay = () => {
       .catch((error) => {
         console.log('something went wrong!', error)
       })
-  }, [])
+  }, [changeImage])
 
   if (data === null) {
     return <div>Loading...</div>
@@ -65,7 +60,10 @@ export const CoffePicOfTheDay = () => {
   } else {
     return (
       <>
-        <PhotoComp photo={data.response.results[0]} />
+        <PhotoComp
+          setChangeImage={setChangeImage}
+          photo={data.response.results[0]}
+        />
       </>
     )
   }

@@ -12,12 +12,16 @@ export const Sidebar = ({ preisliste, setShowContent }) => {
 
   return (
     <Container className='items-start justify-start'>
-      <Title className=''>
+      <Title className='mb-4'>
         <div className='text-3xl'>Guten Morgen!</div>
         <div className='text-2xl'>{format(heute, 'PPPP', { locale: de })}</div>
       </Title>
       <div className='flex flex-col w-full h-full justify-evenly'>
-        <ISNPreis isnpreis={preis} setShowContent={setShowContent} />
+        <ISNPreis
+          className=''
+          isnpreis={preis}
+          setShowContent={setShowContent}
+        />
         <CoffePicOfTheDay />
       </div>
     </Container>
