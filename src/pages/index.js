@@ -8,7 +8,7 @@ import { connectToDatabase } from '@/utils/dbConnection'
 import { Sidebar } from '@/components/sidebar'
 import { SelectPreislisteBdev } from '@/components/preislisteBdev'
 
-export default function Home({ preisebdev, preisliste }) {
+export default function Home({ preisebdev, preisliste, weatherData }) {
   const [showContent, setShowContent] = useState(true)
 
   return (
@@ -17,6 +17,7 @@ export default function Home({ preisebdev, preisliste }) {
         <Sidebar
           preisebdev={preisebdev}
           preisliste={preisliste}
+          weatherData={weatherData}
           setShowContent={() => setShowContent(!showContent)}
         />
       </div>
