@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Calculator component 1`] = `
+<DocumentFragment>
+  <div
+    class="undefined flex flex-col w-full lg:h-full p-8 overflow-hidden border border-base rounded-md items-center justify-center relative "
+  >
+    <h2
+      class="justify-self-start text-xl pb-3 font-semibold dark:font-normal text-heading uppercase"
+    >
+      calculator
+    </h2>
+    <form
+      class="flex flex-col w-full h-full justify-between"
+    >
+      <div
+        class="flex flex-col w-full"
+      >
+        <div
+          class="relative"
+        >
+          <div
+            class="relative w-full"
+          >
+            <div
+              class="relative z-10"
+            >
+              <input
+                autocomplete="off"
+                class="z-10 text-sm cursor-text  w-full py-4 text-center"
+                name="calc"
+                placeholder="1 + 1"
+                type="text"
+              />
+              <label
+                class="absolute -z-10 left-4 flex items-center focus:outline-none transition-all duration-200 ease-in-out text-xs -top-5 undefined"
+                for="calc"
+              />
+            </div>
+            <svg
+              class="absolute right-3 absoluteY-center z-10 cursor-pointer text-gray-700 hover:text-gray-500"
+              fill="none"
+              height="20"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="flex flex-col w-full py-4 pl-3 justify-end items-end"
+        />
+      </div>
+      <div
+        class="flex flex-row gap-2 w-full lg:justify-end"
+      >
+        <button
+          class="button-outlined group w-full undefined "
+          role="submit-button"
+          type="submit"
+        >
+          <svg
+            class="text-center text-green-700 group-hover:text-green-300 w-full"
+            fill="none"
+            height="20"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+        <button
+          class="button-outlined group undefined"
+          type="button"
+        >
+          <svg
+            class="text-center text-red-500 text-opacity-30 group-hover:text-opacity-70"
+            fill="none"
+            height="20"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</DocumentFragment>
+`;
