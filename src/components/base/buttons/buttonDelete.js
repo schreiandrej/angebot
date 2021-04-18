@@ -1,4 +1,4 @@
-export const ButtonDelete = ({ className, deleteResults }) => {
+export const ButtonDelete = ({ className, deleteResults, id }) => {
   return (
     <button
       className={`button-outlined group ${className}`}
@@ -10,6 +10,7 @@ export const ButtonDelete = ({ className, deleteResults }) => {
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'
+        id={id}
         width='20'
         height='20'
         className='text-center text-red-500 text-opacity-30 group-hover:text-opacity-70'

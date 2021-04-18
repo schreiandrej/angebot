@@ -1,14 +1,16 @@
-export const ButtonSubmit = ({ className }) => {
+export const ButtonSubmit = ({ className, id }) => {
   return (
     <button
       className={`button-outlined group w-full ${className} `}
       type='submit'
+      role='submit-button'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'
         viewBox='0 0 24 24'
         stroke='currentColor'
+        id={id}
         width='20'
         height='20'
         className='text-center text-green-700 group-hover:text-green-300 w-full'

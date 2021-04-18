@@ -53,6 +53,7 @@ export const Calculator = ({ className }) => {
         <div className='flex flex-col w-full'>
           <div className='relative'>
             <CalcInput
+              role='textbox'
               register={register({
                 required: { value: true, message: 'Bitte einen Wert eingeben' },
                 pattern: {
@@ -77,7 +78,9 @@ export const Calculator = ({ className }) => {
                       <span>{item.mathString}</span>
                       <div className='flex flex-row justify-start'>
                         <span className='px-2'>=</span>
-                        <span className='font-semibold'>{item.result}</span>
+                        <span className='font-semibold' data-testid='result'>
+                          {item.result}
+                        </span>
                       </div>
                     </div>
                   </CopyToClipboard>
