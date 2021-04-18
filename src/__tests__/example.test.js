@@ -1,4 +1,3 @@
-import React from 'react'
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react'
 import { Calculator } from '@/components/calculator'
 
@@ -10,7 +9,7 @@ test('renders Calculator component', () => {
 })
 
 test('calculate 3+3', async () => {
-  const { getByRole, getByTestId } = render(<Calculator />)
+  const { getByTestId } = render(<Calculator />)
 
   await act(async () => {
     fireEvent.change(screen.getByRole('textbox'), {
