@@ -6,10 +6,16 @@ import scraperBDEV from '@/components/sidebar/scraper'
 import scraperNews from '@/components/news/scraper'
 import { connectToDatabase } from '@/utils/dbConnection'
 import { Sidebar } from '@/components/sidebar'
-import { SelectPreislisteBdev } from '@/components/preislisteBdev'
+import { WeatherForcast } from '@/components/weather'
+import { UpdateISN } from '@/components/updateISN'
 
 export default function Home({ preisebdev, preisliste, weatherData }) {
-  const [showContent, setShowContent] = useState(true)
+  const [stateScreen, setStateScreen] = useState({
+    calc: true,
+    chart: false,
+    weather: false,
+    updateISN: false,
+  })
 
   return (
     <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>
@@ -18,26 +24,35 @@ export default function Home({ preisebdev, preisliste, weatherData }) {
           preisebdev={preisebdev}
           preisliste={preisliste}
           weatherData={weatherData}
-          setShowContent={() => setShowContent(!showContent)}
+          stateScreen={stateScreen}
+          setStateScreen={setStateScreen}
         />
       </div>
-      {showContent ? (
+      {(stateScreen.calc && (
         <div className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-full w-full realative col-start-5 col-end-13 row-start-1 row-end-7'>
-          <div className='col-start-1 col-end-7 row-start-1 row-end-5'>
+          <div className='col-span-6 row-span-6'>
             <Calculator />
           </div>
-          <div className='col-span-6 row-start-1 row-end-7'>
+          <div className='col-span-6 row-span-6'>
             <Vorkasse />
           </div>
-          <div className='col-start-1 col-end-7 row-start-5 row-end-7'>
-            <SelectPreislisteBdev preisebdev={preisebdev} />
+        </div>
+      )) ||
+        (stateScreen.chart && (
+          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+            <LineChart preisliste={preisliste} />
           </div>
-        </div>
-      ) : (
-        <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
-          <LineChart preisliste={preisliste} className='' />
-        </div>
-      )}
+        )) ||
+        (stateScreen.weather && (
+          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+            <WeatherForcast weatherData={weatherData} />
+          </div>
+        )) ||
+        (stateScreen.updateISN && (
+          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+            <UpdateISN />
+          </div>
+        ))}
     </main>
   )
 }

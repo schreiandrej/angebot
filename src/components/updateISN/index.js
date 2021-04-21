@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { format } from 'date-fns'
-import { mutate } from 'swr'
-import { Input } from '@/components/base/forms/input'
 import DatePicker from 'react-datepicker'
+import { Container } from '@/components/base/container'
 
 // TODO => a clear form functionality, Back button,  a better Layout ....
 
@@ -68,8 +67,9 @@ export const UpdateISN = () => {
 
   return (
     <Container className=''>
-      <form className='flex flex-col gap-10 items-center justify-center border border-base rounded-md'>
-        <div>
+      <form className='flex flex-col gap-10 w-1/3 mx-auto items-center justify-center '>
+        <div className='flex flex-row justify-between items-center w-full'>
+          <label htmlFor=''>Date:</label>
           <DatePicker
             selected={searchedDate}
             onChange={(date) => setSearchedDate(date)}
@@ -91,53 +91,53 @@ export const UpdateISN = () => {
             className='w-min-full text-center'
           />
         </div>
-        <hr className='border border-base w-full' />
-        <Input
-          type='text'
-          name='30-34'
-          label='30-34'
-          autoComplete='off'
-          inputStyles='text-center'
-          labelStyles='left-[40%]'
-          register={register({ required: 'Bitte den Preis eingeben!' })}
-        />
-        <Input
-          type='text'
-          name='35-39'
-          label='35-39'
-          autoComplete='off'
-          inputStyles='text-center'
-          labelStyles='left-[40%]'
-          register={register({ required: 'Bitte den Preis eingeben!' })}
-        />
-        <Input
-          type='text'
-          name='40-45,47'
-          label='40-45,47'
-          autoComplete='off'
-          inputStyles='text-center'
-          labelStyles='left-[35%]'
-          register={register({ required: 'Bitte den Preis eingeben!' })}
-        />
-        <Input
-          type='text'
-          name='46,48,49'
-          label='46,48,49'
-          autoComplete='off'
-          inputStyles='text-center'
-          labelStyles='left-[35%]'
-          register={register({ required: 'Bitte den Preis eingeben!' })}
-        />
-        <Input
-          type='text'
-          name='50-52, 57-59'
-          label='50-52, 57-59'
-          autoComplete='off'
-          inputStyles='text-center'
-          labelStyles='left-[30%]'
-          register={register({ required: 'Bitte den Preis eingeben!' })}
-        />
-        <hr className='border border-base w-full' />
+        <div className='flex flex-row w-full justify-between items-center'>
+          <label htmlFor='30-34'>30-34:</label>
+          <input
+            type='text'
+            name='30-34'
+            autoComplete='off'
+            ref={register({ required: 'Bitte den Preis eingeben!' })}
+          />
+        </div>
+        <div className='flex flex-row w-full justify-between items-center'>
+          <label htmlFor='35-39'>35-39:</label>
+          <input
+            type='text'
+            name='35-39'
+            autoComplete='off'
+            ref={register({ required: 'Bitte den Preis eingeben!' })}
+          />
+        </div>
+        <div className='flex flex-row w-full justify-between items-center'>
+          <label htmlFor='40-45,47'>40-45,47:</label>
+          <input
+            type='text'
+            name='40-45,47'
+            autoComplete='off'
+            ref={register({ required: 'Bitte den Preis eingeben!' })}
+          />
+        </div>
+        <div className='flex flex-row w-full justify-between items-center'>
+          <label htmlFor='46,48,49'>46,48,49:</label>
+          <input
+            type='text'
+            name='46,48,49'
+            autoComplete='off'
+            ref={register({ required: 'Bitte den Preis eingeben!' })}
+          />
+        </div>
+
+        <div className='flex flex-row w-full justify-between items-center'>
+          <label htmlFor='30-34'>30-34:</label>
+          <input
+            type='text'
+            name='50-52, 57-59'
+            autoComplete='off'
+            ref={register({ required: 'Bitte den Preis eingeben!' })}
+          />
+        </div>
+
         <button
           type='submit'
           className='button-outlined w-full'

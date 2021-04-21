@@ -7,9 +7,49 @@ import { Title } from '@/components/base/title'
 import de from 'date-fns/locale/de'
 import format from 'date-fns/format'
 
-export const Sidebar = ({ preisliste, setShowContent, weatherData }) => {
+export const Sidebar = ({
+  preisliste,
+  weatherData,
+  preisebdev,
+  setStateScreen,
+  stateScreen,
+}) => {
   const heute = new Date()
   const { postleitzahl, date, preis } = useSortData(preisliste, 33, heute)
+
+  const showChart = () => {
+    setStateScreen({
+      calc: false,
+      chart: true,
+      weather: false,
+      updateISN: false,
+    })
+  }
+  const showWeather = () => {
+    setStateScreen({
+      calc: false,
+      chart: false,
+      weather: true,
+      updateISN: false,
+    })
+  }
+  const showCalc = () => {
+    setStateScreen({
+      calc: true,
+      chart: false,
+      weather: false,
+      updateISN: false,
+    })
+  }
+
+  const showUpdateISN = () => {
+    setStateScreen({
+      calc: false,
+      chart: false,
+      weather: false,
+      updateISN: true,
+    })
+  }
 
   return (
     <Container className='items-start justify-start'>
@@ -20,14 +60,33 @@ export const Sidebar = ({ preisliste, setShowContent, weatherData }) => {
             {format(heute, 'PPPP', { locale: de })}
           </div>
         </Title>
-        <WeatherWidget weatherData={weatherData} />
+        <WeatherWidget weatherData={weatherData} showWeather={showWeather} />
       </div>
       <div className='flex flex-col w-full h-full justify-evenly'>
-        <ISNPreis
-          className=''
-          isnpreis={preis}
-          setShowContent={setShowContent}
-        />
+        <ISNPreis className='' isnpreis={preis} />
+        <div className='flex w-full gap-2'>
+          <button
+            type='button'
+            className='button-outlined w-full'
+            onClick={showCalc}
+          >
+            Calculator
+          </button>
+          <button
+            type='button'
+            className='button-outlined w-full'
+            onClick={showUpdateISN}
+          >
+            Update
+          </button>
+          <button
+            type='button'
+            className='button-outlined w-full'
+            onClick={showChart}
+          >
+            Chart
+          </button>
+        </div>
         <CoffePicOfTheDay />
       </div>
     </Container>

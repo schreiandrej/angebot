@@ -18,9 +18,9 @@ export const Calculator = ({ className }) => {
     if (data.calc !== '') {
       try {
         const formatedNumber = data.calc.replace(/,/gi, '.')
-        const unformatedResult = stringMath(formatedNumber).toFixed(4)
+        const unformatedResult = stringMath(formatedNumber)
         const result = new Intl.NumberFormat('de-DE', {
-          maximumSignificantDigits: 4,
+          maximumSignificantDigits: 8,
         }).format(unformatedResult)
 
         calculation

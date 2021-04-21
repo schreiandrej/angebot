@@ -14,7 +14,7 @@ export const options = {
         ticks: {
           fontColor: 'rgb(255, 255, 255)',
           autoSkip: true,
-          maxTicksLimit: 25,
+          maxTicksLimit: 15,
         },
       },
     ],

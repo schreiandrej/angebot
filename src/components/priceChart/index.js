@@ -61,8 +61,6 @@ export const LineChart = ({ className, preisliste }) => {
   useEffect(() => {
     const lineData = useSortData(preisliste, 30, searchedDate)
 
-    lineData.labels.map((item) => console.log(item))
-
     setChartData({
       values: lineData.values,
       labels: lineData.labels,
@@ -74,30 +72,35 @@ export const LineChart = ({ className, preisliste }) => {
   }, [])
 
   return (
-    <Container className={` ${className} relative`}>
-      <Title className='mb-6'>Preisentwicklung</Title>
+    <Container className='flex flex-col items-stretch relative'>
+      <Title className='mb-20'>Preisentwicklung</Title>
       <Line data={data} options={options} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className=' flex flex-col w-full items-center gap-1 text-xs pt-10 '
+        className='flex flex-row absolute top-2 right-2 items-center gap-1 text-xs pt-10 '
       >
-        <div className='relative flex w-full gap-1'>
-          <div className='relative'>
-            <label className='absolute -top-5 left-4'>Datum</label>
-            <DatePicker
-              selected={searchedDate}
-              onChange={(date) => setSearchedDate(date)}
-              closeOnScroll={true}
-              dateFormat='dd.MM.yyyy'
-              startDate={searchedDate}
-              className='w-min-full'
-            />
-          </div>
+        <div className='relative'>
+          <label className='absolute -top-5 left-1'>Datum</label>
+          <DatePicker
+            selected={searchedDate}
+            onChange={(date) => setSearchedDate(date)}
+            closeOnScroll={true}
+            dateFormat='dd.MM.yyyy'
+            startDate={searchedDate}
+            className='w-min-full'
+          />
+        </div>
+        <div className='flex flex-col relative w-20'>
+          <label
+            htmlFor='postleitzahlSelect'
+            className='absolute -top-5 left-1'
+          >
+            PLZ
+          </label>
           <Select
-            className='h-full '
+            className=''
             name='postleitzahlSelect'
             options={optionsArray}
-            label='Postleitzahl'
             register={register({
               required: 'Bitte eine Postleitzahl eingeben!',
             })}
@@ -108,13 +111,13 @@ export const LineChart = ({ className, preisliste }) => {
               {errors.postleitzahlSelect.message}
             </p>
           )}
-          <button
-            type='submit'
-            className='w-full button-outlined h-full py-2 important-my-0'
-          >
-            suchen
-          </button>
         </div>
+        <button
+          type='submit'
+          className='button-outlined py-2 ml-5 important-my-0'
+        >
+          suchen
+        </button>
       </form>
     </Container>
   )
