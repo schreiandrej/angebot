@@ -109,7 +109,7 @@ export const LineChart = ({ className, preisliste }) => {
         </div>
         <button
           type='submit'
-          className='button-outlined p-3 ml-5 bg-yellow-900 bg-opacity-70 important-my-0'
+          className='button-outlined p-3 ml-5 ring-1 ring-gray-200 bg-opacity-70 important-my-0'
         >
           suchen
         </button>

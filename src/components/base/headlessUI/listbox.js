@@ -11,6 +11,7 @@ export const ListboxComponent = ({
   options,
   selectedOption,
   setSelectedOption,
+  className,
 }) => {
   return (
     <Listbox
@@ -21,7 +22,9 @@ export const ListboxComponent = ({
     >
       {({ open }) => (
         <>
-          <Listbox.Button className='w-full border border-base hover:border-hover focus:outline-none active:ring-active focus:ring-active focus:ring-1 active:ring-1 rounded-lg p-1'>
+          <Listbox.Button
+            className={`w-full border border-base hover:border-hover focus:outline-none active:ring-active focus:ring-active focus:ring-1 active:ring-1 rounded-lg p-1 ${className}`}
+          >
             {selectedOption.name}
           </Listbox.Button>
           {/* Use the Transition + open render prop argument to add transitions. */}

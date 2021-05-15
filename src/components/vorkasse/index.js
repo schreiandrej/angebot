@@ -6,7 +6,6 @@ import { ButtonDelete } from '@/components/base/buttons/buttonDelete'
 import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
 import { Input } from '@/components/base/forms/input'
-import { Select } from '@/components/base/forms/select'
 import { ListboxComponent } from '@/components/base/headlessUI/listbox'
 
 const listOptions = [
