@@ -35,3 +35,5 @@ export const useSortData = (preisliste, postleitzahl, searchedDate) => {
 
   return { values, labels, date, postleitzahl, preis, today }
 }
+
+export const showOneYear = () => {}

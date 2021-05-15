@@ -13,6 +13,7 @@ export const Sidebar = ({
   preisebdev,
   setStateScreen,
   stateScreen,
+  plzListboxOptions,
 }) => {
   const heute = new Date()
   const { postleitzahl, date, preis } = useSortData(preisliste, 33, heute)
@@ -63,7 +64,12 @@ export const Sidebar = ({
         <WeatherWidget weatherData={weatherData} showWeather={showWeather} />
       </div>
       <div className='flex flex-col w-full h-full justify-evenly'>
-        <ISNPreis className='' isnpreis={preis} preisliste={preisliste} />
+        <ISNPreis
+          className=''
+          isnpreis={preis}
+          preisliste={preisliste}
+          plzListboxOptions={plzListboxOptions}
+        />
         <div className='flex w-full gap-2'>
           <button
             type='button'

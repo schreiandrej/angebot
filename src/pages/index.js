@@ -8,8 +8,14 @@ import { connectToDatabase } from '@/utils/dbConnection'
 import { Sidebar } from '@/components/sidebar'
 import { WeatherForcast } from '@/components/weather'
 import { UpdateISN } from '@/components/updateISN'
+import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
 
-export default function Home({ preisebdev, preisliste, weatherData }) {
+export default function Home({
+  preisebdev,
+  preisliste,
+  weatherData,
+  plzListboxOptions,
+}) {
   const [stateScreen, setStateScreen] = useState({
     calc: true,
     chart: false,
@@ -27,6 +33,7 @@ export default function Home({ preisebdev, preisliste, weatherData }) {
           stateScreen={stateScreen}
           setStateScreen={setStateScreen}
           preisliste={preisliste}
+          plzListboxOptions={plzListboxOptions}
         />
       </div>
       {(stateScreen.calc && (
@@ -41,7 +48,10 @@ export default function Home({ preisebdev, preisliste, weatherData }) {
       )) ||
         (stateScreen.chart && (
           <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
-            <LineChart preisliste={preisliste} />
+            <LineChart
+              preisliste={preisliste}
+              plzListboxOptions={plzListboxOptions}
+            />
           </div>
         )) ||
         (stateScreen.weather && (
@@ -71,6 +81,8 @@ export async function getStaticProps() {
     console.log(`Error: ${err}`)
   }
 
+  const preisArray = JSON.parse(JSON.stringify(doc))
+
   // fetch bdev preise
   const preisebdev = await scraperBDEV()
 
@@ -80,12 +92,23 @@ export async function getStaticProps() {
   const data = await res.json()
   const weatherData = await data.daily
 
+  const plzListboxOptions = []
+  getPostleitzahlArray(preisArray).map((item, index) =>
+    plzListboxOptions.push({
+      id: index,
+      name: item,
+      value: item,
+      unavailable: false,
+    })
+  )
+
   return {
     props: {
       preisebdev,
       articles,
       preisliste: JSON.parse(JSON.stringify(doc)),
       weatherData,
+      plzListboxOptions,
     }, // will be passed to the page component as props
   }
 }
