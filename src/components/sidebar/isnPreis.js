@@ -22,7 +22,8 @@ export const ISNPreis = ({
     const { preis } = useSortData(
       preisliste,
       selectedOption.value,
-      searchedDate
+      searchedDate,
+      0
     )
 
     setShowPreis(preis)

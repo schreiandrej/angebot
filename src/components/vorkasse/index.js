@@ -29,6 +29,14 @@ export const Vorkasse = ({ className }) => {
   const clearForm = () => {
     reset()
     clearErrors(['liter', 'preis'])
+
+    setFormState({
+      ...formState,
+      liter: 0,
+      literpreis: 0,
+      zuschlag: 0,
+      adr: 0,
+    })
   }
 
   const onSubmit = (data) => {
@@ -133,7 +141,7 @@ export const Vorkasse = ({ className }) => {
         ></OutputSection>
         <div className=' flex flex-row my-4 gap-2'>
           <ButtonSubmit className='w-full' />
-          <ButtonDelete clearForm={clearForm} />
+          <ButtonDelete deleteResults={clearForm} />
         </div>
       </form>
     </Container>
