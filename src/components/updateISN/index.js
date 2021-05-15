@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { format } from 'date-fns'
 import DatePicker from 'react-datepicker'
@@ -7,7 +7,7 @@ import { Container } from '@/components/base/container'
 // TODO => a clear form functionality, Back button,  a better Layout ....
 
 export const UpdateISN = () => {
-  const { register, handleSubmit, errors } = useForm()
+  const { register, handleSubmit, reset, errors } = useForm()
   const [searchedDate, setSearchedDate] = useState(new Date())
 
   // TODO => implement an update identifier like an Popup or a snackbar
@@ -48,8 +48,13 @@ export const UpdateISN = () => {
       date,
     })
 
-    updateISNPrice(splittedFormData)
+    reset()
   }
+
+  useEffect(() => {
+    updateISNPrice(splittedFormData)
+    console.log(splittedFormData)
+  }, [splittedFormData])
 
   const updateISNPrice = async (dataToUpdate) => {
     try {

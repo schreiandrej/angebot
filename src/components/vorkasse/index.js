@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { OutputSection } from '@/components/vorkasse/outputSection'
 import { ButtonSubmit } from '@/components/base/buttons/buttonSubmit'
 import { ButtonDelete } from '@/components/base/buttons/buttonDelete'
@@ -7,17 +7,18 @@ import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
 import { Input } from '@/components/base/forms/input'
 import { Select } from '@/components/base/forms/select'
-import { ListboxComponent } from '../base/headlessUI/listbox'
+import { ListboxComponent } from '@/components/base/headlessUI/listbox'
 
 const listOptions = [
   { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
-  { id: 1, name: 'Teilmenge', value: 30, unavailable: false },
+  { id: 1, name: 'Teilmenge', value: 49, unavailable: false },
   { id: 1, name: 'Mindermenge', value: 165, unavailable: false },
 ]
 
 export const Vorkasse = ({ className }) => {
   const [selectedOption, setSelectedOption] = useState(listOptions[0])
-  const { handleSubmit, reset, register, errors, clearErrors } = useForm()
+  const { handleSubmit, reset, register, control, errors, clearErrors } =
+    useForm()
   const [formState, setFormState] = useState({
     liter: 0,
     literpreis: 0,
@@ -97,11 +98,17 @@ export const Vorkasse = ({ className }) => {
           )}
         </div>
         <div className='flex w-full'>
-          <ListboxComponent
-            options={listOptions}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            ref={register}
+          <Controller
+            control={control}
+            name='zuschlag'
+            defaultValue={selectedOption}
+            render={() => (
+              <ListboxComponent
+                options={listOptions}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
+              />
+            )}
           />
 
           <div className='flex gap-2 items-center w-full justify-end'>

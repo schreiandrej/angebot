@@ -26,6 +26,7 @@ export default function Home({ preisebdev, preisliste, weatherData }) {
           weatherData={weatherData}
           stateScreen={stateScreen}
           setStateScreen={setStateScreen}
+          preisliste={preisliste}
         />
       </div>
       {(stateScreen.calc && (

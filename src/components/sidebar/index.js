@@ -1,7 +1,7 @@
 import { ISNPreis } from './isnPreis'
 import { WeatherWidget } from './weatherWidget'
 import { CoffePicOfTheDay } from './coffePicture'
-import { useSortData } from '@/hooks/useSortData'
+import { useSortData } from '@/components/priceChart/useSortData'
 import { Container } from '@/components/base/container'
 import { Title } from '@/components/base/title'
 import de from 'date-fns/locale/de'
@@ -63,7 +63,7 @@ export const Sidebar = ({
         <WeatherWidget weatherData={weatherData} showWeather={showWeather} />
       </div>
       <div className='flex flex-col w-full h-full justify-evenly'>
-        <ISNPreis className='' isnpreis={preis} />
+        <ISNPreis className='' isnpreis={preis} preisliste={preisliste} />
         <div className='flex w-full gap-2'>
           <button
             type='button'

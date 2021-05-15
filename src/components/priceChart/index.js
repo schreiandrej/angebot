@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { format } from 'date-fns'
 import { options } from '@/components/priceChart/options'
-import { useSortData } from '@/hooks/useSortData'
+import { useSortData } from '@/components/priceChart/useSortData'
 import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
 import { Title } from '@/components/base/title'
 import { Container } from '@/components/base/container'
@@ -26,8 +26,7 @@ export const LineChart = ({ className, preisliste }) => {
       {
         data: chartData.values,
         fill: false,
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgba(40, 171, 232,0.5)',
+        borderColor: 'hsl(370, 20%, 40%)',
       },
     ],
   }
@@ -39,13 +38,9 @@ export const LineChart = ({ className, preisliste }) => {
       searchedDate
     )
 
-    const formattedLabels = lineData.labels.map((item) =>
-      format(new Date(item), 'MMM. yy')
-    )
-
     setChartData({
       values: lineData.values,
-      labels: formattedLabels,
+      labels: lineData.labels,
       date: lineData.date,
       plz: lineData.postleitzahl,
       preis: lineData.preis,
@@ -77,7 +72,7 @@ export const LineChart = ({ className, preisliste }) => {
       <Line data={data} options={options} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='flex flex-row absolute top-2 right-2 items-center gap-1 text-xs pt-10 '
+        className='flex flex-row absolute top-12 right-12 items-center gap-1 text-xs pt-10 '
       >
         <div className='relative'>
           <label className='absolute -top-5 left-1'>Datum</label>
@@ -114,7 +109,7 @@ export const LineChart = ({ className, preisliste }) => {
         </div>
         <button
           type='submit'
-          className='button-outlined py-2 ml-5 important-my-0'
+          className='button-outlined p-3 ml-5 bg-yellow-900 bg-opacity-70 important-my-0'
         >
           suchen
         </button>
