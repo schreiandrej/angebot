@@ -93,7 +93,7 @@ export const LineChart = ({ className, preisliste, plzListboxOptions }) => {
           Gesamt
         </button>
 
-        <div className='flex flex-col justify-center relative ml-10 w-20 z-10 text-xs'>
+        {/* <div className='flex flex-col justify-center relative ml-10 w-20 z-10 text-xs'>
           <label
             htmlFor='postleitzahlSelect'
             className='absolute -top-4 left-1'
@@ -107,7 +107,7 @@ export const LineChart = ({ className, preisliste, plzListboxOptions }) => {
             setSelectedOption={setSelectedOption}
             className='py-3'
           />
-        </div>
+        </div> */}
       </div>
     </Container>
   )
