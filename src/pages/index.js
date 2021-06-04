@@ -9,6 +9,7 @@ import { Sidebar } from '@/components/sidebar'
 import { WeatherForcast } from '@/components/weather'
 import { UpdateISN } from '@/components/updateISN'
 import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
+import { Note } from '@/components/auftragsnotiz/note'
 
 export default function Home({
   preisebdev,
@@ -22,6 +23,7 @@ export default function Home({
     weather: false,
     updateISN: false,
   })
+  const [notizVorkasse, setNotizVorkasse] = useState(true)
 
   return (
     <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>
@@ -41,8 +43,15 @@ export default function Home({
           <div className='col-span-6 row-span-6'>
             <Calculator />
           </div>
-          <div className='col-span-6 row-span-6'>
-            <Vorkasse />
+
+          <div className='relative col-span-6 row-span-6'>
+            <button
+              className='absolute top-1 right-12 z-20 button-outlined text-xs'
+              onClick={() => setNotizVorkasse(!notizVorkasse)}
+            >
+              {notizVorkasse ? 'vorkasse' : 'notiz'}
+            </button>
+            {notizVorkasse ? <Note /> : <Vorkasse />}
           </div>
         </div>
       )) ||
