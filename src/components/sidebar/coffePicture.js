@@ -35,7 +35,7 @@ export const CoffePicOfTheDay = () => {
   useEffect(() => {
     unsplashApi.search
       .getPhotos({
-        query: 'coffee cup',
+        query: 'good morning',
         orientation: 'landscape',
         page: Math.floor(Math.random() * 100),
         per_page: 1,
