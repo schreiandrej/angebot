@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { createApi } from 'unsplash-js'
-import { useForm } from 'react-hook-form'
+import { SearchButton } from './searchButton'
+import {useSearchPictureModal, useSearchedWord, useChagenImage} from '@/store/context'
+
 const unsplashApi = createApi({
-  accessKey: '65umxT49424gR-yCnG-e7GDQkE8DkJyrnt0VyorxUs4',
+  accessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESS,
 })
 
 const PhotoComp = ({ photo, setChangeImage }) => {
@@ -31,20 +33,11 @@ const PhotoComp = ({ photo, setChangeImage }) => {
 
 export const CoffePicOfTheDay = () => {
   const [data, setPhotosResponse] = useState(null)
-  const [changeImage, setChangeImage] = useState(false)
-  const { register, handleSubmit, errors } = useForm()
-  const [searchWord, setSearchWord] = useState('coffee')
+  const { searchWord, setSearchWord } = useSearchedWord()
+  const { modalState, setModalState } = useSearchPictureModal()
+  const {changeImage, setChangeImage} = useChagenImage()
 
-  const onSubmit = (data) => {
-    console.log(data.searchWord.length)
-    
-    if (data.searchWord.length > 0) { 
-      console.log('i am here');
-      
-      setSearchWord(data.searchWord)
-      setChangeImage(!changeImage)
-  }
-  }
+  
 
   useEffect(() => {
     unsplashApi.search
@@ -73,22 +66,8 @@ export const CoffePicOfTheDay = () => {
     )
   } else {
     return (
-      <div className='flex flex-col gap-2'>
-        <form
-          className='flex flex-row w-full gap-2 max-h-10'
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <input
-            type='text'
-            name='searchWord'
-            placeholder='search'
-            className='w-2/3'
-            ref={register}
-          />
-          <button type='submit' className='button-outlined w-1/3 m-0'>
-            search
-          </button>
-        </form>
+      <div className='flex flex-col gap-2 relative'>
+        <SearchButton className={`opacity-0 group-hover:opacity-100`} setModalState={setModalState} />
         <PhotoComp
           setChangeImage={setChangeImage}
           photo={data.response.results[0]}

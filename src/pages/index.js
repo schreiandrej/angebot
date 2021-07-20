@@ -11,6 +11,7 @@ import { UpdateISN } from '@/components/updateISN'
 import { getPostleitzahlArray } from '@/components/priceChart/getPostleitzeitArray'
 import { Note } from '@/components/auftragsnotiz/note'
 
+
 export default function Home({
   preisebdev,
   preisliste,
@@ -24,6 +25,7 @@ export default function Home({
     updateISN: false,
   })
   const [notizVorkasse, setNotizVorkasse] = useState(true)
+
 
   return (
     <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>

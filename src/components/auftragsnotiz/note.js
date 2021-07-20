@@ -17,17 +17,17 @@ export const Note = () => {
 
   const onSubmit = (data) => {
     setCopyText({
-      Telefon: ` ${data.anrufnummer ? data.anrufnummer : '-'}`,
-      'E-mail': ` ${data.email ? data.email : '-'}`,
+      Telefon: ` ${data.anrufnummer ? data.anrufnummer : '---'}`,
+      'E-mail': ` ${data.email ? data.email : '---'}`,
       Bestellzeit: ` ${data.bestellzeit.slice(0, 2)}:${data.bestellzeit.slice(
         2,
         4
       )} Uhr`,
       Preis: ` ${data.preis} €`,
       Füllstand: ` ${data.fuellstand} %`,
-      'Preis genannt': ` ${data.preisgenannt ? 'ja' : 'nein'}`,
+      'Preis genannt': ` ${data.preisgenannt ? 'JA' : 'NEIN'}`,
       Sondervereinbarung: ` ${
-        data.sondervereinbarung ? data.sondervereinbarung : '-'
+        data.sondervereinbarung ? data.sondervereinbarung : '---'
       }`,
     })
     reset()
@@ -49,8 +49,8 @@ export const Note = () => {
   return (
     <Container>
       <form className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
-        <Anrufnummer ref={register} />
         <EMail ref={register} />
+        <Anrufnummer ref={register} />
         <Bestellzeit ref={register} />
         <PreisPro100Liter ref={register} />
         <Fuellstand ref={register} />
