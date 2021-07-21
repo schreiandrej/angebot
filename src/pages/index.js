@@ -81,13 +81,13 @@ export default function Home({
 
 export async function getStaticProps() {
   // fetch news
-  const articles = await scraperNews()
+  // const articles = await scraperNews()
 
   // fetch isn pricelist
   let doc = null
   const { db } = await connectToDatabase()
   try {
-    doc = await db.collection('preisliste').find({}).sort().toArray()
+    doc = await db.collection('preisliste').find({}).sort({'Datum': 1}).toArray()
   } catch (err) {
     console.log(`Error: ${err}`)
   }
@@ -98,7 +98,7 @@ export async function getStaticProps() {
   const preisebdev = await scraperBDEV()
 
   // wether data
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=0e3c8e20a71d95e79c8837ed8b306239`
+  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_ID}`
   const res = await fetch(url)
   const data = await res.json()
   const weatherData = await data.daily
@@ -116,7 +116,7 @@ export async function getStaticProps() {
   return {
     props: {
       preisebdev,
-      articles,
+      // articles,
       preisliste: JSON.parse(JSON.stringify(doc)),
       weatherData,
       plzListboxOptions,
