@@ -5,8 +5,9 @@ import { ButtonSubmit } from '@/components/Base/Buttons/ButtonSubmit'
 import { ButtonDelete } from '@/components/Base/Buttons/ButtonDelete'
 import { Title } from '@/components/Base/Title'
 import { Container } from '@/components/Base/Container'
-import { Input } from '@/components/Base/Forms/Input'
-import { ListboxComponent } from '@/components/Base/HeadlessUI/Listbox'
+// import { Input } from '@/components/Base/Forms/Input'
+import { ListboxComponent } from '@/components/Vorkasse/Listbox'
+import { Input } from 'sa-tw-lib'
 
 const listOptions = [
   { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
@@ -14,11 +15,18 @@ const listOptions = [
   { id: 1, name: 'Mindermenge', value: 165, unavailable: false },
 ]
 
-export const Vorkasse = ({ className }) => {
+interface IForm {
+  liter: number
+  literpreis: number
+  zuschlag: number
+  adr: number
+}
+
+export const Vorkasse = ({ className }: { className?: string }) => {
   const [selectedOption, setSelectedOption] = useState(listOptions[0])
   const { handleSubmit, reset, register, control, errors, clearErrors } =
     useForm()
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<IForm>({
     liter: 0,
     literpreis: 0,
     zuschlag: 0,
@@ -39,7 +47,7 @@ export const Vorkasse = ({ className }) => {
     })
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: { preis: string; liter: string; adr: string }) => {
     const replacedCommaa = data.preis?.replace(',', '.')
     const preis =
       parseFloat(replacedCommaa) < 1
@@ -49,8 +57,8 @@ export const Vorkasse = ({ className }) => {
     setFormState({
       ...formState,
       liter: parseFloat(data.liter),
-      literpreis: parseFloat(preis),
-      zuschlag: parseFloat(selectedOption.value),
+      literpreis: parseFloat(data.preis),
+      zuschlag: selectedOption.value,
       adr: Boolean(data.adr) === true ? 11 : 0,
     })
   }
@@ -75,7 +83,7 @@ export const Vorkasse = ({ className }) => {
             label='Liter'
             inputStyles='w-full'
             autoComplete='off'
-            register={register({
+            ref={register({
               required: true,
               min: 0,
               max: 24000,
@@ -94,7 +102,7 @@ export const Vorkasse = ({ className }) => {
             label='Preis/l'
             inputStyles='w-full'
             autoComplete='off'
-            register={register({
+            ref={register({
               required: 'Bitte ein Preis eingeben',
             })}
           />
@@ -140,8 +148,8 @@ export const Vorkasse = ({ className }) => {
           adr={formState.adr}
         ></OutputSection>
         <div className=' flex flex-row my-4 gap-2'>
-          <ButtonSubmit className='w-full' />
-          <ButtonDelete deleteResults={clearForm} />
+          <ButtonSubmit id='vorkasseSubmitButton' className='w-full' />
+          <ButtonDelete id='vorkasseDeleteButton' deleteResults={clearForm} />
         </div>
       </form>
     </Container>

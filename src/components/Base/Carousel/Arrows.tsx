@@ -1,4 +1,8 @@
-export const ArrowRight = ({ onClick }) => {
+type ArrowProps = {
+  onClick: () => void
+}
+
+export const ArrowRight = ({ onClick }: ArrowProps) => {
   return (
     <div
       className='absolute z-10 absoluteY-center right-0 text-base hover:text-hover opacity-10 hover:opacity-100 cursor-pointer'
@@ -23,7 +27,7 @@ export const ArrowRight = ({ onClick }) => {
   )
 }
 
-export const ArrowLeft = ({ onClick }) => {
+export const ArrowLeft = ({ onClick }: ArrowProps) => {
   return (
     <div
       className='absolute z-10 left-0 absoluteY-center text-base hover:text-hover opacity-10 hover:opacity-100 cursor-pointer'

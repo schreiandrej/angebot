@@ -1,11 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ReactChild, ReactNode } from 'react'
 import { ArrowLeft, ArrowRight } from './Arrows'
 import { Indicators } from './Indcators'
 
-export const Carousel = ({ children, className }) => {
+type CarouselProps = {
+  children: ReactChild[]
+  className?: string
+}
+
+export const Carousel = ({ children, className }: CarouselProps) => {
   // ...
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [length, setLength] = useState(children.length)
+
+  const [length, setLength] = useState(children && children.length)
 
   // Set the length to match current children from props
   useEffect(() => {
@@ -50,7 +56,11 @@ export const Carousel = ({ children, className }) => {
   )
 }
 
-export const SliderItem = ({ children }) => {
+type SliderItemProps = {
+  children: ReactNode
+}
+
+export const SliderItem = ({ children }: SliderItemProps) => {
   return (
     <div className='w-full flex justify-center flex-shrink-0 flex-grow'>
       {children}

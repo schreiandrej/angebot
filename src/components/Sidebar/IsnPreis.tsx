@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react'
 import DatePicker from 'react-datepicker'
 import { useSortData } from '@/components/PriceChart/useSortData'
-import { ListboxComponent } from '@/components/Base/HeadlessUI/Listbox'
+import { ListboxComponent } from '@/components/Vorkasse/Listbox'
+
+type ISNPreisProps = {
+  isnpreis: any
+  className?: string
+  preisliste: any
+  plzListboxOptions: any
+}
 
 export const ISNPreis = ({
   isnpreis,
   className,
   preisliste,
   plzListboxOptions,
-}) => {
+}: ISNPreisProps) => {
   const [optionsList, setOptionsList] = useState([])
   const [selectedOption, setSelectedOption] = useState(plzListboxOptions[0])
   const [searchedDate, setSearchedDate] = useState(new Date())
@@ -41,7 +48,7 @@ export const ISNPreis = ({
           <label className='absolute -top-5 left-1'>Datum</label>
           <DatePicker
             selected={searchedDate}
-            onChange={(date) => setSearchedDate(date)}
+            onChange={(date: any) => setSearchedDate(date)}
             closeOnScroll={true}
             dateFormat='dd.MM.yyyy'
             startDate={searchedDate}

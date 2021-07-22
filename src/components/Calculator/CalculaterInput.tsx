@@ -1,16 +1,23 @@
-import { Input } from '@/components/Base/Forms/Input'
+import { Input } from 'sa-tw-lib'
 
-export const CalcInput = ({ className, register, clearForm }) => {
+interface CalculaterInputProp {
+  register: any
+  clearForm: () => void
+}
+
+export const CalculaterInput = ({
+  register,
+  clearForm,
+}: CalculaterInputProp) => {
   return (
     <div className='relative w-full'>
       <Input
-        register={register}
+        ref={register}
+        label=''
         type='text'
         name='calc'
         autoComplete='off'
         inputStyles='w-full py-4 text-center'
-        autoFocus
-        placeholder=''
       />
       <svg
         xmlns='http://www.w3.org/2000/svg'

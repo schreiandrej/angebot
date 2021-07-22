@@ -1,8 +1,15 @@
-export const Indicators = ({ itemCount, currentIndex }) => {
+import { ReactChild } from 'react'
+
+type IndicatorsProps = {
+  itemCount: ReactChild[]
+  currentIndex: number
+}
+
+export const Indicators = ({ itemCount, currentIndex }: IndicatorsProps) => {
   return (
     <div className='flex flex-row w-full justify-center gap-2 py-2'>
-      {itemCount.map((item, index) => (
-        <div key={index}>
+      {itemCount.map((item, index: number) => (
+        <div key={`${item}${index}`}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 20 20'

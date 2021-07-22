@@ -1,8 +1,13 @@
+import { ReactNode } from 'react'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
 import { DarkModeToggle } from '@/components/Base/DarkModeToggle'
 
-export function Layout({ children }) {
+type LayoutProps = {
+  children: ReactNode
+}
+
+export function Layout({ children }: LayoutProps) {
   return (
     <>
       <Head>

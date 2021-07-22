@@ -1,4 +1,14 @@
-export const ButtonDelete = ({ className, deleteResults, id }) => {
+type ButtonDeleteProps = {
+  className?: string
+  deleteResults?: () => void
+  id: string
+}
+
+export const ButtonDelete = ({
+  className,
+  deleteResults,
+  id,
+}: ButtonDeleteProps) => {
   return (
     <button
       className={`button-outlined group w-full ${className}`}

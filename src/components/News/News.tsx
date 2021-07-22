@@ -1,7 +1,15 @@
 import { Container } from '@/components/Base/Container'
 import { Carousel } from '@/components/Base/Carousel'
 
-export const News = ({ articles, className }) => {
+type NewsProps = {
+  articles: {
+    text: string | undefined
+    url: string
+  }[]
+  className?: string
+}
+
+export const News = ({ articles, className }: NewsProps) => {
   return (
     <Container className={`${className}`}>
       <Carousel>

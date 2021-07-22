@@ -9,14 +9,22 @@ import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArr
 import { Title } from '@/components/Base/Title'
 import { Container } from '@/components/Base/Container'
 import { data } from './chartData'
-import { ListboxComponent } from '@/components/Base/HeadlessUI/Listbox'
+import { ListboxComponent } from '@/components/Vorkasse/Listbox'
+import { OptionsType } from '@/types/index'
 
-export const LineChart = ({ className, preisliste, plzListboxOptions }) => {
-  const [chartData, setChartData] = useState({
-    labels: '',
-    values: '',
-  })
-  const [optionsList, setOptionsList] = useState([])
+type LineChartProps = {
+  className?: string
+  preisliste: any
+  plzListboxOptions: OptionsType[]
+}
+
+export const LineChart = ({
+  className,
+  preisliste,
+  plzListboxOptions,
+}: LineChartProps) => {
+  const [chartData, setChartData] = useState<{ values: any[]; labels: any[] }>()
+  const [optionsList, setOptionsList] = useState<OptionsType[]>()
   const [selectedOption, setSelectedOption] = useState(plzListboxOptions[0])
   const [searchedDate, setSearchedDate] = useState(new Date())
 
@@ -31,7 +39,7 @@ export const LineChart = ({ className, preisliste, plzListboxOptions }) => {
     setOptionsList(plzListboxOptions)
   }, [])
 
-  const setChartToDiffrenPeriod = (period) => {
+  const setChartToDiffrenPeriod = (period: number) => {
     const lineData = useSortData(
       preisliste,
       selectedOption.value,
@@ -48,7 +56,14 @@ export const LineChart = ({ className, preisliste, plzListboxOptions }) => {
   return (
     <Container className='flex flex-col items-stretch relative'>
       <Title className='mb-20'>Preisentwicklung</Title>
-      <Line data={data(chartData.labels, chartData.values)} options={options} />
+      {chartData ? (
+        <Line
+          data={data(chartData.labels, chartData.values)}
+          options={options}
+        />
+      ) : (
+        <div>Error no data found!</div>
+      )}
       <div className='flex flex-row gap-1 absolute top-12 right-12 text-sm'>
         <button
           type='button'

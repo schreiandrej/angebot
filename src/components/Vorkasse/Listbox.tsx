@@ -1,18 +1,35 @@
 import { Listbox, Transition } from '@headlessui/react'
 
-// Options example
-// const people = [
-//   { id: 1, name: 'Durward Reynolds', value: x, unavailable: false },
-//   { id: 2, name: 'Kenton Towne', value: x, unavailable: false },
-//   { id: 3, name: 'Therese Wunsch', value: x, unavailable: true },
-// ]
+/**
+ * @example
+ * Options example
+ * const people = [
+ * { id: 1, name: 'Durward Reynolds', value: x, unavailable: false },
+ * { id: 2, name: 'Kenton Towne', value: x, unavailable: false },
+ * { id: 3, name: 'Therese Wunsch', value: x, unavailable: true },
+ * ]
+ */
+
+type OptionsType = {
+  id: number
+  name: string
+  value: number
+  unavailable: boolean
+}
+
+type ListboxComponentProps = {
+  options: OptionsType[]
+  selectedOption: OptionsType
+  setSelectedOption: any
+  className?: string
+}
 
 export const ListboxComponent = ({
   options,
   selectedOption,
   setSelectedOption,
   className,
-}) => {
+}: ListboxComponentProps) => {
   return (
     <Listbox
       as='div'
@@ -61,7 +78,7 @@ export const ListboxComponent = ({
   )
 }
 
-export const CheckmarkIcon = ({ className }) => {
+export const CheckmarkIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

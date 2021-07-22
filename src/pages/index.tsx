@@ -1,23 +1,30 @@
+import { GetStaticProps } from 'next'
 import { useState } from 'react'
 import { Calculator } from '@/components/Calculator/Calculator'
 import { Vorkasse } from '@/components/Vorkasse/Vorkasse'
 import { LineChart } from '@/components/PriceChart/PriceChart'
 import scraperBDEV from '@/components/Sidebar/scraper'
-import scraperNews from '@/components/News/scraper'
 import { connectToDatabase } from '@/utils/dbConnection'
 import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { WeatherForcast } from '@/components/Weather/Weather'
 import { UpdateISN } from '@/components/UpdateISN/UpdateISN'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
 import { Note } from '@/components/Auftragsnotiz/Note'
-import { GetStaticProps } from 'next'
+import { OptionsType } from '@/types/index'
+
+type HomeProps = {
+  preisebdev: any
+  preisliste: any
+  weatherData: any
+  plzListboxOptions: OptionsType[]
+}
 
 export default function Home({
   preisebdev,
   preisliste,
   weatherData,
   plzListboxOptions,
-}) {
+}: HomeProps) {
   const [stateScreen, setStateScreen] = useState({
     calc: true,
     chart: false,
@@ -30,12 +37,9 @@ export default function Home({
     <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>
       <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
         <Sidebar
-          preisebdev={preisebdev}
           preisliste={preisliste}
           weatherData={weatherData}
-          stateScreen={stateScreen}
           setStateScreen={setStateScreen}
-          preisliste={preisliste}
           plzListboxOptions={plzListboxOptions}
         />
       </div>
@@ -106,7 +110,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const data = await res.json()
   const weatherData = await data.daily
 
-  const plzListboxOptions = []
+  const plzListboxOptions: OptionsType[] = []
   getPostleitzahlArray(preisArray).map((item, index) =>
     plzListboxOptions.push({
       id: index,
@@ -123,6 +127,6 @@ export const getStaticProps: GetStaticProps = async () => {
       preisliste: JSON.parse(JSON.stringify(doc)),
       weatherData,
       plzListboxOptions,
-    }, // will be passed to the page component as props
+    },
   }
 }

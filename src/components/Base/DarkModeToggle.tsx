@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
-export const DarkModeToggle = ({ className }) => {
+export const DarkModeToggle = () => {
   const { theme, setTheme } = useTheme()
   const [toggleState, setToggleState] = useState('dark')
 
   useEffect(() => {
-    setToggleState(theme)
+    theme && setToggleState(theme)
   }, [theme])
 
   return (
-    <label className={`${className} absolute top-10 right-10 z-20 `}>
+    <label className={`absolute top-10 right-10 z-20 `}>
       <input
         type='checkbox'
         defaultChecked={true}

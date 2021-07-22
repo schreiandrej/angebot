@@ -1,12 +1,13 @@
 import cheerio from 'cheerio'
 
+
 export default async function scraperNews() {
   const res = await fetch(`https://www.presseportal.de/st/Fl%C3%BCssiggas`)
 
   const buffer = await res.text()
   const $ = cheerio.load(buffer)
 
-  const articles = []
+  const articles= []
 
   $('article').each(function (i, el) {
     articles[i] = {

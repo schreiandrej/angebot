@@ -5,7 +5,11 @@ import { ListboxComponent } from './ListboxComponent'
 
 // { id: 1, name: 'Durward Reynolds', value: x, unavailable: false }
 
-export const SelectPreislisteBdev = ({ preisebdev }) => {
+type PreiseBdevType = {
+  preisebdev: any
+}
+
+export const SelectPreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
   const [selectedOption, setSelectedOption] = useState(preisebdev[0])
 
   if (!selectedOption) return <div>loading....</div>
@@ -23,8 +27,8 @@ export const SelectPreislisteBdev = ({ preisebdev }) => {
   )
 }
 
-export const PreislisteBdev = ({ preisebdev }) => {
-  const convert = (numberString) =>
+export const PreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
+  const convert = (numberString: string) =>
     new Intl.NumberFormat('de-DE', {
       style: 'currency',
       currency: 'EUR',
@@ -33,7 +37,7 @@ export const PreislisteBdev = ({ preisebdev }) => {
     <div className='text-lg w-full'>
       <Title className='text-2xl mb-6'>Preise des BDEV: </Title>
       <ul>
-        {preisebdev.map((item, index) => (
+        {preisebdev.map((item: any, index: number) => (
           <li
             key={index}
             className='flex flex-row items-center justify-between'

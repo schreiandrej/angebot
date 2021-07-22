@@ -1,10 +1,10 @@
-import { useContext, createContext, useState } from 'react'
+import { useContext, createContext, useState, ReactNode } from 'react'
 
-const SearchPictureModalState = createContext(false)
-const SearchedWord = createContext('coffee')
-const ChangeImage = createContext(false)
+const SearchPictureModalState = createContext(null)
+const SearchedWord = createContext(null)
+const ChangeImage = createContext(null)
 
-export const ContextProvider = ({ children }) => {
+export const ContextProvider = ({ children }: any) => {
   const [modalState, setModalState] = useState(false)
   const [searchWord, setSearchWord] = useState('coffee')
   const [changeImage, setChangeImage] = useState(false)

@@ -1,4 +1,9 @@
-export const ButtonSubmit = ({ className, id }) => {
+type ButtonSubmitProps = {
+  className?: string
+  id: string
+}
+
+export const ButtonSubmit = ({ className, id }: ButtonSubmitProps) => {
   return (
     <button
       className={`button-outlined group w-full ${className} `}

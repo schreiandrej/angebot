@@ -3,10 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 /**
  * TODO define Types for the request
- *
- * @param req T
- * @param res
- * @returns
  */
 
 export default async function handler(

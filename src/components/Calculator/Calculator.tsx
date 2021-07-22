@@ -6,15 +6,20 @@ import { Title } from '@/components/Base/Title'
 import { Container } from '@/components/Base/Container'
 import { ButtonSubmit } from '@/components/Base/Buttons/ButtonSubmit'
 import { ButtonDelete } from '@/components/Base/Buttons/ButtonDelete'
-import { CalcInput } from '@/components/Calculator/CalculaterInput'
+import { CalculaterInput } from '@/components/Calculator/CalculaterInput'
 
-export const Calculator = ({ className }) => {
-  const [calculation, setCalculation] = useState(null)
+interface InputDataObject {
+  calc: string
+}
+
+export const Calculator = () => {
+  const [calculation, setCalculation] =
+    useState<{ result: string; mathString: string }[] | null>(null)
   const { register, handleSubmit, errors, reset, setValue } = useForm()
 
   const regExpression = /[^a-zA-Z]/
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: InputDataObject) => {
     if (data.calc !== '') {
       try {
         const formatedNumber = data.calc.replace(/,/gi, '.')
@@ -44,7 +49,7 @@ export const Calculator = ({ className }) => {
   }
 
   return (
-    <Container className={`${className}`}>
+    <Container>
       <Title className='justify-self-start'>Calculator</Title>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -52,8 +57,7 @@ export const Calculator = ({ className }) => {
       >
         <div className='flex flex-col w-full'>
           <div className='relative'>
-            <CalcInput
-              role='textbox'
+            <CalculaterInput
               register={register({
                 required: { value: true, message: 'Bitte einen Wert eingeben' },
                 pattern: {
@@ -89,8 +93,8 @@ export const Calculator = ({ className }) => {
           </div>
         </div>
         <div className='flex flex-row gap-2 w-full lg:justify-end'>
-          <ButtonSubmit />
-          <ButtonDelete deleteResults={deleteResults} />
+          <ButtonSubmit id='calcSubmitButton' />
+          <ButtonDelete id='calcDeleteButton' deleteResults={deleteResults} />
         </div>
       </form>
     </Container>
