@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, MouseEventHandler } from 'react'
 import { unsplashApi } from './unsplashApi'
 import { SearchButton } from './SearchButton'
+import { PhotoComponent } from './PhotoComponent'
+import { getUnsplashPicture } from './unsplashApi'
 import {
   useSearchPictureModal,
   useSearchedWord,
@@ -10,61 +12,16 @@ import { Photos } from 'unsplash-js/dist/methods/search/types/response'
 import { ApiResponse } from 'unsplash-js/dist/helpers/response'
 import { Countries, Country } from '@/types/types'
 
-type CapitalInformaitonType = {
+export type CapitalInformaitonType = {
   capital: string
-  continentName: string
-  countryName: string
-  currencyCode: string
-  population: string
-}
-
-type PhotoCompProps = {
-  photo: any
-  setChangeImage: any
-  capitalInformation: CapitalInformaitonType | null
+  continentName?: string
+  countryName?: string
+  currencyCode?: string
+  population?: string
 }
 
 type SearchModalProps = {
   dataCountries: Countries
-}
-
-/**
- * TODO - On initial load we see a coffe picture, but it needs to be a capital
- */
-
-const PhotoComp = ({
-  photo,
-  setChangeImage,
-  capitalInformation,
-}: PhotoCompProps) => {
-  const { user, urls } = photo
-  const imageRef = useRef(null)
-
-  return (
-    <div className='relative'>
-      {urls && (
-        <img
-          src={urls.regular}
-          className='cursor-pointer rounded-lg'
-          ref={imageRef}
-          onClick={setChangeImage}
-          alt='Photo of a capital city'
-        />
-      )}
-      {user && (
-        <a
-          className='absolute bottom-2 right-2 bg-accent rounded-md px-1'
-          target='_blank'
-          href={`https://unsplash.com/@${user.username}`}
-        >
-          {user.name}
-        </a>
-      )}
-      {capitalInformation && (
-        <div className='absolute top-2 left-2 bg-transparent'>{`${capitalInformation?.capital}, ${capitalInformation?.countryName}, ${capitalInformation?.population}, ${capitalInformation?.currencyCode}`}</div>
-      )}
-    </div>
-  )
 }
 
 export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
@@ -92,24 +49,14 @@ export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
       currencyCode: `${selctedCountry.currencyCode}`,
       population: `${selctedCountry.population}`,
     })
+
+    getUnsplashPicture(selctedCountry.capital, setPhotosResponse)
   }, [])
 
   useEffect(() => {
-    unsplashApi.search
-      .getPhotos({
-        query: `${searchWord}`,
-        orientation: 'landscape',
-        page: Math.floor(Math.random() * 100),
-        perPage: 1,
-      })
-      .then((result) => {
-        setPhotosResponse(result)
-      })
-      .catch((error) => {
-        console.log('something went wrong!', error)
-      })
-
-    // setCapitalInfomation(null)
+    if (searchWord) {
+      getUnsplashPicture(searchWord, setPhotosResponse)
+    }
   }, [changeImage])
 
   if (data === null) {
@@ -127,8 +74,10 @@ export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
         <SearchButton
           className={`opacity-0 group-hover:opacity-100`}
           setModalState={setModalState}
+          setCapitalInfomation={setCapitalInfomation}
+          searchWord={searchWord}
         />
-        <PhotoComp
+        <PhotoComponent
           setChangeImage={setChangeImage}
           photo={data.response.results[0]}
           capitalInformation={capitalInfomation}

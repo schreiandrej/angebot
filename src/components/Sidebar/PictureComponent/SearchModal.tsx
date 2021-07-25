@@ -20,8 +20,6 @@ export function SearchModal() {
   }
 
   const onSubmit = (data: InputData) => {
-    console.log(data.searchWord.length)
-
     if (data.searchWord.length > 0) {
       setSearchWord(data.searchWord)
       setChangeImage(!changeImage)
@@ -32,14 +30,6 @@ export function SearchModal() {
   function closeModal() {
     setModalState(false)
   }
-
-  function openModal() {
-    setModalState(true)
-  }
-
-  /**
-   * TODO A Fallback for a nonsens searchword, because in this case the API return is undefind. This throw an error.
-   */
 
   return (
     <Transition appear show={modalState} as={Fragment}>
