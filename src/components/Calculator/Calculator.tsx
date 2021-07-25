@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useRef, MutableRefObject } from 'react'
 import { useForm } from 'react-hook-form'
 import stringMath from 'string-math'
+import composeRefs from '@seznam/compose-react-refs'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { Title } from '@/components/MicroComponents/Title'
 import { Container } from '@/components/MicroComponents/Container'
@@ -14,8 +15,14 @@ interface InputDataObject {
 
 export const Calculator = () => {
   const [calculation, setCalculation] =
-    useState<{ result: string; mathString: string }[] | null>(null)
+    useState<{ convertResult: string; mathString: string }[] | null>(null)
   const { register, handleSubmit, errors, reset, setValue } = useForm()
+  const calcInputRef = useRef(null)
+
+  // to focus the input after one of the given result were copied
+  const focusInput = (ref: any) => {
+    if (ref) ref?.current.focus()
+  }
 
   const regExpression = /[^a-zA-Z]/
 
@@ -23,18 +30,23 @@ export const Calculator = () => {
     if (data.calc !== '') {
       try {
         const formatedNumber = data.calc.replace(/,/gi, '.')
-        const unformatedResult = stringMath(formatedNumber)
-        const result = new Intl.NumberFormat('de-DE', {
+        const result = stringMath(formatedNumber)
+        const convertResult = new Intl.NumberFormat('de-DE', {
           maximumSignificantDigits: 8,
-        }).format(unformatedResult)
+          useGrouping: false,
+        }).format(result)
 
         calculation
-          ? setCalculation([...calculation, { result, mathString: data.calc }])
-          : setCalculation([{ result, mathString: data.calc }])
+          ? setCalculation([
+              ...calculation,
+              { convertResult, mathString: data.calc },
+            ])
+          : setCalculation([{ convertResult, mathString: data.calc }])
 
         setValue('calc', result, { shouldValidate: true })
-      } catch (error) {
-        console.log('oh oh, we have some error!')
+        focusInput(calcInputRef)
+      } catch (error: any) {
+        console.log('oh oh, we have some error!', error.message)
       }
     }
   }
@@ -58,13 +70,19 @@ export const Calculator = () => {
         <div className='flex flex-col w-full'>
           <div className='relative'>
             <CalculaterInput
-              register={register({
-                required: { value: true, message: 'Bitte einen Wert eingeben' },
-                pattern: {
-                  value: regExpression,
-                  message: 'Bitte nur Zahlen und + - / * !',
-                },
-              })}
+              register={composeRefs(
+                register({
+                  required: {
+                    value: true,
+                    message: 'Bitte einen Wert eingeben',
+                  },
+                  pattern: {
+                    value: regExpression,
+                    message: 'Bitte nur Zahlen und + - / * !',
+                  },
+                }),
+                calcInputRef
+              )}
               clearForm={clearForm}
             />
             {errors.calc && (
@@ -77,13 +95,17 @@ export const Calculator = () => {
             {calculation &&
               calculation.map((item, index) => {
                 return (
-                  <CopyToClipboard key={index} text={item.result}>
+                  <CopyToClipboard key={index} text={item.convertResult}>
                     <div className='flex flex-row justify-start w-full cursor-pointer hover:text-gray-500'>
                       <span>{item.mathString}</span>
                       <div className='flex flex-row justify-start'>
                         <span className='px-2'>=</span>
-                        <span className='font-semibold' data-testid='result'>
-                          {item.result}
+                        <span
+                          className='font-semibold'
+                          data-testid='result'
+                          onClick={() => focusInput(calcInputRef)}
+                        >
+                          {item.convertResult}
                         </span>
                       </div>
                     </div>

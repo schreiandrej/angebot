@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@seznam/compose-react-refs": "1.0.6",
     "chart.js": "2.9.4",
     "cheerio": "1.0.0-rc.5",
     "date-fns": "2.19.0",
