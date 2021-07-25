@@ -7,8 +7,10 @@ export const ButtonSubmit = ({ className, id }: ButtonSubmitProps) => {
   return (
     <button
       className={`button-outlined group w-full ${className} `}
+      id='submitButton'
+      title='Submit Button'
       type='submit'
-      role='submit-button'
+      role='button'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'

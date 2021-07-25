@@ -11,9 +11,12 @@ export const ButtonDelete = ({
 }: ButtonDeleteProps) => {
   return (
     <button
+      id='deleteButton'
+      title='Delete Button'
       className={`button-outlined group w-full ${className}`}
       type='button'
       onClick={deleteResults}
+      role='button'
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
