@@ -8,7 +8,15 @@ export default async function scraperBDEV() {
   const buffer = await res.text()
   const $ = cheerio.load(buffer)
 
-  const regionen = []
+  const regionen: {
+    [x: string]: {
+      plz: string
+      brutto1000: string
+      netto1000: string
+      brutto3000: string
+      netto3000: string
+    }
+  }[] = []
 
   $('.content-segment')
     .children('table')
@@ -34,7 +42,7 @@ export default async function scraperBDEV() {
     }
   }
 
-  const getOptions = (data) => {
+  const getOptions = (data: any[]) => {
     return data.map((item, index) => ({
       id: index + 1,
       name: Object.keys(item)[0],

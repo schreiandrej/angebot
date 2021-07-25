@@ -1,4 +1,4 @@
-export const WeatherWidget = ({ weatherData, showWeather }) => {
+export const WeatherWidget = ({ weatherData, showWeather }: any) => {
   const dayTemp = weatherData[0].temp.day
   const maxTemp = weatherData[0].temp.max
   const weatherDescription = weatherData[0].weather[0].description

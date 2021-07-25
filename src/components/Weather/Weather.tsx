@@ -6,10 +6,10 @@ import { Line } from 'react-chartjs-2'
 import { options } from './options'
 import { Title } from '@/components/MicroComponents/Title'
 
-export const WeatherForcast = ({ weatherData }) => {
-  const minTemp = weatherData.map((day) => day.temp.min)
-  const maxTemp = weatherData.map((day) => day.temp.max)
-  const days = weatherData.map((day) =>
+export const WeatherForcast = ({ weatherData }: any) => {
+  const minTemp = weatherData.map((day: any) => day.temp.min)
+  const maxTemp = weatherData.map((day: any) => day.temp.max)
+  const days = weatherData.map((day: any) =>
     format(fromUnixTime(day.dt), 'dd.MM.yy')
   )
 
@@ -54,7 +54,7 @@ export const WeatherForcast = ({ weatherData }) => {
       <Title className='pb-8'>Wettervorhersage</Title>
       <div className='flex flex-row w-full gap-2 text-sm'>
         {weatherData &&
-          weatherData.map((day) => {
+          weatherData.map((day: any) => {
             return (
               <div
                 className='flex flex-col gap-1 w-full items-center'

@@ -38,6 +38,7 @@
     "postcss.config.js",
     "setupEnv.js",
     "src/components/News/scraper.js",
-    "src/components/Sidebar/PictureComponent/unsplashApi.js"
+    "src/components/Sidebar/PictureComponent/unsplashApi.js",
+    "src/components/Sidebar/copyToClipboard.js"
   ]
 }

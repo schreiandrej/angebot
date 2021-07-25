@@ -1,12 +1,20 @@
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
+type OutputSectionType = {
+  preisProLiter: number
+  liter: number
+  preis: number
+  zuschlag: number
+  adr: number
+}
+
 export const OutputSection = ({
   preisProLiter,
   liter,
   preis,
   zuschlag,
   adr,
-}) => {
+}: OutputSectionType) => {
   const currentMwstFactor = 1.19
 
   return (
