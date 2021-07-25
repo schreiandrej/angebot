@@ -1,5 +1,5 @@
 import { Listbox, Transition } from '@headlessui/react'
-import { OptionsType } from '@/types/index'
+import { OptionsType } from '@/types/types'
 
 /**
  * @example

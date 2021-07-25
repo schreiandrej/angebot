@@ -1,6 +1,8 @@
+import { ReactNode } from 'react'
+
 type TitleProps = {
   className?: string
-  children: string
+  children: ReactNode
 }
 
 export const Title = ({ className, children }: TitleProps) => {

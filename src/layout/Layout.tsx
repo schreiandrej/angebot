@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
-import { DarkModeToggle } from '@/components/Base/DarkModeToggle'
+import { DarkModeToggle } from '@/components/MicroComponents/DarkModeToggle'
 
 type LayoutProps = {
   children: ReactNode

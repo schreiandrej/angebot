@@ -1,20 +1,29 @@
 import { useState } from 'react'
 import { ISNPreis } from './IsnPreis'
 import { WeatherWidget } from './WeatherWidget'
-import { CoffePicOfTheDay } from './PictureComponent/CoffePicture'
+import { DailyPicture } from './PictureComponent/DailyPicture'
 import { useSortData } from '@/components/PriceChart/useSortData'
-import { Container } from '@/components/Base/Container'
-import { Title } from '@/components/Base/Title'
+import { Container } from '@/components/MicroComponents/Container'
+import { Title } from '@/components/MicroComponents/Title'
 import { SearchModal } from './PictureComponent/SearchModal'
 import de from 'date-fns/locale/de'
 import format from 'date-fns/format'
+
+type SidebarProps = {
+  preisliste: any
+  weatherData: any
+  setStateScreen: any
+  plzListboxOptions: any
+  dataCountries: any
+}
 
 export const Sidebar = ({
   preisliste,
   weatherData,
   setStateScreen,
   plzListboxOptions,
-}) => {
+  dataCountries,
+}: SidebarProps) => {
   const heute = new Date()
   const { date, preis } = useSortData(preisliste, 33, heute)
 
@@ -93,7 +102,7 @@ export const Sidebar = ({
             Chart
           </button>
         </div>
-        <CoffePicOfTheDay />
+        <DailyPicture dataCountries={dataCountries} />
         <SearchModal />
       </div>
     </Container>

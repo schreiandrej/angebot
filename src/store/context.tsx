@@ -1,13 +1,37 @@
-import { useContext, createContext, useState, ReactNode } from 'react'
+import { useContext, createContext, useState } from 'react'
 
-const SearchPictureModalState = createContext(null)
-const SearchedWord = createContext(null)
-const ChangeImage = createContext(null)
+interface ISearchPictureModalState {
+  modalState: boolean
+  setModalState: (m: boolean) => void
+}
+
+interface ISearcedWord {
+  searchWord: string | null
+  setSearchWord: (w: string | null) => void
+}
+
+interface IChangeImage {
+  changeImage: boolean
+  setChangeImage: (i: boolean) => void
+}
+
+const SearchPictureModalState = createContext<ISearchPictureModalState>({
+  modalState: false,
+  setModalState: () => {},
+})
+const SearchedWord = createContext<ISearcedWord>({
+  searchWord: null,
+  setSearchWord: () => {},
+})
+const ChangeImage = createContext<IChangeImage>({
+  changeImage: false,
+  setChangeImage: () => {},
+})
 
 export const ContextProvider = ({ children }: any) => {
-  const [modalState, setModalState] = useState(false)
-  const [searchWord, setSearchWord] = useState('coffee')
-  const [changeImage, setChangeImage] = useState(false)
+  const [modalState, setModalState] = useState<boolean>(false)
+  const [searchWord, setSearchWord] = useState<string | null>(null)
+  const [changeImage, setChangeImage] = useState<boolean>(false)
 
   return (
     <SearchPictureModalState.Provider value={{ modalState, setModalState }}>

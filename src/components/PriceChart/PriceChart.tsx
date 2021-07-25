@@ -6,11 +6,11 @@ import {
   showDiffrentPeriods,
 } from '@/components/PriceChart/useSortData'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
-import { Title } from '@/components/Base/Title'
-import { Container } from '@/components/Base/Container'
+import { Title } from '@/components/MicroComponents/Title'
+import { Container } from '@/components/MicroComponents/Container'
 import { data } from './chartData'
 import { ListboxComponent } from '@/components/Vorkasse/Listbox'
-import { OptionsType } from '@/types/index'
+import { OptionsType } from '@/types/types'
 
 type LineChartProps = {
   className?: string

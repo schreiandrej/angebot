@@ -1,4 +1,4 @@
-import { Container } from '@/components/Base/Container'
+import { Container } from '@/components/MicroComponents/Container'
 import { Carousel } from '@/components/Base/Carousel'
 
 type NewsProps = {

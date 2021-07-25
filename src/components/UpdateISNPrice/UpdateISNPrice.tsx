@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { format } from 'date-fns'
 import DatePicker from 'react-datepicker'
-import { Container } from '@/components/Base/Container'
+import { Container } from '@/components/MicroComponents/Container'
+import { SplittedFormDataType, UpdateDataFormType } from '@/types/types'
 
 // TODO => a clear form functionality, Back button,  a better Layout ....
 
@@ -13,9 +14,10 @@ export const UpdateISN = () => {
   // TODO => implement an update identifier like an Popup or a snackbar
   // const [showUpdateInfo, setShowUpdateInfo] = useState(false)
 
-  const [splittedFormData, setSplittedFormData] = useState()
+  const [splittedFormData, setSplittedFormData] =
+    useState<SplittedFormDataType>()
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: UpdateDataFormType) => {
     const date = format(new Date(searchedDate), 'yyyy-MM-dd')
 
     setSplittedFormData({
@@ -52,11 +54,10 @@ export const UpdateISN = () => {
   }
 
   useEffect(() => {
-    updateISNPrice(splittedFormData)
-    console.log(splittedFormData)
+    if (splittedFormData) updateISNPrice(splittedFormData)
   }, [splittedFormData])
 
-  const updateISNPrice = async (dataToUpdate) => {
+  const updateISNPrice = async (dataToUpdate: SplittedFormDataType) => {
     try {
       const res = await fetch(`/api/update`, {
         method: 'PUT',
@@ -77,7 +78,7 @@ export const UpdateISN = () => {
           <label htmlFor=''>Date:</label>
           <DatePicker
             selected={searchedDate}
-            onChange={(date) => setSearchedDate(date)}
+            onChange={(date: Date) => setSearchedDate(date)}
             closeOnScroll={true}
             dateFormat='dd.MM.yyyy'
             startDate={searchedDate}
@@ -101,6 +102,7 @@ export const UpdateISN = () => {
           <input
             type='text'
             name='30-34'
+            id='30-34'
             autoComplete='off'
             ref={register({ required: 'Bitte den Preis eingeben!' })}
           />
@@ -110,6 +112,7 @@ export const UpdateISN = () => {
           <input
             type='text'
             name='35-39'
+            id='35-39'
             autoComplete='off'
             ref={register({ required: 'Bitte den Preis eingeben!' })}
           />
@@ -119,6 +122,7 @@ export const UpdateISN = () => {
           <input
             type='text'
             name='40-45,47'
+            id='40-45,47'
             autoComplete='off'
             ref={register({ required: 'Bitte den Preis eingeben!' })}
           />
@@ -128,16 +132,18 @@ export const UpdateISN = () => {
           <input
             type='text'
             name='46,48,49'
+            id='46,48,49'
             autoComplete='off'
             ref={register({ required: 'Bitte den Preis eingeben!' })}
           />
         </div>
 
         <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='30-34'>30-34:</label>
+          <label htmlFor='50-52, 57-59'>50-52, 57-59:</label>
           <input
             type='text'
             name='50-52, 57-59'
+            id='50-52, 57-59'
             autoComplete='off'
             ref={register({ required: 'Bitte den Preis eingeben!' })}
           />

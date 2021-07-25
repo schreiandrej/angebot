@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Container } from '@/components/Base/Container'
+import { Container } from '@/components/MicroComponents/Container'
 import { format, fromUnixTime } from 'date-fns'
 import de from 'date-fns/locale/de'
 import { Line } from 'react-chartjs-2'
 import { options } from './options'
-import { Title } from '@/components/Base/Title'
+import { Title } from '@/components/MicroComponents/Title'
 
 export const WeatherForcast = ({ weatherData }) => {
   const minTemp = weatherData.map((day) => day.temp.min)

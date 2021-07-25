@@ -1,19 +1,25 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useSearchPictureModal, useSearchedWord, useChagenImage } from '@/store/context'
+import {
+  useSearchPictureModal,
+  useSearchedWord,
+  useChagenImage,
+} from '@/store/context'
+import { OptionsType } from '@/types/types'
 
-
-
-export  function SearchModal() {
+export function SearchModal() {
   const { modalState, setModalState } = useSearchPictureModal()
-  const {searchWord, setSearchWord} = useSearchedWord()
+  const { searchWord, setSearchWord } = useSearchedWord()
   const { changeImage, setChangeImage } = useChagenImage()
-
 
   const { register, handleSubmit, errors } = useForm()
 
-  const onSubmit = (data) => {
+  type InputData = {
+    searchWord: string
+  }
+
+  const onSubmit = (data: InputData) => {
     console.log(data.searchWord.length)
 
     if (data.searchWord.length > 0) {
@@ -32,7 +38,7 @@ export  function SearchModal() {
   }
 
   /**
-   * TODO A Fallback for a nonsens searchword, because in this case the API return is undifind. This throw an error. 
+   * TODO A Fallback for a nonsens searchword, because in this case the API return is undefind. This throw an error.
    */
 
   return (
@@ -78,7 +84,7 @@ export  function SearchModal() {
               >
                 Was für ein Bild möchtest du sehen?
               </Dialog.Title>
-              <Dialog.Description as="div" className='text-base'>
+              <Dialog.Description as='div' className='text-base'>
                 <form
                   className='flex flex-col w-full gap-2'
                   onSubmit={handleSubmit(onSubmit)}

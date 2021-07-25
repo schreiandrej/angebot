@@ -1,8 +1,22 @@
 import { format, differenceInCalendarDays } from 'date-fns'
 
-export const useSortData = (preisliste, postleitzahl, searchedDate, period) => {
-  const labels = []
-  const values = []
+interface ReturnUseSortDate {
+  values: any
+  labels: any
+  date: any
+  postleitzahl: any
+  preis: any
+  today: any
+}
+
+export const useSortData = (
+  preisliste: string | any[],
+  postleitzahl: string | number,
+  searchedDate: string | number | Date,
+  period: number = 0
+) => {
+  const labels: string[] = []
+  const values: any[] = []
   const arr = []
 
   // Die Daten in der Datenbank laufen immer bis zum Ende des Jahre, deswegen muss die Ausgabe bis zum heutigen Tag gekürzt werden.
@@ -19,6 +33,7 @@ export const useSortData = (preisliste, postleitzahl, searchedDate, period) => {
 
   if (period === 0) period = arr.length
   // Arrays für das Chart aufbereiten
+
   arr.map((item, index) => {
     if (index > arr.length - period) {
       labels.push(format(new Date(item['Datum']), 'dd.MM.yy'))
@@ -39,9 +54,13 @@ export const useSortData = (preisliste, postleitzahl, searchedDate, period) => {
   return { values, labels, date, postleitzahl, preis, today }
 }
 
-export const showDiffrentPeriods = (preisliste, postleitzahl, period) => {
-  const labels = []
-  const values = []
+export const showDiffrentPeriods = (
+  preisliste: string | any[],
+  postleitzahl: any,
+  period: any
+) => {
+  const labels: never[] = []
+  const values: never[] = []
   const arr = []
 
   // Die Daten in der Datenbank laufen immer bis zum Ende des Jahre, deswegen muss die Ausgabe bis zum heutigen Tag gekürzt werden.

@@ -1,4 +1,12 @@
-export const SearchButton = ({ setModalState, className }) => {
+type SearchButtonProps = {
+  setModalState: (m: boolean) => void
+  className?: string
+}
+
+export const SearchButton = ({
+  setModalState,
+  className,
+}: SearchButtonProps) => {
   return (
     <button
       type='button'

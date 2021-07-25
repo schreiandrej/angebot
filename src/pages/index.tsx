@@ -7,16 +7,17 @@ import scraperBDEV from '@/components/Sidebar/scraper'
 import { connectToDatabase } from '@/utils/dbConnection'
 import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { WeatherForcast } from '@/components/Weather/Weather'
-import { UpdateISN } from '@/components/UpdateISN/UpdateISN'
+import { UpdateISN } from '@/components/UpdateISNPrice/UpdateISNPrice'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
 import { Note } from '@/components/Auftragsnotiz/Note'
-import { OptionsType } from '@/types/index'
+import { OptionsType, Countries } from '@/types/types'
 
 type HomeProps = {
   preisebdev: any
   preisliste: any
   weatherData: any
   plzListboxOptions: OptionsType[]
+  dataCountries: Countries
 }
 
 export default function Home({
@@ -24,6 +25,7 @@ export default function Home({
   preisliste,
   weatherData,
   plzListboxOptions,
+  dataCountries,
 }: HomeProps) {
   const [stateScreen, setStateScreen] = useState({
     calc: true,
@@ -41,6 +43,7 @@ export default function Home({
           weatherData={weatherData}
           setStateScreen={setStateScreen}
           plzListboxOptions={plzListboxOptions}
+          dataCountries={dataCountries}
         />
       </div>
       {(stateScreen.calc && (
@@ -104,6 +107,13 @@ export const getStaticProps: GetStaticProps = async () => {
   // fetch bdev preise
   const preisebdev = await scraperBDEV()
 
+  // fetch countries
+
+  const countriesUrl =
+    'https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json'
+  const resCountries = await fetch(countriesUrl)
+  const dataCountries = await resCountries.json()
+
   // wether data
   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_ID}`
   const res = await fetch(url)
@@ -127,6 +137,7 @@ export const getStaticProps: GetStaticProps = async () => {
       preisliste: JSON.parse(JSON.stringify(doc)),
       weatherData,
       plzListboxOptions,
+      dataCountries,
     },
   }
 }

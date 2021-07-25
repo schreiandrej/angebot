@@ -1,6 +1,6 @@
-import { Title } from '@/components/Base/Title'
+import { Title } from '@/components/MicroComponents/Title'
 import { useState } from 'react'
-import { Container } from '../Base/Container'
+import { Container } from '../MicroComponents/Container'
 import { ListboxComponent } from './ListboxComponent'
 
 // { id: 1, name: 'Durward Reynolds', value: x, unavailable: false }
