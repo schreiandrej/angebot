@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, MouseEventHandler } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 import { unsplashApi } from './unsplashApi'
 import { SearchButton } from './SearchButton'
 import { PhotoComponent } from './PhotoComponent'
@@ -22,15 +22,19 @@ export type CapitalInformaitonType = {
 
 type SearchModalProps = {
   dataCountries: Countries
+  capitalInfomation: CapitalInformaitonType | null
+  setCapitalInformation: Dispatch<SetStateAction<CapitalInformaitonType | null>>
 }
 
-export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
+export const DailyPicture = ({
+  dataCountries,
+  capitalInfomation,
+  setCapitalInformation,
+}: SearchModalProps) => {
   const [data, setPhotosResponse] = useState<ApiResponse<Photos> | null>(null)
   const { searchWord, setSearchWord } = useSearchedWord()
   const { modalState, setModalState } = useSearchPictureModal()
   const { changeImage, setChangeImage } = useChagenImage()
-  const [capitalInfomation, setCapitalInfomation] =
-    useState<CapitalInformaitonType | null>(null)
 
   useEffect(() => {
     const { countries } = dataCountries
@@ -42,7 +46,7 @@ export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
     const randomNumber = Math.floor(Math.random() * biggerCountries.length + 1)
     const selctedCountry = biggerCountries[randomNumber]
     setSearchWord(selctedCountry.capital)
-    setCapitalInfomation({
+    setCapitalInformation({
       capital: `${selctedCountry.capital}`,
       continentName: `${selctedCountry.continentName}`,
       countryName: `${selctedCountry.countryName}`,
@@ -74,8 +78,6 @@ export const DailyPicture = ({ dataCountries }: SearchModalProps) => {
         <SearchButton
           className={`opacity-0 group-hover:opacity-100`}
           setModalState={setModalState}
-          setCapitalInfomation={setCapitalInfomation}
-          searchWord={searchWord}
         />
         <PhotoComponent
           setChangeImage={setChangeImage}

@@ -1,29 +1,35 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState, useEffect } from 'react'
+import { Dispatch, Fragment, SetStateAction } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   useSearchPictureModal,
   useSearchedWord,
   useChagenImage,
 } from '@/store/context'
-import { OptionsType } from '@/types/types'
+import { CapitalInformaitonType } from './DailyPicture'
 
-export function SearchModal() {
+type SearchModalProps = {
+  setCapitalInformation: Dispatch<SetStateAction<CapitalInformaitonType | null>>
+}
+type InputData = {
+  searchWord: string
+}
+
+export function SearchModal({ setCapitalInformation }: SearchModalProps) {
   const { modalState, setModalState } = useSearchPictureModal()
-  const { searchWord, setSearchWord } = useSearchedWord()
+  const { setSearchWord } = useSearchedWord()
   const { changeImage, setChangeImage } = useChagenImage()
 
-  const { register, handleSubmit, errors } = useForm()
-
-  type InputData = {
-    searchWord: string
-  }
+  const { register, handleSubmit } = useForm()
 
   const onSubmit = (data: InputData) => {
     if (data.searchWord.length > 0) {
       setSearchWord(data.searchWord)
       setChangeImage(!changeImage)
       closeModal()
+      setCapitalInformation({
+        capital: data.searchWord,
+      })
     }
   }
 

@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { ISNPreis } from './IsnPreis'
 import { WeatherWidget } from './WeatherWidget'
-import { DailyPicture } from './PictureComponent/DailyPicture'
+import {
+  CapitalInformaitonType,
+  DailyPicture,
+} from './PictureComponent/DailyPicture'
 import { useSortData } from '@/components/PriceChart/useSortData'
 import { Container } from '@/components/MicroComponents/Container'
 import { Title } from '@/components/MicroComponents/Title'
@@ -26,6 +29,8 @@ export const Sidebar = ({
 }: SidebarProps) => {
   const heute = new Date()
   const { date, preis } = useSortData(preisliste, 33, heute)
+  const [capitalInfomation, setCapitalInformation] =
+    useState<CapitalInformaitonType | null>(null)
 
   const showChart = () => {
     setStateScreen({
@@ -102,8 +107,12 @@ export const Sidebar = ({
             Chart
           </button>
         </div>
-        <DailyPicture dataCountries={dataCountries} />
-        <SearchModal />
+        <DailyPicture
+          dataCountries={dataCountries}
+          capitalInfomation={capitalInfomation}
+          setCapitalInformation={setCapitalInformation}
+        />
+        <SearchModal setCapitalInformation={setCapitalInformation} />
       </div>
     </Container>
   )

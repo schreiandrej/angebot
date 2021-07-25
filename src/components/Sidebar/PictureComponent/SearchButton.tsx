@@ -1,31 +1,19 @@
-import { Dispatch, SetStateAction } from 'react'
-import { CapitalInformaitonType } from './DailyPicture'
-
 type SearchButtonProps = {
   setModalState: (m: boolean) => void
   className?: string
-  setCapitalInfomation: Dispatch<SetStateAction<CapitalInformaitonType | null>>
-  searchWord: string | null
 }
 
 export const SearchButton = ({
   setModalState,
   className,
-  setCapitalInfomation,
-  searchWord,
 }: SearchButtonProps) => {
-  const clickHandler = () => {
-    setModalState(true)
-    if (searchWord) setCapitalInfomation({ capital: searchWord })
-  }
-
   return (
     <button
       type='button'
       id='searchButton'
       title='Search Button'
       className={`z-10 top-3 right-3 absolute ${className}`}
-      onClick={clickHandler}
+      onClick={() => setModalState(true)}
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
