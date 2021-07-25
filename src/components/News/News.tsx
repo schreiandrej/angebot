@@ -1,5 +1,5 @@
 import { Container } from '@/components/MicroComponents/Container'
-import { Carousel } from '@/components/Base/Carousel'
+import { Slider } from 'sa-tw-lib'
 
 type NewsProps = {
   articles: {
@@ -12,7 +12,7 @@ type NewsProps = {
 export const News = ({ articles, className }: NewsProps) => {
   return (
     <Container className={`${className}`}>
-      <Carousel>
+      <Slider className=''>
         {articles.map((article, index) => {
           return (
             <h3 className='min-w-full px-4 text-center' key={index}>
@@ -25,7 +25,7 @@ export const News = ({ articles, className }: NewsProps) => {
             </h3>
           )
         })}
-      </Carousel>
+      </Slider>
     </Container>
   )
 }

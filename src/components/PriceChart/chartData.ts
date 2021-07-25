@@ -1,4 +1,4 @@
-export const data = (labels, values) => {
+export const data = (labels: string[], values: string[]) => {
   return {
     labels: labels,
     datasets: [
