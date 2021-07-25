@@ -77,7 +77,6 @@ test('calculate 3 results', async () => {
     fireEvent.change(await screen.getByRole('textbox'), {
       target: { value: `1 + 1` },
     })
-    console.log(getByRole('textbox').target.value)
 
     fireEvent.click(await screen.getByRole('submit-button'))
   })
