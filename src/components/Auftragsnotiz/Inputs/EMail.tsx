@@ -1,10 +1,15 @@
 import { forwardRef } from 'react'
 
-export const EMail = forwardRef((params, ref) => {
+interface InputProps {
+  ref: React.ForwardedRef<HTMLInputElement>
+}
+
+export const EMail = forwardRef<HTMLInputElement, InputProps>((params, ref) => {
   return (
     <div className='auftragsnotiz-inputs'>
-      <label>E-Mail</label>
+      <label htmlFor='email'>E-Mail</label>
       <input
+        id='email'
         type='email'
         name='email'
         autoComplete='email'

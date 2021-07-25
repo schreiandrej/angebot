@@ -1,10 +1,22 @@
 import { forwardRef } from 'react'
 
-export const Fuellstand = forwardRef((params, ref) => {
-  return (
-    <div className='auftragsnotiz-inputs'>
-      <label>Füllstand</label>
-      <input type='number' name='fuellstand' autoComplete='off' ref={ref} />
-    </div>
-  )
-})
+interface InputProps {
+  ref: React.ForwardedRef<HTMLInputElement>
+}
+
+export const Fuellstand = forwardRef<HTMLInputElement, InputProps>(
+  (params, ref) => {
+    return (
+      <div className='auftragsnotiz-inputs'>
+        <label htmlFor='fuellstand'>Füllstand</label>
+        <input
+          id='fuellstand'
+          type='number'
+          name='fuellstand'
+          autoComplete='off'
+          ref={ref}
+        />
+      </div>
+    )
+  }
+)

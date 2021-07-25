@@ -11,11 +11,31 @@ import {
   Bestellzeit,
 } from './Inputs'
 
+type CopyTextType = {
+  Telefon: string
+  'E-mail': string
+  Bestellzeit: string
+  Preis: string
+  Füllstand: string
+  'Preis genannt': string
+  Sondervereinbarung: string
+}
+
+type FormData = {
+  anrufnummer: string
+  email: string
+  bestellzeit: string
+  preis: string
+  fuellstand: string
+  preisgenannt: string
+  sondervereinbarung: string
+}
+
 export const Note = () => {
   const { register, handleSubmit, reset } = useForm()
-  const [copyText, setCopyText] = useState()
+  const [copyText, setCopyText] = useState<CopyTextType | null>(null)
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: FormData) => {
     setCopyText({
       Telefon: ` ${data.anrufnummer ? data.anrufnummer : '---'}`,
       'E-mail': ` ${data.email ? data.email : '---'}`,
@@ -38,7 +58,6 @@ export const Note = () => {
       const normalizedString = JSON.stringify(copyText)
         .replace(/["{}]/g, '')
         .replaceAll(',', ', ')
-        .replace()
 
       console.log(normalizedString)
 
