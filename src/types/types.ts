@@ -7,23 +7,6 @@ export type OptionsType = {
   unavailable: boolean
 }
 
-// Picture components types
-
-export type Countries = {
-  countries: {
-    country: Country[]
-  }
-}
-
-export type Country = {
-  capital: string
-  continentName: string
-  countryCode: string
-  countryName: string
-  currencyCode: string
-  population: string
-}
-
 // Update ISN price component
 
 export type SplittedFormDataType = {

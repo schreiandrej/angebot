@@ -10,20 +10,12 @@ import {
 } from '@/store/context'
 import { Photos } from 'unsplash-js/dist/methods/search/types/response'
 import { ApiResponse } from 'unsplash-js/dist/helpers/response'
-import { Countries, Country } from '@/types/types'
-
-export type CapitalInformaitonType = {
-  capital: string
-  continentName?: string
-  countryName?: string
-  currencyCode?: string
-  population?: string
-}
+import { Country, Countries } from './types'
 
 type SearchModalProps = {
   dataCountries: Countries
-  capitalInfomation: CapitalInformaitonType | null
-  setCapitalInformation: Dispatch<SetStateAction<CapitalInformaitonType | null>>
+  capitalInfomation: Country | null
+  setCapitalInformation: Dispatch<SetStateAction<Country | null>>
 }
 
 export const DailyPicture = ({

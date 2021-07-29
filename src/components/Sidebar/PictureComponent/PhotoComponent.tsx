@@ -1,10 +1,10 @@
 import { useRef } from 'react'
-import { CapitalInformaitonType } from './DailyPicture'
+import { Country } from './types'
 
 type PhotoComponentProps = {
   photo: any
   setChangeImage: any
-  capitalInformation: CapitalInformaitonType | null
+  capitalInformation: Country | null
 }
 
 export const PhotoComponent = ({
@@ -34,19 +34,18 @@ export const PhotoComponent = ({
             {photo.user.name}
           </a>
 
-          {capitalInformation && (
-            <div className='absolute top-2 left-2 bg-accent rounded-sm px-1'>{`${
-              capitalInformation?.capital
-            }${
-              capitalInformation?.countryName &&
-              ', ' + capitalInformation?.countryName + ','
-            }${
-              capitalInformation.population &&
-              new Intl.NumberFormat().format(
-                parseInt(capitalInformation?.population)
-              ) + 'Einw.'
-            }`}</div>
-          )}
+          <div className='absolute top-2 left-2 flex flex-row bg-accent rounded-sm px-1'>
+            <div>{capitalInformation && `${capitalInformation?.capital}`}</div>
+
+            <div>
+              {capitalInformation?.continentName &&
+                `, ${
+                  capitalInformation?.countryName
+                }: ${new Intl.NumberFormat().format(
+                  parseInt(capitalInformation?.population)
+                )} Einw.`}
+            </div>
+          </div>
         </div>
       ) : (
         'Keine Bilder gefunden. Versuchs nochmal!'
