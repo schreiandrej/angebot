@@ -11,11 +11,11 @@ export interface CountryCapital {
 }
 
 export interface CountryInformation {
-  continentName: string
+  continentName?: string
   countryCode?: string
-  countryName: string
-  currencyCode: string
-  population: string
+  countryName?: string
+  currencyCode?: string
+  population?: string
 }
 
 export interface Country extends CountryCapital, CountryInformation {}

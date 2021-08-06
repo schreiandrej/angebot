@@ -1,16 +1,14 @@
 import { useState } from 'react'
 import { ISNPreis } from './IsnPreis'
 import { WeatherWidget } from './WeatherWidget'
-import {
-  CapitalInformaitonType,
-  DailyPicture,
-} from './PictureComponent/DailyPicture'
+import { DailyPicture } from './PictureComponent/DailyPicture'
 import { useSortData } from '@/components/PriceChart/useSortData'
 import { Container } from '@/components/MicroComponents/Container'
 import { Title } from '@/components/MicroComponents/Title'
 import { SearchModal } from './PictureComponent/SearchModal'
 import de from 'date-fns/locale/de'
 import format from 'date-fns/format'
+import { Country } from './PictureComponent/types'
 
 type SidebarProps = {
   preisliste: any
@@ -30,7 +28,7 @@ export const Sidebar = ({
   const heute = new Date()
   const { date, preis } = useSortData(preisliste, 33, heute)
   const [capitalInfomation, setCapitalInformation] =
-    useState<CapitalInformaitonType | null>(null)
+    useState<Country | null>(null)
 
   const showChart = () => {
     setStateScreen({

@@ -3,7 +3,7 @@
     "target": "es2019",
     "lib": ["dom", "dom.iterable", "esnext"],
     "importHelpers": true,
-    "removeComments": true,
+    // "removeComments": true,
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["src/components/*"],
@@ -29,6 +29,7 @@
   "exclude": ["node_modules", ".next"],
   "include": [
     "next-env.d.ts",
+    "additional.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "src/utils/dbConnection.js",

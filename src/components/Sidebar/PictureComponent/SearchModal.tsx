@@ -6,10 +6,10 @@ import {
   useSearchedWord,
   useChagenImage,
 } from '@/store/context'
-import { CapitalInformaitonType } from './DailyPicture'
+import { Country } from './types'
 
 type SearchModalProps = {
-  setCapitalInformation: Dispatch<SetStateAction<CapitalInformaitonType | null>>
+  setCapitalInformation: Dispatch<SetStateAction<Country | null>>
 }
 type InputData = {
   searchWord: string

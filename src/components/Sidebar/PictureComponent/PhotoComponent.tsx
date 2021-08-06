@@ -39,16 +39,17 @@ export const PhotoComponent = ({
 
             <div>
               {capitalInformation?.continentName &&
-                `, ${
-                  capitalInformation?.countryName
-                }: ${new Intl.NumberFormat().format(
-                  parseInt(capitalInformation?.population)
-                )} Einw.`}
+                `, ${capitalInformation?.countryName}: ${
+                  capitalInformation.population &&
+                  new Intl.NumberFormat().format(
+                    parseInt(capitalInformation.population)
+                  )
+                } Einw.`}
             </div>
           </div>
         </div>
       ) : (
-        'Keine Bilder gefunden. Versuchs nochmal!'
+        `Keine Bilder für ${capitalInformation?.capital} gefunden. Versuchs nochmal!`
       )}
     </>
   )

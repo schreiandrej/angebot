@@ -10,7 +10,8 @@ import { WeatherForcast } from '@/components/Weather/Weather'
 import { UpdateISN } from '@/components/UpdateISNPrice/UpdateISNPrice'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
 import { Note } from '@/components/Auftragsnotiz/Note'
-import { OptionsType, Countries } from '@/types/types'
+import { OptionsType } from '@/types/types'
+import { Countries } from '@/components/Sidebar/PictureComponent/types'
 
 type HomeProps = {
   preisebdev: any

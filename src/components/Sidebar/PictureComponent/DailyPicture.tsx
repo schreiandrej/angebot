@@ -32,7 +32,8 @@ export const DailyPicture = ({
     const { countries } = dataCountries
     const allCountries = countries.country
     const biggerCountries = allCountries.filter(
-      (country: Country) => parseInt(country.population) > 10000000
+      (country: Country) =>
+        country.population && parseInt(country.population) > 10000000
     )
 
     const randomNumber = Math.floor(Math.random() * biggerCountries.length + 1)
