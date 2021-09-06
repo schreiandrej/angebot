@@ -4,7 +4,7 @@ import { PreisPro100Liter } from './PreisPro100Liter'
 import { Fuellstand } from './Fuellstand'
 import { PreisGenannt } from './PreisGenannt'
 import { Sondervereinbarung } from './Sondervereinbarung'
-import { Bestellzeit } from './Bestellzeit'
+import { Fixmenge } from './Fixmenge'
 
 export {
   Anrufnummer,
@@ -13,5 +13,5 @@ export {
   Fuellstand,
   PreisGenannt,
   Sondervereinbarung,
-  Bestellzeit,
+  Fixmenge,
 }

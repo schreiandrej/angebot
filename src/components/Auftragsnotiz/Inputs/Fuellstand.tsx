@@ -11,7 +11,7 @@ export const Fuellstand = forwardRef<HTMLInputElement, InputProps>(
         <label htmlFor='fuellstand'>Füllstand</label>
         <input
           id='fuellstand'
-          type='number'
+          type='text'
           name='fuellstand'
           autoComplete='off'
           ref={ref}

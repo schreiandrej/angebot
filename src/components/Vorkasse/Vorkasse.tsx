@@ -75,7 +75,27 @@ export const Vorkasse = ({ className }: { className?: string }) => {
     <Container className={`${className}`}>
       <Title className='mb-4'>Vorkasse</Title>
       <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
-        <div className='w-full relative'>
+        <div className='relative w-full'>
+          <Input
+            type='number'
+            name='preis'
+            label='Preis/l'
+            step='0.01'
+            defaultValue='0.00'
+            max={1}
+            inputStyles='w-full'
+            autoComplete='off'
+            ref={register({
+              required: 'Bitte ein Preis eingeben',
+            })}
+          />
+          {errors?.preis && (
+            <p className='absolute right-0 text-xs text-red-600 -top-5'>
+              {errors.preis.message}
+            </p>
+          )}
+        </div>
+        <div className='relative w-full'>
           <Input
             type='text'
             name='liter'
@@ -89,25 +109,8 @@ export const Vorkasse = ({ className }: { className?: string }) => {
             })}
           />
           {errors?.liter?.type === 'required' && (
-            <p className='text-xs text-red-600 absolute -top-5 right-0'>
+            <p className='absolute right-0 text-xs text-red-600 -top-5'>
               Bitte die Litermenge angeben!
-            </p>
-          )}
-        </div>
-        <div className='w-full relative'>
-          <Input
-            type='text'
-            name='preis'
-            label='Preis/l'
-            inputStyles='w-full'
-            autoComplete='off'
-            ref={register({
-              required: 'Bitte ein Preis eingeben',
-            })}
-          />
-          {errors?.preis && (
-            <p className='text-xs text-red-600 absolute -top-5 right-0'>
-              {errors.preis.message}
             </p>
           )}
         </div>
@@ -125,7 +128,7 @@ export const Vorkasse = ({ className }: { className?: string }) => {
             )}
           />
 
-          <div className='flex gap-2 items-center w-full justify-end'>
+          <div className='flex items-center justify-end w-full gap-2'>
             <input
               type='checkbox'
               id='adr'
@@ -134,7 +137,7 @@ export const Vorkasse = ({ className }: { className?: string }) => {
               ref={register}
               defaultChecked
             />
-            <label htmlFor='adr' className=' text-xs'>
+            <label htmlFor='adr' className='text-xs '>
               ADR-Zuschlag
             </label>
           </div>
@@ -146,7 +149,7 @@ export const Vorkasse = ({ className }: { className?: string }) => {
           zuschlag={formState.zuschlag}
           adr={formState.adr}
         ></OutputSection>
-        <div className=' flex flex-row my-4 gap-2'>
+        <div className='flex flex-row gap-2 my-4 '>
           <ButtonSubmit id='vorkasseSubmitButton' className='w-full' />
           <ButtonDelete id='vorkasseDeleteButton' deleteResults={clearForm} />
         </div>

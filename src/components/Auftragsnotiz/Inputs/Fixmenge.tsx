@@ -4,17 +4,16 @@ interface InputProps {
   ref: React.ForwardedRef<HTMLInputElement>
 }
 
-export const Bestellzeit = forwardRef<HTMLInputElement, InputProps>(
-  (props, ref) => {
+export const Fixmenge = forwardRef<HTMLInputElement, InputProps>(
+  (params, ref) => {
     return (
       <div className='auftragsnotiz-inputs'>
-        <label htmlFor='bestellzeit'>Zeit</label>
+        <label htmlFor='fixmenge'>Fixmenge</label>
         <input
-          id='bestellzeit'
-          type='tel'
-          name='bestellzeit'
+          id='fixmenge'
+          type='text'
+          name='fixmenge'
           autoComplete='off'
-          max='4'
           ref={ref}
         />
       </div>

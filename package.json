@@ -21,7 +21,7 @@
     "react-datepicker": "3.6.0",
     "react-dom": "17.0.2",
     "react-hook-form": "6.14.1",
-    "sa-tw-lib": "0.0.4",
+    "sa-tw-lib": "0.0.7",
     "string-math": "1.2.2",
     "swr": "0.5.4",
     "unsplash-js": "7.0.10"

@@ -8,11 +8,12 @@ export const PreisPro100Liter = forwardRef<HTMLInputElement, InputProps>(
   (params, ref) => {
     return (
       <div className='auftragsnotiz-inputs'>
-        <label htmlFor='preis'>Preis/100l</label>
+        <label htmlFor='preis'>Preis/l</label>
         <input
           id='preis'
           type='number'
           step='0.01'
+          defaultValue='0.00'
           name='preis'
           autoComplete='off'
           ref={ref}
