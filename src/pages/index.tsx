@@ -9,7 +9,6 @@ import { Sidebar } from '@/components/Sidebar/Sidebar'
 import { WeatherForcast } from '@/components/Weather/Weather'
 import { UpdateISN } from '@/components/UpdateISNPrice/UpdateISNPrice'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
-import { Note } from '@/components/Auftragsnotiz/Note'
 import { OptionsType } from '@/types/types'
 import { Countries } from '@/components/Sidebar/PictureComponent/types'
 
@@ -34,10 +33,10 @@ export default function Home({
     weather: false,
     updateISN: false,
   })
-  const [notizVorkasse, setNotizVorkasse] = useState(true)
+  const [calcVorkasse, setCalcVorkasse] = useState(true)
 
   return (
-    <main className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-screen p-6 w-full bg-base text-base'>
+    <main className='flex flex-col w-full gap-3 p-6 text-base lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 lg:gap-6 lg:h-screen bg-base'>
       <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
         <Sidebar
           preisliste={preisliste}
@@ -48,19 +47,15 @@ export default function Home({
         />
       </div>
       {(stateScreen.calc && (
-        <div className='flex flex-col lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 gap-3 lg:gap-6 lg:h-full w-full realative col-start-5 col-end-13 row-start-1 row-end-7'>
-          <div className='col-span-6 row-span-6'>
-            <Calculator />
-          </div>
-
-          <div className='relative col-span-6 row-span-6'>
+        <div className='flex flex-col w-full col-start-5 col-end-13 row-start-1 row-end-7 gap-3 lg:h-full realative'>
+          <div className='relative w-full h-full'>
             <button
-              className='absolute top-1 right-12 z-20 button-outlined text-xs'
-              onClick={() => setNotizVorkasse(!notizVorkasse)}
+              className='absolute z-20 text-xs top-1 right-12 button-outlined'
+              onClick={() => setCalcVorkasse(!calcVorkasse)}
             >
-              {notizVorkasse ? 'vorkasse' : 'notiz'}
+              {calcVorkasse ? 'vorkasse' : 'calc'}
             </button>
-            {notizVorkasse ? <Note /> : <Vorkasse />}
+            {calcVorkasse ? <Calculator /> : <Vorkasse />}
           </div>
         </div>
       )) ||

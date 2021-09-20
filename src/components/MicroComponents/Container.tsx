@@ -8,7 +8,7 @@ interface ContainerProps {
 export const Container = ({ className, children }: ContainerProps) => {
   return (
     <div
-      className={`${className} flex flex-col w-full lg:h-full p-8 bg-accent overflow-hidden border border-base rounded-md justify-center relative`}
+      className={`${className} flex flex-col w-full lg:h-full p-8 overflow-hidden bg-gray-800 rounded-md justify-center relative`}
     >
       {children}
     </div>

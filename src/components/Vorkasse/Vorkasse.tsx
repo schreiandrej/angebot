@@ -72,16 +72,18 @@ export const Vorkasse = ({ className }: { className?: string }) => {
   }, [formState])
 
   return (
-    <Container className={`${className}`}>
+    <Container>
       <Title className='mb-4'>Vorkasse</Title>
-      <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className='flex flex-col max-w-xl gap-8'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className='relative w-full'>
           <Input
             type='number'
             name='preis'
             label='Preis/l'
             step='0.01'
-            defaultValue='0.00'
             max={1}
             inputStyles='w-full'
             autoComplete='off'
