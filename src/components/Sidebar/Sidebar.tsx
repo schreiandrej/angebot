@@ -3,7 +3,6 @@ import { ISNPreis } from './IsnPreis'
 import { WeatherWidget } from './WeatherWidget'
 import { DailyPicture } from './PictureComponent/DailyPicture'
 import { useSortData } from '@/components/PriceChart/useSortData'
-import { Container } from '@/components/MicroComponents/Container'
 import { Title } from '@/components/MicroComponents/Title'
 import { SearchModal } from './PictureComponent/SearchModal'
 import de from 'date-fns/locale/de'
@@ -65,7 +64,7 @@ export const Sidebar = ({
   }
 
   return (
-    <Container className='relative items-start justify-start'>
+    <div className='relative items-start justify-start'>
       <div className='flex flex-row justify-between w-full'>
         <Title className='mb-4'>
           <div className='text-3xl'>Guten Morgen!</div>
@@ -112,6 +111,6 @@ export const Sidebar = ({
         />
         <SearchModal setCapitalInformation={setCapitalInformation} />
       </div>
-    </Container>
+    </div>
   )
 }

@@ -7,7 +7,6 @@ import {
 } from '@/components/PriceChart/useSortData'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
 import { Title } from '@/components/MicroComponents/Title'
-import { Container } from '@/components/MicroComponents/Container'
 import { data } from './chartData'
 import { ListboxComponent } from '@/components/Vorkasse/Listbox'
 import { OptionsType } from '@/types/types'
@@ -54,17 +53,19 @@ export const LineChart = ({
   }
 
   return (
-    <Container className='flex flex-col items-stretch relative'>
-      <Title className='mb-20'>Preisentwicklung</Title>
+    <div className='flex flex-col w-full h-full'>
+      <Title className='text-left'>Preisentwicklung</Title>
       {chartData ? (
-        <Line
-          data={data(chartData.labels, chartData.values)}
-          options={options}
-        />
+        <div className='relative p-10'>
+          <Line
+            data={data(chartData.labels, chartData.values)}
+            options={options}
+          />
+        </div>
       ) : (
         <div>Error no data found!</div>
       )}
-      <div className='flex flex-row gap-1 absolute top-12 right-12 text-sm'>
+      <div className='absolute flex flex-row gap-1 text-sm top-12 right-12'>
         <button
           type='button'
           onClick={() => setChartToDiffrenPeriod(180)}
@@ -108,7 +109,7 @@ export const LineChart = ({
           Gesamt
         </button>
 
-        {/* <div className='flex flex-col justify-center relative ml-10 w-20 z-10 text-xs'>
+        {/* <div className='relative z-10 flex flex-col justify-center w-20 ml-10 text-xs'>
           <label
             htmlFor='postleitzahlSelect'
             className='absolute -top-4 left-1'
@@ -124,6 +125,6 @@ export const LineChart = ({
           />
         </div> */}
       </div>
-    </Container>
+    </div>
   )
 }

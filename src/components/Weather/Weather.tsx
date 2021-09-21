@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Container } from '@/components/MicroComponents/Container'
 import { format, fromUnixTime } from 'date-fns'
 import de from 'date-fns/locale/de'
 import { Line } from 'react-chartjs-2'
@@ -50,14 +49,14 @@ export const WeatherForcast = ({ weatherData }: any) => {
   }
 
   return (
-    <Container className='h-full items-center justify-center'>
+    <div className='items-center justify-center h-full'>
       <Title className='pb-8'>Wettervorhersage</Title>
       <div className='flex flex-row w-full gap-2 text-sm'>
         {weatherData &&
           weatherData.map((day: any) => {
             return (
               <div
-                className='flex flex-col gap-1 w-full items-center'
+                className='flex flex-col items-center w-full gap-1'
                 key={day.dt}
               >
                 <div className=''>{`${format(fromUnixTime(day.dt), 'EEEE', {
@@ -70,6 +69,6 @@ export const WeatherForcast = ({ weatherData }: any) => {
           })}
       </div>
       <Line data={data} options={options} />
-    </Container>
+    </div>
   )
 }

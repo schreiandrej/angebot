@@ -1,6 +1,5 @@
 import { Title } from '@/components/MicroComponents/Title'
 import { useState } from 'react'
-import { Container } from '../MicroComponents/Container'
 import { ListboxComponent } from './ListboxComponent'
 
 // { id: 1, name: 'Durward Reynolds', value: x, unavailable: false }
@@ -15,7 +14,7 @@ export const SelectPreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
   if (!selectedOption) return <div>loading....</div>
 
   return (
-    <Container className='hidden md:flex flex-col w-full items-center gap-2 '>
+    <div className='flex-col items-center hidden w-full gap-2 md:flex '>
       <ListboxComponent
         options={preisebdev}
         selectedOption={selectedOption}
@@ -23,7 +22,7 @@ export const SelectPreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
       />
       <div>{`${selectedOption.plz}`}</div>
       <div>{`${selectedOption.value}`}</div>
-    </Container>
+    </div>
   )
 }
 
@@ -34,8 +33,8 @@ export const PreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
       currency: 'EUR',
     }).format(parseFloat(numberString.replace(',', '.')))
   return (
-    <div className='text-lg w-full'>
-      <Title className='text-2xl mb-6'>Preise des BDEV: </Title>
+    <div className='w-full text-lg'>
+      <Title className='mb-6 text-2xl'>Preise des BDEV: </Title>
       <ul>
         {preisebdev.map((item: any, index: number) => (
           <li
@@ -50,7 +49,7 @@ export const PreislisteBdev = ({ preisebdev }: PreiseBdevType) => {
                 ? item[Object.keys(item)[0]].plz.slice(-22)
                 : item[Object.keys(item)[0]].plz}
             </span>
-            <span className='flex-shrink  pl-8'>
+            <span className='flex-shrink pl-8'>
               {convert(item[Object.keys(item)[0]].netto1000)}
             </span>
           </li>

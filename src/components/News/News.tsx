@@ -1,4 +1,3 @@
-import { Container } from '@/components/MicroComponents/Container'
 import { Slider } from 'sa-tw-lib'
 
 type NewsProps = {
@@ -11,7 +10,7 @@ type NewsProps = {
 
 export const News = ({ articles, className }: NewsProps) => {
   return (
-    <Container className={`${className}`}>
+    <div className={`${className}`}>
       <Slider className=''>
         {articles.map((article, index) => {
           return (
@@ -26,6 +25,6 @@ export const News = ({ articles, className }: NewsProps) => {
           )
         })}
       </Slider>
-    </Container>
+    </div>
   )
 }

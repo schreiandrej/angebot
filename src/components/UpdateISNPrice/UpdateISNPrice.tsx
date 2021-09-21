@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { format } from 'date-fns'
 import DatePicker from 'react-datepicker'
-import { Container } from '@/components/MicroComponents/Container'
 import { SplittedFormDataType, UpdateDataFormType } from '@/types/types'
 
 // TODO => a clear form functionality, Back button,  a better Layout ....
@@ -72,91 +71,89 @@ export const UpdateISN = () => {
   }
 
   return (
-    <Container className=''>
-      <form className='flex flex-col gap-10 w-1/3 mx-auto items-center justify-center '>
-        <div className='flex flex-row justify-between items-center w-full'>
-          <label htmlFor=''>Date:</label>
-          <DatePicker
-            selected={searchedDate}
-            onChange={(date: Date) => setSearchedDate(date)}
-            closeOnScroll={true}
-            dateFormat='dd.MM.yyyy'
-            startDate={searchedDate}
-            popperPlacement='right-start'
-            popperModifiers={{
-              offset: {
-                enabled: true,
-                offset: '5px, 10px',
-              },
-              preventOverflow: {
-                enabled: true,
-                escapeWithReference: false,
-                boundariesElement: 'viewport',
-              },
-            }}
-            className='w-min-full text-center'
-          />
-        </div>
-        <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='30-34'>30-34:</label>
-          <input
-            type='text'
-            name='30-34'
-            id='30-34'
-            autoComplete='off'
-            ref={register({ required: 'Bitte den Preis eingeben!' })}
-          />
-        </div>
-        <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='35-39'>35-39:</label>
-          <input
-            type='text'
-            name='35-39'
-            id='35-39'
-            autoComplete='off'
-            ref={register({ required: 'Bitte den Preis eingeben!' })}
-          />
-        </div>
-        <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='40-45,47'>40-45,47:</label>
-          <input
-            type='text'
-            name='40-45,47'
-            id='40-45,47'
-            autoComplete='off'
-            ref={register({ required: 'Bitte den Preis eingeben!' })}
-          />
-        </div>
-        <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='46,48,49'>46,48,49:</label>
-          <input
-            type='text'
-            name='46,48,49'
-            id='46,48,49'
-            autoComplete='off'
-            ref={register({ required: 'Bitte den Preis eingeben!' })}
-          />
-        </div>
+    <form className='flex flex-col items-center justify-center w-1/3 gap-10 mx-auto '>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor=''>Date:</label>
+        <DatePicker
+          selected={searchedDate}
+          onChange={(date: Date) => setSearchedDate(date)}
+          closeOnScroll={true}
+          dateFormat='dd.MM.yyyy'
+          startDate={searchedDate}
+          popperPlacement='right-start'
+          popperModifiers={{
+            offset: {
+              enabled: true,
+              offset: '5px, 10px',
+            },
+            preventOverflow: {
+              enabled: true,
+              escapeWithReference: false,
+              boundariesElement: 'viewport',
+            },
+          }}
+          className='text-center w-min-full'
+        />
+      </div>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor='30-34'>30-34:</label>
+        <input
+          type='text'
+          name='30-34'
+          id='30-34'
+          autoComplete='off'
+          ref={register({ required: 'Bitte den Preis eingeben!' })}
+        />
+      </div>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor='35-39'>35-39:</label>
+        <input
+          type='text'
+          name='35-39'
+          id='35-39'
+          autoComplete='off'
+          ref={register({ required: 'Bitte den Preis eingeben!' })}
+        />
+      </div>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor='40-45,47'>40-45,47:</label>
+        <input
+          type='text'
+          name='40-45,47'
+          id='40-45,47'
+          autoComplete='off'
+          ref={register({ required: 'Bitte den Preis eingeben!' })}
+        />
+      </div>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor='46,48,49'>46,48,49:</label>
+        <input
+          type='text'
+          name='46,48,49'
+          id='46,48,49'
+          autoComplete='off'
+          ref={register({ required: 'Bitte den Preis eingeben!' })}
+        />
+      </div>
 
-        <div className='flex flex-row w-full justify-between items-center'>
-          <label htmlFor='50-52, 57-59'>50-52, 57-59:</label>
-          <input
-            type='text'
-            name='50-52, 57-59'
-            id='50-52, 57-59'
-            autoComplete='off'
-            ref={register({ required: 'Bitte den Preis eingeben!' })}
-          />
-        </div>
+      <div className='flex flex-row items-center justify-between w-full'>
+        <label htmlFor='50-52, 57-59'>50-52, 57-59:</label>
+        <input
+          type='text'
+          name='50-52, 57-59'
+          id='50-52, 57-59'
+          autoComplete='off'
+          ref={register({ required: 'Bitte den Preis eingeben!' })}
+        />
+      </div>
 
-        <button
-          type='submit'
-          className='button-outlined w-full'
-          onClick={handleSubmit(onSubmit)}
-        >
-          update
-        </button>
-      </form>
-    </Container>
+      <button
+        type='submit'
+        className='w-full button-outlined'
+        onClick={handleSubmit(onSubmit)}
+      >
+        update
+      </button>
+    </form>
   )
 }

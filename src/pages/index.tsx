@@ -11,6 +11,7 @@ import { UpdateISN } from '@/components/UpdateISNPrice/UpdateISNPrice'
 import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
 import { OptionsType } from '@/types/types'
 import { Countries } from '@/components/Sidebar/PictureComponent/types'
+import { Tab } from '@headlessui/react'
 
 type HomeProps = {
   preisebdev: any
@@ -18,6 +19,10 @@ type HomeProps = {
   weatherData: any
   plzListboxOptions: OptionsType[]
   dataCountries: Countries
+}
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function Home({
@@ -33,11 +38,17 @@ export default function Home({
     weather: false,
     updateISN: false,
   })
+
+  let [sections] = useState({
+    calculator: 'Calculator',
+    vorkasse: 'Vorkasse',
+  })
+
   const [calcVorkasse, setCalcVorkasse] = useState(true)
 
   return (
-    <main className='flex flex-col w-full gap-3 p-6 text-base lg:grid lg:grid-col-1 lg:grid-cols-12 lg:grid-rows-6 lg:gap-6 lg:h-screen bg-base'>
-      <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
+    <main className='flex flex-col w-full gap-3 p-6 text-base lg:h-screen bg-base'>
+      {/* <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
         <Sidebar
           preisliste={preisliste}
           weatherData={weatherData}
@@ -45,38 +56,47 @@ export default function Home({
           plzListboxOptions={plzListboxOptions}
           dataCountries={dataCountries}
         />
-      </div>
-      {(stateScreen.calc && (
-        <div className='flex flex-col w-full col-start-5 col-end-13 row-start-1 row-end-7 gap-3 lg:h-full realative'>
-          <div className='relative w-full h-full'>
-            <button
-              className='absolute z-20 text-xs top-1 right-12 button-outlined'
-              onClick={() => setCalcVorkasse(!calcVorkasse)}
+      </div> */}
+
+      <Tab.Group>
+        <Tab.List className='flex p-1 space-x-1 bg-blue-900/20 rounded-xl'>
+          {Object.keys(sections).map((section) => (
+            <Tab
+              key={section}
+              className={({ selected }) =>
+                classNames(
+                  'w-full py-2.5 text-sm leading-5 font-medium rounded-lg focus:outline-none',
+                  selected
+                    ? 'bg-accent shadow text-white text-xl'
+                    : 'text-gray-500 hover:bg-white/[0.12] hover:text-gray-400'
+                )
+              }
             >
-              {calcVorkasse ? 'vorkasse' : 'calc'}
-            </button>
-            {calcVorkasse ? <Calculator /> : <Vorkasse />}
-          </div>
-        </div>
-      )) ||
-        (stateScreen.chart && (
-          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+              {section}
+            </Tab>
+          ))}
+        </Tab.List>
+        <Tab.Panels className='relative flex flex-col items-center justify-center w-full h-full'>
+          <Tab.Panel className='w-1/2'>
+            <Calculator />
+          </Tab.Panel>
+          <Tab.Panel className='w-1/2'>
+            <Vorkasse />
+          </Tab.Panel>
+          {/* <Tab.Panel className='w-full'>
             <LineChart
               preisliste={preisliste}
               plzListboxOptions={plzListboxOptions}
             />
-          </div>
-        )) ||
-        (stateScreen.weather && (
-          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+          </Tab.Panel> */}
+          {/* <Tab.Panel className='w-full'>
             <WeatherForcast weatherData={weatherData} />
-          </div>
-        )) ||
-        (stateScreen.updateISN && (
-          <div className='col-start-5 col-end-13 row-start-1 row-end-7'>
+          </Tab.Panel> */}
+          {/* <Tab.Panel className='w-full'>
             <UpdateISN />
-          </div>
-        ))}
+          </Tab.Panel> */}
+        </Tab.Panels>
+      </Tab.Group>
     </main>
   )
 }

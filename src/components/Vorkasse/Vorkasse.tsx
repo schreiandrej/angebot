@@ -4,7 +4,6 @@ import { OutputSection } from '@/components/Vorkasse/OutputSection'
 import { ButtonSubmit } from '@/components/MicroComponents/Buttons/ButtonSubmit'
 import { ButtonDelete } from '@/components/MicroComponents/Buttons/ButtonDelete'
 import { Title } from '@/components/MicroComponents/Title'
-import { Container } from '@/components/MicroComponents/Container'
 import { ListboxComponent } from '@/components/Vorkasse/Listbox'
 import { Input } from 'sa-tw-lib'
 
@@ -72,12 +71,9 @@ export const Vorkasse = ({ className }: { className?: string }) => {
   }, [formState])
 
   return (
-    <Container>
-      <Title className='mb-4'>Vorkasse</Title>
-      <form
-        className='flex flex-col max-w-xl gap-8'
-        onSubmit={handleSubmit(onSubmit)}
-      >
+    <section className='w-full'>
+      {/* <Title className='mb-4'>Vorkasse</Title> */}
+      <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
         <div className='relative w-full'>
           <Input
             type='number'
@@ -156,6 +152,6 @@ export const Vorkasse = ({ className }: { className?: string }) => {
           <ButtonDelete id='vorkasseDeleteButton' deleteResults={clearForm} />
         </div>
       </form>
-    </Container>
+    </section>
   )
 }
