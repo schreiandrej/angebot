@@ -81,7 +81,8 @@ export const Vorkasse = ({ className }: { className?: string }) => {
             label='Preis/l'
             step='0.01'
             max={1}
-            inputStyles='w-full'
+            inputStyles='w-full h-12'
+            labelStyles='px-4'
             autoComplete='off'
             ref={register({
               required: 'Bitte ein Preis eingeben',
@@ -98,7 +99,8 @@ export const Vorkasse = ({ className }: { className?: string }) => {
             type='text'
             name='liter'
             label='Liter'
-            inputStyles='w-full'
+            inputStyles='w-full h-12'
+            labelStyles='px-4'
             autoComplete='off'
             ref={register({
               required: true,
@@ -120,6 +122,7 @@ export const Vorkasse = ({ className }: { className?: string }) => {
             render={() => (
               <ListboxComponent
                 options={listOptions}
+                className='h-12'
                 selectedOption={selectedOption}
                 setSelectedOption={setSelectedOption}
               />

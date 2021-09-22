@@ -20,7 +20,7 @@ export const ButtonSubmit = ({ className, id }: ButtonSubmitProps) => {
         id={id}
         width='20'
         height='20'
-        className='text-center text-green-900 group-hover:text-green-300 w-full'
+        className='w-full text-center text-green-900 text-opacity-20 group-hover:text-green-300'
       >
         <path
           strokeLinecap='round'

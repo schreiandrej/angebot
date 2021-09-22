@@ -9,12 +9,12 @@
   --color-text-heading: #eeebe6;
   /* border variables */
   --color-border-base: #25241e;
-  --color-border-hover: #c4c4c4;
-  --color-border-active: #ffffff;
+  --color-border-hover: #4e4e4e;
+  --color-border-active: #947f7f;
   /* ring variables */
   --color-ring-base: #46443a;
   --color-ring-hover: #c4c4c4;
-  --color-ring-active: #ffffff;
+  --color-ring-active: #747474;
 }
 
 .light {

@@ -26,7 +26,7 @@ export const ButtonDelete = ({
         id={id}
         width='20'
         height='20'
-        className='text-center text-red-900 text-opacity-50 group-hover:text-opacity-100 w-full'
+        className='w-full text-center text-red-900 text-opacity-20 group-hover:text-opacity-100'
       >
         <path
           strokeLinecap='round'
