@@ -2,9 +2,16 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-@layer base {
-  @import './theme.css';
+@font-face {
+  font-family: 'Frutiger LT Light';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Frutiger LT Light'),
+    url('/frutiger-lt-cufonfonts-webfont/Frutiger-LT-45-Light.woff')
+      format('woff');
+}
 
+@layer base {
   [type='text'],
   [type='email'],
   [type='url'],
@@ -20,7 +27,7 @@
   [multiple],
   textarea,
   select {
-    @apply border-base rounded-lg bg-transparent text-base;
+    @apply border-gray-400 rounded-lg bg-transparent;
   }
 
   [type='text']:focus,
@@ -38,7 +45,7 @@
   [multiple]:focus,
   textarea:focus,
   select:focus {
-    @apply border-active ring-active;
+    @apply border-gray-400 ring-gray-600;
   }
 
   [type='text']:hover,
@@ -56,22 +63,22 @@
   [multiple]:hover,
   textarea:hover,
   select:hover {
-    @apply border-hover;
+    @apply border-gray-600;
   }
 
   [type='checkbox'],
   [type='radio'] {
-    @apply border-base rounded-lg bg-transparent;
+    @apply border-gray-600 rounded-lg bg-transparent;
   }
 
   [type='checkbox']:hover,
   [type='radio']:hover {
-    @apply border-hover;
+    @apply border-gray-600;
   }
 
   [type='checkbox']:focus,
   [type='radio']:focus {
-    @apply border-active ring-active ring-1;
+    @apply border-gray-400 ring-gray-600 ring-1;
   }
 
   input:-webkit-autofill,

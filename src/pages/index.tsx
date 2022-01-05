@@ -1,157 +1,173 @@
-import { GetStaticProps } from 'next'
-import { useState } from 'react'
-import { Calculator } from '@/components/Calculator/Calculator'
-import { Vorkasse } from '@/components/Vorkasse/Vorkasse'
-import { LineChart } from '@/components/PriceChart/PriceChart'
-import scraperBDEV from '@/components/Sidebar/scraper'
-import { connectToDatabase } from '@/utils/dbConnection'
-import { Sidebar } from '@/components/Sidebar/Sidebar'
-import { WeatherForcast } from '@/components/Weather/Weather'
-import { UpdateISN } from '@/components/UpdateISNPrice/UpdateISNPrice'
-import { getPostleitzahlArray } from '@/components/PriceChart/getPostleitzeitArray'
-import { OptionsType } from '@/types/types'
-import { Countries } from '@/components/Sidebar/PictureComponent/types'
-import { Tab } from '@headlessui/react'
+import { useEffect, useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { OutputSection } from '@/components/OutputSection'
+import { ButtonSubmit } from '@/components/Buttons/ButtonSubmit'
+import { ButtonDelete } from '@/components/Buttons/ButtonDelete'
+import { ListboxComponent } from '@/components/Listbox'
 
-type HomeProps = {
-  preisebdev: any
-  preisliste: any
-  weatherData: any
-  plzListboxOptions: OptionsType[]
-  dataCountries: Countries
+const listOptions = [
+  { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
+  { id: 1, name: 'Teilmenge', value: 49, unavailable: false },
+  { id: 1, name: 'Mindermenge', value: 165, unavailable: false },
+]
+
+interface IForm {
+  liter: number
+  literpreis: number
+  zuschlag: number
+  adr: number
 }
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function Home({}: // preisebdev,
-// preisliste,
-// weatherData,
-// plzListboxOptions,
-// dataCountries,
-HomeProps) {
-  const [stateScreen, setStateScreen] = useState({
-    calc: true,
-    chart: false,
-    weather: false,
-    updateISN: false,
+export default function Home() {
+  const [selectedOption, setSelectedOption] = useState(listOptions[0])
+  const { handleSubmit, reset, register, control, errors, clearErrors } =
+    useForm()
+  const [formState, setFormState] = useState<IForm>({
+    liter: 0,
+    literpreis: 0,
+    zuschlag: 0,
+    adr: 0,
   })
+  const [totalAmount, setTotalAmount] = useState(0)
 
-  let [sections] = useState({
-    calculator: 'Calculator',
-    vorkasse: 'Vorkasse',
-  })
+  const clearForm = () => {
+    reset()
+    clearErrors(['liter', 'preis'])
 
-  const [calcVorkasse, setCalcVorkasse] = useState(true)
+    setFormState({
+      ...formState,
+      liter: 0,
+      literpreis: 0,
+      zuschlag: 0,
+      adr: 0,
+    })
+  }
+
+  const transformPreis = (preis: string) => {
+    const replacedComma = preis.replace(',', '.')
+    return parseFloat(replacedComma) < 1
+      ? parseFloat(replacedComma)
+      : parseFloat(replacedComma) / 100
+  }
+
+  const onSubmit = (data: { preis: string; liter: string; adr: string }) => {
+    const preis = transformPreis(data.preis)
+
+    setFormState({
+      ...formState,
+      liter: parseFloat(data.liter),
+      literpreis: parseFloat(JSON.stringify(preis)),
+      zuschlag: selectedOption.value,
+      adr: Boolean(data.adr) === true ? 11 : 0,
+    })
+  }
+
+  useEffect(() => {
+    setTotalAmount(
+      (formState.literpreis * formState.liter +
+        formState.zuschlag +
+        formState.adr) *
+        1.19
+    )
+  }, [formState])
 
   return (
     <main className='flex flex-col w-full justify-center items-center gap-3 p-6 text-base lg:h-screen bg-base'>
-      {/* <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
-        <Sidebar
-          preisliste={preisliste}
-          weatherData={weatherData}
-          setStateScreen={setStateScreen}
-          plzListboxOptions={plzListboxOptions}
-          dataCountries={dataCountries}
-        />
-      </div> */}
-      {/* 
-      <Tab.Group>
-        <Tab.List className='flex p-1 space-x-1 bg-blue-900/20 rounded-xl'>
-          {Object.keys(sections).map((section) => (
-            <Tab
-              key={section}
-              className={({ selected }) =>
-                classNames(
-                  'w-full py-2.5 text-sm leading-5 font-medium rounded-lg focus:outline-none',
-                  selected
-                    ? 'bg-accent shadow text-white text-xl'
-                    : 'text-gray-500 hover:bg-white/[0.12] hover:text-gray-400'
-                )
-              }
-            >
-              {section}
-            </Tab>
-          ))}
-        </Tab.List>
-        <Tab.Panels className='relative flex flex-col items-center justify-center w-full h-full'>
-          <Tab.Panel className='w-1/2'>
-            <Calculator />
-          </Tab.Panel>
-          <Tab.Panel className='w-1/2'> */}
-      <Vorkasse />
-      {/* </Tab.Panel> */}
-      {/* <Tab.Panel className='w-full'>
-            <LineChart
-              preisliste={preisliste}
-              plzListboxOptions={plzListboxOptions}
+      <section className='w-3/5'>
+        <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
+          <div className='flex flex-row gap-5'>
+            <div className='relative w-full flex flex-col'>
+              <label htmlFor='preis' className=''>
+                Preis/l
+              </label>
+              <input
+                type='number'
+                name='preis'
+                id='preis'
+                // label='Preis/l'
+                step='0.01'
+                // inputStyles='w-full h-12'
+                // labelStyles='px-4'
+                autoComplete='off'
+                ref={register({
+                  required: 'Bitte ein Preis eingeben',
+                })}
+              />
+              {errors?.preis && (
+                <p className='absolute right-0 text-xs text-red-600 -top-5'>
+                  {errors.preis.message}
+                </p>
+              )}
+            </div>
+            <div className='relative w-full flex flex-col'>
+              <label htmlFor='liter' className=''>
+                Liter
+              </label>
+              <input
+                type='text'
+                name='liter'
+                // label='Liter'
+                id='liter'
+                // inputStyles='w-full h-12'
+                // labelStyles='px-4'
+                autoComplete='off'
+                ref={register({
+                  required: true,
+                  min: 0,
+                  max: 24000,
+                })}
+              />
+              {errors?.liter?.type === 'required' && (
+                <p className='absolute right-0 text-xs text-red-600 -top-5'>
+                  Bitte die Litermenge angeben!
+                </p>
+              )}
+            </div>
+          </div>
+          <div className='flex w-full'>
+            <Controller
+              control={control}
+              role='zuschlag'
+              name='zuschlag'
+              defaultValue={selectedOption}
+              render={() => (
+                <ListboxComponent
+                  options={listOptions}
+                  className='h-12'
+                  selectedOption={selectedOption}
+                  setSelectedOption={setSelectedOption}
+                />
+              )}
             />
-          </Tab.Panel> */}
-      {/* <Tab.Panel className='w-full'>
-            <WeatherForcast weatherData={weatherData} />
-          </Tab.Panel> */}
-      {/* <Tab.Panel className='w-full'>
-            <UpdateISN />
-          </Tab.Panel> */}
-      {/* </Tab.Panels>
-      </Tab.Group> */}
+
+            <div className='flex items-center justify-end w-full gap-2'>
+              <input
+                type='checkbox'
+                id='adr'
+                name='adr'
+                data-testid='adr'
+                className={`text-gray-500 bg-transparent rounded-sm`}
+                ref={register}
+                defaultChecked
+              />
+              <label htmlFor='adr' className='text-xs'>
+                ADR-Zuschlag
+              </label>
+            </div>
+          </div>
+          <OutputSection
+            liter={formState.liter}
+            preisProLiter={formState.literpreis}
+            preis={totalAmount}
+            zuschlag={formState.zuschlag}
+            adr={formState.adr}
+          ></OutputSection>
+          <div className='flex flex-row gap-2 my-4 '>
+            <ButtonSubmit />
+            <ButtonDelete deleteResults={clearForm} />
+          </div>
+        </form>
+      </section>
     </main>
   )
 }
-
-// export const getStaticProps: GetStaticProps = async () => {
-//   // fetch news
-//   // const articles = await scraperNews()
-
-//   // fetch isn pricelist
-//   let doc = null
-//   const { db } = await connectToDatabase()
-//   try {
-//     doc = await db
-//       .collection('preisliste')
-//       .find({})
-//       .sort({ Datum: 1 })
-//       .toArray()
-//   } catch (err) {
-//     console.log(`Error: ${err}`)
-//   }
-
-//   const preisArray = JSON.parse(JSON.stringify(doc))
-
-//   // fetch bdev preise
-//   const preisebdev = await scraperBDEV()
-
-//   // fetch countries
-//   const countriesUrl =
-//     'https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json'
-//   const resCountries = await fetch(countriesUrl)
-//   const dataCountries = await resCountries.json()
-
-//   // wether data
-//   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_ID}`
-//   const res = await fetch(url)
-//   const data = await res.json()
-//   const weatherData = await data.daily
-
-//   const plzListboxOptions: OptionsType[] = []
-//   getPostleitzahlArray(preisArray).map((item, index) =>
-//     plzListboxOptions.push({
-//       id: index,
-//       name: item,
-//       value: item,
-//       unavailable: false,
-//     })
-//   )
-
-//   return {
-//     props: {
-//       preisebdev,
-//       // articles,
-//       preisliste: JSON.parse(JSON.stringify(doc)),
-//       weatherData,
-//       plzListboxOptions,
-//       dataCountries,
-//     },
-//   }
-// }

@@ -29,17 +29,12 @@
   "exclude": ["node_modules", ".next"],
   "include": [
     "next-env.d.ts",
-    "additional.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/utils/dbConnection.js",
     "tailwind.config.js",
     "jest.config.js",
     "jest.setup.js",
     "postcss.config.js",
-    "setupEnv.js",
-    "src/components/News/scraper.js",
-    "src/components/Sidebar/PictureComponent/unsplashApi.js",
-    "src/components/Sidebar/copyToClipboard.js"
+    "src/utils/copyToClipboard.js"
   ]
 }

@@ -1,7 +1,5 @@
 import { ReactNode } from 'react'
 import Head from 'next/head'
-import { ThemeProvider } from 'next-themes'
-import { DarkModeToggle } from '@/components/MicroComponents/DarkModeToggle'
 
 type LayoutProps = {
   children: ReactNode
@@ -17,12 +15,15 @@ export function Layout({ children }: LayoutProps) {
         />
         <meta name='description' content='Description' />
         <meta name='keywords' content='Keywords' />
+        <link
+          rel='preload'
+          href='/frutiger-lt-cufonfonts-webfont/Frutiger-LT-45-Light.woff'
+          as='font'
+          crossOrigin=''
+        />
         <title>Dashboard</title>
       </Head>
-      <ThemeProvider attribute='class'>
-        <DarkModeToggle />
-        {children}
-      </ThemeProvider>
+      {children}
     </>
   )
 }
