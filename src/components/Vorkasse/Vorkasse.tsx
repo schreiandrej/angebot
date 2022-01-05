@@ -71,48 +71,50 @@ export const Vorkasse = ({ className }: { className?: string }) => {
   }, [formState])
 
   return (
-    <section className='w-full'>
+    <section className='w-3/5'>
       {/* <Title className='mb-4'>Vorkasse</Title> */}
       <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
-        <div className='relative w-full'>
-          <Input
-            type='number'
-            name='preis'
-            label='Preis/l'
-            step='0.01'
-            max={1}
-            inputStyles='w-full h-12'
-            labelStyles='px-4'
-            autoComplete='off'
-            ref={register({
-              required: 'Bitte ein Preis eingeben',
-            })}
-          />
-          {errors?.preis && (
-            <p className='absolute right-0 text-xs text-red-600 -top-5'>
-              {errors.preis.message}
-            </p>
-          )}
-        </div>
-        <div className='relative w-full'>
-          <Input
-            type='text'
-            name='liter'
-            label='Liter'
-            inputStyles='w-full h-12'
-            labelStyles='px-4'
-            autoComplete='off'
-            ref={register({
-              required: true,
-              min: 0,
-              max: 24000,
-            })}
-          />
-          {errors?.liter?.type === 'required' && (
-            <p className='absolute right-0 text-xs text-red-600 -top-5'>
-              Bitte die Litermenge angeben!
-            </p>
-          )}
+        <div className='flex flex-row gap-5'>
+          <div className='relative w-full'>
+            <Input
+              type='number'
+              name='preis'
+              label='Preis/l'
+              step='0.01'
+              max={1}
+              inputStyles='w-full h-12'
+              labelStyles='px-4'
+              autoComplete='off'
+              ref={register({
+                required: 'Bitte ein Preis eingeben',
+              })}
+            />
+            {errors?.preis && (
+              <p className='absolute right-0 text-xs text-red-600 -top-5'>
+                {errors.preis.message}
+              </p>
+            )}
+          </div>
+          <div className='relative w-full'>
+            <Input
+              type='text'
+              name='liter'
+              label='Liter'
+              inputStyles='w-full h-12'
+              labelStyles='px-4'
+              autoComplete='off'
+              ref={register({
+                required: true,
+                min: 0,
+                max: 24000,
+              })}
+            />
+            {errors?.liter?.type === 'required' && (
+              <p className='absolute right-0 text-xs text-red-600 -top-5'>
+                Bitte die Litermenge angeben!
+              </p>
+            )}
+          </div>
         </div>
         <div className='flex w-full'>
           <Controller
@@ -134,11 +136,11 @@ export const Vorkasse = ({ className }: { className?: string }) => {
               type='checkbox'
               id='adr'
               name='adr'
-              className={`text-transparent rounded-sm`}
+              className={`text-gray-500  bg-base rounded-sm`}
               ref={register}
               defaultChecked
             />
-            <label htmlFor='adr' className='text-xs '>
+            <label htmlFor='adr' className='text-xs'>
               ADR-Zuschlag
             </label>
           </div>

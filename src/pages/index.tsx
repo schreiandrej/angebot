@@ -25,13 +25,12 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Home({
-  preisebdev,
-  preisliste,
-  weatherData,
-  plzListboxOptions,
-  dataCountries,
-}: HomeProps) {
+export default function Home({}: // preisebdev,
+// preisliste,
+// weatherData,
+// plzListboxOptions,
+// dataCountries,
+HomeProps) {
   const [stateScreen, setStateScreen] = useState({
     calc: true,
     chart: false,
@@ -47,7 +46,7 @@ export default function Home({
   const [calcVorkasse, setCalcVorkasse] = useState(true)
 
   return (
-    <main className='flex flex-col w-full gap-3 p-6 text-base lg:h-screen bg-base'>
+    <main className='flex flex-col w-full justify-center items-center gap-3 p-6 text-base lg:h-screen bg-base'>
       {/* <div className='col-start-1 col-end-5 row-start-1 row-end-7'>
         <Sidebar
           preisliste={preisliste}
@@ -57,7 +56,7 @@ export default function Home({
           dataCountries={dataCountries}
         />
       </div> */}
-
+      {/* 
       <Tab.Group>
         <Tab.List className='flex p-1 space-x-1 bg-blue-900/20 rounded-xl'>
           {Object.keys(sections).map((section) => (
@@ -80,79 +79,79 @@ export default function Home({
           <Tab.Panel className='w-1/2'>
             <Calculator />
           </Tab.Panel>
-          <Tab.Panel className='w-1/2'>
-            <Vorkasse />
-          </Tab.Panel>
-          {/* <Tab.Panel className='w-full'>
+          <Tab.Panel className='w-1/2'> */}
+      <Vorkasse />
+      {/* </Tab.Panel> */}
+      {/* <Tab.Panel className='w-full'>
             <LineChart
               preisliste={preisliste}
               plzListboxOptions={plzListboxOptions}
             />
           </Tab.Panel> */}
-          {/* <Tab.Panel className='w-full'>
+      {/* <Tab.Panel className='w-full'>
             <WeatherForcast weatherData={weatherData} />
           </Tab.Panel> */}
-          {/* <Tab.Panel className='w-full'>
+      {/* <Tab.Panel className='w-full'>
             <UpdateISN />
           </Tab.Panel> */}
-        </Tab.Panels>
-      </Tab.Group>
+      {/* </Tab.Panels>
+      </Tab.Group> */}
     </main>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  // fetch news
-  // const articles = await scraperNews()
+// export const getStaticProps: GetStaticProps = async () => {
+//   // fetch news
+//   // const articles = await scraperNews()
 
-  // fetch isn pricelist
-  let doc = null
-  const { db } = await connectToDatabase()
-  try {
-    doc = await db
-      .collection('preisliste')
-      .find({})
-      .sort({ Datum: 1 })
-      .toArray()
-  } catch (err) {
-    console.log(`Error: ${err}`)
-  }
+//   // fetch isn pricelist
+//   let doc = null
+//   const { db } = await connectToDatabase()
+//   try {
+//     doc = await db
+//       .collection('preisliste')
+//       .find({})
+//       .sort({ Datum: 1 })
+//       .toArray()
+//   } catch (err) {
+//     console.log(`Error: ${err}`)
+//   }
 
-  const preisArray = JSON.parse(JSON.stringify(doc))
+//   const preisArray = JSON.parse(JSON.stringify(doc))
 
-  // fetch bdev preise
-  const preisebdev = await scraperBDEV()
+//   // fetch bdev preise
+//   const preisebdev = await scraperBDEV()
 
-  // fetch countries
-  const countriesUrl =
-    'https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json'
-  const resCountries = await fetch(countriesUrl)
-  const dataCountries = await resCountries.json()
+//   // fetch countries
+//   const countriesUrl =
+//     'https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json'
+//   const resCountries = await fetch(countriesUrl)
+//   const dataCountries = await resCountries.json()
 
-  // wether data
-  const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_ID}`
-  const res = await fetch(url)
-  const data = await res.json()
-  const weatherData = await data.daily
+//   // wether data
+//   const url = `https://api.openweathermap.org/data/2.5/onecall?lat=51.945438364155955&lon=8.862723792633542&exclude=current,minutely,hourly&units=metric&lang=de&appid=${process.env.NEXT_PUBLIC_OPENWEATHER_ID}`
+//   const res = await fetch(url)
+//   const data = await res.json()
+//   const weatherData = await data.daily
 
-  const plzListboxOptions: OptionsType[] = []
-  getPostleitzahlArray(preisArray).map((item, index) =>
-    plzListboxOptions.push({
-      id: index,
-      name: item,
-      value: item,
-      unavailable: false,
-    })
-  )
+//   const plzListboxOptions: OptionsType[] = []
+//   getPostleitzahlArray(preisArray).map((item, index) =>
+//     plzListboxOptions.push({
+//       id: index,
+//       name: item,
+//       value: item,
+//       unavailable: false,
+//     })
+//   )
 
-  return {
-    props: {
-      preisebdev,
-      // articles,
-      preisliste: JSON.parse(JSON.stringify(doc)),
-      weatherData,
-      plzListboxOptions,
-      dataCountries,
-    },
-  }
-}
+//   return {
+//     props: {
+//       preisebdev,
+//       // articles,
+//       preisliste: JSON.parse(JSON.stringify(doc)),
+//       weatherData,
+//       plzListboxOptions,
+//       dataCountries,
+//     },
+//   }
+// }

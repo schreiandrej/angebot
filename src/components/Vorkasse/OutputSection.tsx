@@ -76,7 +76,7 @@ export const OutputSection = ({
           )}
           {adr !== 0 && (
             <tr className=''>
-              <td className=''>Gefahrgutzuschlag:</td>
+              <td className=''>ADR-Zuschlag:</td>
               <CopyToClipboard text={adr.toFixed(2)}>
                 <td className='text-right cursor-pointer hover:text-hover'>
                   {adr.toFixed(2)} €
