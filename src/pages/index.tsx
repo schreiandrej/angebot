@@ -4,6 +4,8 @@ import { OutputSection } from '@/components/OutputSection'
 import { ButtonSubmit } from '@/components/Buttons/ButtonSubmit'
 import { ButtonDelete } from '@/components/Buttons/ButtonDelete'
 import { ListboxComponent } from '@/components/Listbox'
+import CopyToClipboard from 'react-copy-to-clipboard'
+import { copyTable } from 'src/lib/copyTable'
 
 const listOptions = [
   { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
@@ -60,6 +62,8 @@ export default function Home() {
       zuschlag: selectedOption.value,
       adr: Boolean(data.adr) === true ? 11 : 0,
     })
+
+    copyTable()
   }
 
   useEffect(() => {
