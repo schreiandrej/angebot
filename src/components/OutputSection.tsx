@@ -20,94 +20,70 @@ export const OutputSection = ({
   return (
     <div className='flex flex-col w-full items-center p-5'>
       <table className='w-4/5'>
-        <thead>
+        <thead className='border-b border-b-slate-200'>
           <tr className=''>
             <th className='text-left'>Bestellung</th>
-            <th className='text-right '></th>
-            <th className='text-right '> {liter} Liter</th>
+            <th className='text-right'></th>
+            <th className='text-right'> {liter} Liter</th>
           </tr>
         </thead>
         <tbody className='font-base'>
           <tr className='text-xs'>
             <td className=''></td>
 
-            <td className='text-right cursor-pointer hover:text-hover'>
+            <td className='text-right cursor-pointer hover:text-hover  pt-4'>
               zzgl. MwSt.
             </td>
 
-            <td className='text-right cursor-pointer hover:text-hover'>
+            <td className='text-right cursor-pointer hover:text-hover pt-4'>
               inkl. MwSt.
             </td>
           </tr>
           <tr className=''>
             <td className=''>Preis/l:</td>
-            <CopyToClipboard text={preisProLiter.toFixed(4)}>
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {preisProLiter.toFixed(4).replace('.', ',')} €
-              </td>
-            </CopyToClipboard>
-            <CopyToClipboard
-              text={(preisProLiter * currentMwstFactor).toFixed(4)}
-            >
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {(preisProLiter * currentMwstFactor)
-                  .toFixed(4)
-                  .replace('.', ',')}
-                €
-              </td>
-            </CopyToClipboard>
+            <td className='text-right cursor-pointer hover:text-hover'>
+              {preisProLiter.toFixed(4).replace('.', ',')} €
+            </td>
+            <td className='text-right cursor-pointer hover:text-hover'>
+              {(preisProLiter * currentMwstFactor).toFixed(4).replace('.', ',')}
+              €
+            </td>
           </tr>
           <tr className=''>
             <td className=''>Flüssiggas:</td>
-            <CopyToClipboard text={(preisProLiter * liter).toFixed(2)}>
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {(preisProLiter * liter).toFixed(2).replace('.', ',')} €
-              </td>
-            </CopyToClipboard>
-            <CopyToClipboard
-              text={(preisProLiter * liter * currentMwstFactor).toFixed(2)}
-            >
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {(preisProLiter * liter * currentMwstFactor)
-                  .toFixed(2)
-                  .replace('.', ',')}{' '}
-                €
-              </td>
-            </CopyToClipboard>
+            <td className='text-right cursor-pointer hover:text-hover'>
+              {(preisProLiter * liter).toFixed(2).replace('.', ',')} €
+            </td>
+            <td className='text-right cursor-pointer hover:text-hover'>
+              {(preisProLiter * liter * currentMwstFactor)
+                .toFixed(2)
+                .replace('.', ',')}{' '}
+              €
+            </td>
           </tr>
 
           {zuschlag !== 0 && (
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
-              <CopyToClipboard text={zuschlag.toFixed(2)}>
-                <td className='text-right cursor-pointer hover:text-hover'>
-                  {zuschlag.toFixed(2).replace('.', ',')} €
-                </td>
-              </CopyToClipboard>
-              <CopyToClipboard text={(zuschlag * currentMwstFactor).toFixed(2)}>
-                <td className='text-right cursor-pointer hover:text-hover'>
-                  {(zuschlag * currentMwstFactor).toFixed(2).replace('.', ',')}{' '}
-                  €
-                </td>
-              </CopyToClipboard>
+              <td className='text-right cursor-pointer hover:text-hover'>
+                {zuschlag.toFixed(2).replace('.', ',')} €
+              </td>
+              <td className='text-right cursor-pointer hover:text-hover'>
+                {(zuschlag * currentMwstFactor).toFixed(2).replace('.', ',')} €
+              </td>
             </tr>
           )}
           {adr !== 0 && (
             <tr className=''>
               <td className=''>ADR-Zuschlag:</td>
-              <CopyToClipboard text={adr.toFixed(2)}>
-                <td className='text-right cursor-pointer hover:text-hover'>
-                  {adr.toFixed(2).replace('.', ',')} €
-                </td>
-              </CopyToClipboard>
-              <CopyToClipboard text={(adr * currentMwstFactor).toFixed(2)}>
-                <td className='text-right cursor-pointer hover:text-hover'>
-                  {(adr * currentMwstFactor).toFixed(2).replace('.', ',')} €
-                </td>
-              </CopyToClipboard>
+              <td className='text-right cursor-pointer hover:text-hover'>
+                {adr.toFixed(2).replace('.', ',')} €
+              </td>
+              <td className='text-right cursor-pointer hover:text-hover'>
+                {(adr * currentMwstFactor).toFixed(2).replace('.', ',')} €
+              </td>
             </tr>
           )}
-
           <tr className='mt-1 font-bold '>
             <td className=''>Gesamtpreis:</td>
             <CopyToClipboard text={(preis / currentMwstFactor).toFixed(2)}>
