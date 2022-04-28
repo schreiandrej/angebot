@@ -31,11 +31,11 @@ export const OutputSection = ({
           <tr className='text-xs'>
             <td className=''></td>
 
-            <td className='text-right cursor-pointer hover:text-hover  pt-4'>
+            <td className='text-right cursor-pointer hover:text-hover  pt-2'>
               zzgl. MwSt.
             </td>
 
-            <td className='text-right cursor-pointer hover:text-hover pt-4'>
+            <td className='text-right cursor-pointer hover:text-hover pt-2'>
               inkl. MwSt.
             </td>
           </tr>
