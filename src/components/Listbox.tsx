@@ -1,15 +1,9 @@
+import { IOptionsType } from '../types'
 import { Listbox, Transition } from '@headlessui/react'
 
-type OptionsType = {
-  id: number
-  name: string
-  value: number
-  unavailable: boolean
-}
-
-type ListboxComponentProps = {
-  options: OptionsType[]
-  selectedOption: OptionsType
+interface ListboxComponentProps {
+  options: IOptionsType[]
+  selectedOption: IOptionsType
   setSelectedOption: any
   className?: string
 }

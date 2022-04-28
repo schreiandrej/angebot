@@ -18,7 +18,7 @@ export const OutputSection = ({
   const currentMwstFactor = 1.19
 
   return (
-    <div className='flex flex-col w-full items-center p-5'>
+    <section className='flex flex-col w-full items-center p-5'>
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
@@ -102,6 +102,6 @@ export const OutputSection = ({
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
   )
 }
