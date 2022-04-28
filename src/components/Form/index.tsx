@@ -1,11 +1,13 @@
-import { transformPreis } from '@/utils/utils'
+import {
+  calculateTotalAmount,
+  setStateOnSubmit,
+  transformPreis,
+} from '@/utils/utils'
 import { initialFormState, listOptions } from '@/utils/variables'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { copyTable } from 'src/lib/copyTable'
-import { ButtonDelete } from '../Buttons/ButtonDelete'
-import { ButtonSubmit } from '../Buttons/ButtonSubmit'
-import { OutputSection } from '../OutputSection'
+import { copyTable } from '@/utils/copyTable'
+import { OutputSection } from './OutputSection'
 import { InputLiter } from './InputLiter'
 import { InputPreis } from './InputPreis'
 import { InputZuschlag } from './InputZuschlag'
@@ -13,12 +15,12 @@ import { IOptionsType, IData, IForm } from '../../types'
 import { InputTankvolumen } from './InputTankvolumen'
 import { InputADRZuschlag } from './InputADRZuschlag'
 import { InputFüllstand } from './InputFüllstand'
+import { ButtonSubmit, ButtonDelete } from '../Buttons'
 
 export const FormComponent = () => {
   const [selectedOption, setSelectedOption] = useState<IOptionsType>(
     listOptions[0]
   )
-
   const { handleSubmit, reset, register, control, errors, clearErrors } =
     useForm()
   const [formState, setFormState] = useState<IForm>(initialFormState)
@@ -30,29 +32,17 @@ export const FormComponent = () => {
     reset()
     clearErrors(['liter', 'preis'])
 
-    setFormState({
-      ...formState,
-      liter: 0,
-      literpreis: 0,
-      zuschlag: 0,
-      adr: 0,
-    })
+    setFormState(initialFormState)
   }
 
   const onSubmit = ({ preis, liter, adr }: IData) => {
-    setFormState({
-      ...formState,
-      liter: parseFloat(liter),
-      literpreis: parseFloat(JSON.stringify(transformPreis(preis))),
-      zuschlag: selectedOption.value,
-      adr: Boolean(adr) === true ? 11 : 0,
-    })
+    setFormState(setStateOnSubmit(formState, liter, preis, selectedOption, adr))
 
     copyTable()
   }
 
   useEffect(() => {
-    setTotalAmount((literpreis * liter + zuschlag + adr) * 1.19)
+    setTotalAmount(calculateTotalAmount(literpreis, liter, zuschlag, adr))
   }, [formState])
 
   return (

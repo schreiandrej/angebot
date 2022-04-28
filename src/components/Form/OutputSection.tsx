@@ -22,7 +22,7 @@ export const OutputSection = ({
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
-            <th className='text-left'>Bestellung</th>
+            <th className='text-left'>Liefermenge</th>
             <th className='text-right'></th>
             <th className='text-right'> {liter} Liter</th>
           </tr>
@@ -74,17 +74,28 @@ export const OutputSection = ({
             </tr>
           )}
           {adr !== 0 && (
-            <tr className=''>
-              <td className=''>ADR-Zuschlag:</td>
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {adr.toFixed(2).replace('.', ',')} €
-              </td>
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {(adr * currentMwstFactor).toFixed(2).replace('.', ',')} €
-              </td>
-            </tr>
+            <>
+              <tr className=''>
+                <td className=''>Gefahrgutzuschlag:</td>
+                <td className='text-right cursor-pointer hover:text-hover'>
+                  {adr.toFixed(2).replace('.', ',')} €
+                </td>
+                <td className='text-right cursor-pointer hover:text-hover'>
+                  {(adr * currentMwstFactor).toFixed(2).replace('.', ',')} €
+                </td>
+              </tr>
+              <tr className=''>
+                <td className='pb-3'>Dieselzuschlag:</td>
+                <td className='pb-3 text-right cursor-pointer hover:text-hover'>
+                  {(4.2).toFixed(2).replace('.', ',')} €
+                </td>
+                <td className='pb-3 text-right cursor-pointer hover:text-hover'>
+                  {(4.2 * currentMwstFactor).toFixed(2).replace('.', ',')} €
+                </td>
+              </tr>
+            </>
           )}
-          <tr className='mt-1 font-bold '>
+          <tr className='border-t border-b-slate-200 font-bold'>
             <td className=''>Gesamtpreis:</td>
             <CopyToClipboard text={(preis / currentMwstFactor).toFixed(2)}>
               <td
