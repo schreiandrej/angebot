@@ -11,9 +11,10 @@ export const calculateTotalAmount = (
   literpreis: number,
   liter: number,
   zuschlag: number,
+  dieselzuschlag: number,
   adr: number
 ) => {
-  return (literpreis * liter + zuschlag + adr) * 1.19
+  return (literpreis * liter + zuschlag + adr + dieselzuschlag) * 1.19
 }
 
 export const setStateOnSubmit = (
@@ -21,6 +22,7 @@ export const setStateOnSubmit = (
   liter: string,
   preis: string,
   selectedOption: IOptionsType,
+  dieselzuschlag: number,
   adr: string
 ) => {
   return {
@@ -28,6 +30,7 @@ export const setStateOnSubmit = (
     liter: parseFloat(liter),
     literpreis: parseFloat(JSON.stringify(transformPreis(preis))),
     zuschlag: selectedOption.value,
+    dieselzuschlag: dieselzuschlag,
     adr: Boolean(adr) === true ? 11 : 0,
   }
 }

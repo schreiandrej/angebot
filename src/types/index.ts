@@ -2,6 +2,7 @@ export interface IForm {
   liter: number
   literpreis: number
   zuschlag: number
+  dieselzuschlag: number
   adr: number
 }
 

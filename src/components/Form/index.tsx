@@ -1,8 +1,4 @@
-import {
-  calculateTotalAmount,
-  setStateOnSubmit,
-  transformPreis,
-} from '@/utils/utils'
+import { calculateTotalAmount, setStateOnSubmit } from '@/utils/utils'
 import { initialFormState, listOptions } from '@/utils/variables'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -26,7 +22,7 @@ export const FormComponent = () => {
   const [formState, setFormState] = useState<IForm>(initialFormState)
   const [totalAmount, setTotalAmount] = useState(0)
 
-  const { liter, literpreis, zuschlag, adr } = formState
+  const { liter, literpreis, zuschlag, dieselzuschlag, adr } = formState
 
   const clearForm = () => {
     reset()
@@ -36,13 +32,24 @@ export const FormComponent = () => {
   }
 
   const onSubmit = ({ preis, liter, adr }: IData) => {
-    setFormState(setStateOnSubmit(formState, liter, preis, selectedOption, adr))
+    setFormState(
+      setStateOnSubmit(
+        formState,
+        liter,
+        preis,
+        selectedOption,
+        dieselzuschlag,
+        adr
+      )
+    )
 
     copyTable()
   }
 
   useEffect(() => {
-    setTotalAmount(calculateTotalAmount(literpreis, liter, zuschlag, adr))
+    setTotalAmount(
+      calculateTotalAmount(literpreis, liter, zuschlag, dieselzuschlag, adr)
+    )
   }, [formState])
 
   return (
@@ -66,6 +73,7 @@ export const FormComponent = () => {
         preisProLiter={literpreis}
         preis={totalAmount}
         zuschlag={zuschlag}
+        dieselzuschlag={dieselzuschlag}
         adr={adr}
       ></OutputSection>
       <section className='flex flex-row gap-2 my-4 '>

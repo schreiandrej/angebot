@@ -1,10 +1,17 @@
+import {
+  calcGesamtPreis,
+  calcPreisGesamtmenge,
+  calcPreisProLiter,
+  calcZuschlag,
+} from '@/utils/calculations'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
-type OutputSectionType = {
+interface Props {
   preisProLiter: number
   liter: number
   preis: number
   zuschlag: number
+  dieselzuschlag: number
   adr: number
 }
 
@@ -13,8 +20,9 @@ export const OutputSection = ({
   liter,
   preis,
   zuschlag,
+  dieselzuschlag,
   adr,
-}: OutputSectionType) => {
+}: Props) => {
   const currentMwstFactor = 1.19
 
   return (
@@ -22,7 +30,7 @@ export const OutputSection = ({
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
-            <th className='text-left'>Liefermenge</th>
+            <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
             <th className='text-right'> {liter} Liter</th>
           </tr>
@@ -42,23 +50,19 @@ export const OutputSection = ({
           <tr className=''>
             <td className=''>Preis/l:</td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {preisProLiter.toFixed(4).replace('.', ',')} €
+              {calcPreisProLiter(preisProLiter).netto}
             </td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {(preisProLiter * currentMwstFactor).toFixed(4).replace('.', ',')}
-              €
+              {calcPreisProLiter(preisProLiter).brutto}
             </td>
           </tr>
           <tr className=''>
             <td className=''>Flüssiggas:</td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {(preisProLiter * liter).toFixed(2).replace('.', ',')} €
+              {calcPreisGesamtmenge(preisProLiter, liter).netto}
             </td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {(preisProLiter * liter * currentMwstFactor)
-                .toFixed(2)
-                .replace('.', ',')}{' '}
-              €
+              {calcPreisGesamtmenge(preisProLiter, liter).brutto}
             </td>
           </tr>
 
@@ -66,10 +70,10 @@ export const OutputSection = ({
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {zuschlag.toFixed(2).replace('.', ',')} €
+                {calcZuschlag(zuschlag).netto}
               </td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {(zuschlag * currentMwstFactor).toFixed(2).replace('.', ',')} €
+                {calcZuschlag(zuschlag).brutto}
               </td>
             </tr>
           )}
@@ -78,19 +82,19 @@ export const OutputSection = ({
               <tr className=''>
                 <td className=''>Gefahrgutzuschlag:</td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {adr.toFixed(2).replace('.', ',')} €
+                  {calcZuschlag(adr).netto}
                 </td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {(adr * currentMwstFactor).toFixed(2).replace('.', ',')} €
+                  {calcZuschlag(adr).brutto}
                 </td>
               </tr>
               <tr className=''>
                 <td className='pb-3'>Dieselzuschlag:</td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {(4.2).toFixed(2).replace('.', ',')} €
+                  {calcZuschlag(dieselzuschlag).netto}
                 </td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {(4.2 * currentMwstFactor).toFixed(2).replace('.', ',')} €
+                  {calcZuschlag(dieselzuschlag).brutto}
                 </td>
               </tr>
             </>
@@ -102,12 +106,12 @@ export const OutputSection = ({
                 role='nettoGesamtpreis'
                 className='text-right cursor-pointer hover:text-hover'
               >
-                {(preis / currentMwstFactor).toFixed(2).replace('.', ',')} €
+                {calcGesamtPreis(preis).netto}
               </td>
             </CopyToClipboard>
             <CopyToClipboard text={preis.toFixed(2)}>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {preis.toFixed(2).replace('.', ',')} €
+                {calcGesamtPreis(preis).brutto}
               </td>
             </CopyToClipboard>
           </tr>

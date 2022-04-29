@@ -21,7 +21,7 @@ export function Layout({ children }: LayoutProps) {
           as='font'
           crossOrigin=''
         />
-        <title>Dashboard</title>
+        <title>Vorkasse</title>
       </Head>
       {children}
     </>

@@ -15,5 +15,6 @@ export const initialFormState = {
   liter: 0,
   literpreis: 0,
   zuschlag: 0,
+  dieselzuschlag: 0,
   adr: 0,
 }
