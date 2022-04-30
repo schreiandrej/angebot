@@ -3,24 +3,22 @@ interface Props {
   errors: any
 }
 
-export const InputPreis = ({ register, errors }: Props) => {
+export const InputVorkasse = ({ register, errors }: Props) => {
   return (
     <div className='relative w-full flex flex-col'>
-      <label htmlFor='preis' className=''>
-        Preis/l
+      <label htmlFor='vorkasse' className=''>
+        Vorkasse
       </label>
       <input
         type='text'
-        name='preis'
-        id='preis'
+        name='vorkasse'
+        id='vorkasse'
         autoComplete='off'
-        ref={register({
-          required: 'Bitte ein Preis eingeben',
-        })}
+        ref={register({})}
       />
-      {errors?.preis && (
+      {errors?.literpreis && (
         <p className='absolute right-0 text-xs text-red-600 -top-5'>
-          {errors.preis.message}
+          {errors.preis?.message}
         </p>
       )}
     </div>

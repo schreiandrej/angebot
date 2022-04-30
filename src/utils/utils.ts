@@ -1,30 +1,16 @@
 import { currentMwstFactor } from './variables'
 
-export const calculate = (
+export const calculateVorkasse = (
   literpreis: number,
-  liter: number,
-  zuschlag: number,
-  dieselzuschlag: number,
+  liefermenge: number,
   füllstand: number,
   tankvolumen: number,
-  adr: number
+  zuschlag: number,
+  dieselzuschlag: number,
+  adrzuschlag: number,
+  vorkasse: number
 ) => {
-  const litermenge =
-    (literpreis * (tankvolumen * (füllstand / 100)) +
-      zuschlag +
-      adr +
-      dieselzuschlag) *
-    currentMwstFactor
+  const calc = vorkasse / literpreis
 
-  const gesamtpreis =
-    (literpreis * (liter !== 0 ? liter : litermenge) +
-      zuschlag +
-      adr +
-      dieselzuschlag) *
-    currentMwstFactor
-
-  return {
-    litermenge,
-    gesamtpreis,
-  }
+  return {}
 }

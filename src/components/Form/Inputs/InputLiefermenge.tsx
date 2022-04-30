@@ -2,19 +2,16 @@ interface Props {
   register: any
 }
 
-export const InputLiter = ({ register }: Props) => {
+export const InputLiefermenge = ({ register }: Props) => {
   return (
     <div className='relative w-full flex flex-col'>
-      <label htmlFor='liter' className=''>
-        Liter
+      <label htmlFor='liefermenge' className=''>
+        Liefermenge
       </label>
       <input
         type='text'
-        name='liter'
-        // label='Liter'
-        id='liter'
-        // inputStyles='w-full h-12'
-        // labelStyles='px-4'
+        name='liefermenge'
+        id='liefermenge'
         autoComplete='off'
         ref={register({
           min: 0,

@@ -15,7 +15,7 @@ interface Props {
 export const OutputSection = ({ formState }: Props) => {
   const {
     literpreis,
-    litermenge,
+    liefermenge,
     füllstand,
     tankvolumen,
     mengenzuschlag,
@@ -28,9 +28,19 @@ export const OutputSection = ({ formState }: Props) => {
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
+            <th className='text-left'>Behältervolumen:</th>
+            <th className='text-right'></th>
+            <th className='text-right'> {tankvolumen} Liter</th>
+          </tr>
+          <tr className=''>
+            <th className='text-left'>Füllstand:</th>
+            <th className='text-right'></th>
+            <th className='text-right'> {füllstand} %</th>
+          </tr>
+          <tr className=''>
             <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
-            <th className='text-right'> {litermenge} Liter</th>
+            <th className='text-right'> {liefermenge} Liter</th>
           </tr>
         </thead>
         <tbody className='font-base'>
@@ -57,10 +67,10 @@ export const OutputSection = ({ formState }: Props) => {
           <tr className=''>
             <td className=''>Flüssiggas:</td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisGesamtmenge(literpreis, litermenge).netto}
+              {calcPreisGesamtmenge(literpreis, liefermenge).netto}
             </td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisGesamtmenge(literpreis, litermenge).brutto}
+              {calcPreisGesamtmenge(literpreis, liefermenge).brutto}
             </td>
           </tr>
 
@@ -99,17 +109,17 @@ export const OutputSection = ({ formState }: Props) => {
           )}
           <tr className='border-t border-b-slate-200 font-bold'>
             <td className=''>Gesamtpreis:</td>
-            <CopyToClipboard text={(litermenge / currentMwstFactor).toFixed(2)}>
+            <CopyToClipboard text={calcGesamtPreis(liefermenge).netto}>
               <td
                 role='nettoGesamtpreis'
                 className='text-right cursor-pointer hover:text-hover'
               >
-                {calcGesamtPreis(litermenge).netto}
+                {calcGesamtPreis(liefermenge).netto}
               </td>
             </CopyToClipboard>
-            <CopyToClipboard text={litermenge.toFixed(2)}>
+            <CopyToClipboard text={calcGesamtPreis(liefermenge).brutto}>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcGesamtPreis(litermenge).brutto}
+                {calcGesamtPreis(liefermenge).brutto}
               </td>
             </CopyToClipboard>
           </tr>

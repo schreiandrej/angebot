@@ -1,7 +1,7 @@
 export const currentMwstFactor = 1.19
 
-export const listOptions = [
-  { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
+export const mengezuschlagOptions = [
+  { id: 1, name: 'Kein Mengenzuschlag', value: 0, unavailable: false },
   { id: 1, name: 'Teilmenge', value: 49, unavailable: false },
   { id: 1, name: 'Mindermenge', value: 165, unavailable: false },
 ]
@@ -15,10 +15,11 @@ export const tankvolumenOptions = [
 
 export const initialFormState = {
   literpreis: 0,
-  litermenge: 0,
+  liefermenge: 0,
   füllstand: 0,
   tankvolumen: 0,
   mengenzuschlag: 0,
   dieselzuschlag: 0,
   adrzuschlag: 0,
+  vorkasse: 0,
 }

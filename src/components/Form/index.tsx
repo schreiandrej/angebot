@@ -1,21 +1,32 @@
-import { initialFormState, listOptions } from '@/utils/variables'
+import {
+  initialFormState,
+  mengezuschlagOptions,
+  tankvolumenOptions,
+} from '@/utils/variables'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { copyTable } from '@/utils/copyTable'
+import {
+  InputADRZuschlag,
+  InputDieselzuschlag,
+  InputFüllstand,
+  InputLiefermenge,
+  InputPreis,
+  InputTankvolumen,
+  InputVorkasse,
+  InputZuschlag,
+} from './Inputs'
 import { OutputSection } from './OutputSection'
-import { InputLiter } from './InputLiter'
-import { InputPreis } from './InputPreis'
-import { InputZuschlag } from './InputZuschlag'
 import { IOptionsType, IForm, IFormData } from '../../types'
-import { InputTankvolumen } from './InputTankvolumen'
-import { InputADRZuschlag } from './InputADRZuschlag'
-import { InputFüllstand } from './InputFüllstand'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
 import { setStateOnSubmit } from '@/utils/setState'
 
 export const FormComponent = () => {
   const [mengenzuschlag, setMengenzuschlag] = useState<IOptionsType>(
-    listOptions[0]
+    mengezuschlagOptions[0]
+  )
+  const [tankvolumen, setTankvolumen] = useState<IOptionsType>(
+    tankvolumenOptions[1]
   )
   const [formState, setFormState] = useState<IForm>(initialFormState)
 
@@ -30,29 +41,49 @@ export const FormComponent = () => {
   }
 
   const onSubmit = (formData: IFormData) => {
-    setFormState(setStateOnSubmit(formState, formData, mengenzuschlag))
+    if (formData)
+      setFormState(
+        setStateOnSubmit(formState, formData, tankvolumen, mengenzuschlag)
+      )
 
+    console.log(formState)
     // copyTable()
   }
 
   return (
     <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
-      <section className='flex flex-row w-full gap-3'>
-        <InputPreis register={register} errors={errors} />
-        <InputFüllstand register={register} />
-        <InputLiter register={register} />
+      <section className='flex flex-col gap-5'>
+        <div className='flex flex-row w-full gap-3'>
+          <div className='flex flex-col w-full gap-2'>
+            <InputVorkasse register={register} errors={errors} />
+            <InputPreis register={register} errors={errors} />
+          </div>
+          <div className='flex flex-col w-full gap-2'>
+            <InputLiefermenge register={register} />
+            <InputFüllstand register={register} />
+          </div>
+        </div>
+        <div className='flex flex-col w-full gap-5'>
+          <div className='flex flex-row gap-5'>
+            <InputZuschlag
+              control={control}
+              mengenzuschlag={mengenzuschlag}
+              setMengenzuschlag={setMengenzuschlag}
+            />
+            <InputTankvolumen
+              control={control}
+              tankvolumen={tankvolumen}
+              setTankvolumen={setTankvolumen}
+            />
+            <div className='flex flex-row w-full justify-end gap-3'>
+              <InputADRZuschlag register={register} />
+              <InputDieselzuschlag register={register} />
+            </div>
+          </div>
+        </div>
       </section>
-      <section className='flex w-full gap-5'>
-        <InputZuschlag
-          control={control}
-          selectedOption={mengenzuschlag}
-          setSelectedOption={setMengenzuschlag}
-        />
-        <InputTankvolumen control={control} />
-      </section>
-      <InputADRZuschlag register={register} />
       <OutputSection formState={formState} />
-      <section className='flex flex-row gap-2 my-4 '>
+      <section className='flex flex-row gap-3 '>
         <ButtonSubmit />
         <ButtonDelete deleteResults={clearForm} />
       </section>

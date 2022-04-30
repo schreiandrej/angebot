@@ -88,11 +88,3 @@
     transition: background-color 5000s ease-in-out 0s;
   }
 }
-
-@layer components {
-  @import './custom-buttons.css';
-}
-
-@layer utilities {
-  @import './custom-utilities.css';
-}
