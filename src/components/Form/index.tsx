@@ -1,4 +1,4 @@
-import { calculateTotalAmount, setStateOnSubmit } from '@/utils/utils'
+import { calculate } from '@/utils/utils'
 import { initialFormState, listOptions } from '@/utils/variables'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
@@ -12,6 +12,7 @@ import { InputTankvolumen } from './InputTankvolumen'
 import { InputADRZuschlag } from './InputADRZuschlag'
 import { InputFüllstand } from './InputFüllstand'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
+import { setStateOnSubmit } from '@/utils/setState'
 
 export const FormComponent = () => {
   const [selectedOption, setSelectedOption] = useState<IOptionsType>(
@@ -22,7 +23,15 @@ export const FormComponent = () => {
   const [formState, setFormState] = useState<IForm>(initialFormState)
   const [totalAmount, setTotalAmount] = useState(0)
 
-  const { liter, literpreis, zuschlag, dieselzuschlag, adr } = formState
+  const {
+    liter,
+    literpreis,
+    zuschlag,
+    dieselzuschlag,
+    füllstand,
+    tankvolumen,
+    adr,
+  } = formState
 
   const clearForm = () => {
     reset()
@@ -31,15 +40,16 @@ export const FormComponent = () => {
     setFormState(initialFormState)
   }
 
-  const onSubmit = ({ preis, liter, adr }: IData) => {
+  const onSubmit = ({ preis, liter, adr, füllstand, tankvolumen }: IData) => {
     setFormState(
       setStateOnSubmit(
         formState,
         liter,
         preis,
         selectedOption,
-        dieselzuschlag,
-        adr
+        adr,
+        tankvolumen,
+        füllstand
       )
     )
 
@@ -48,7 +58,15 @@ export const FormComponent = () => {
 
   useEffect(() => {
     setTotalAmount(
-      calculateTotalAmount(literpreis, liter, zuschlag, dieselzuschlag, adr)
+      calculate(
+        literpreis,
+        liter,
+        zuschlag,
+        dieselzuschlag,
+        füllstand,
+        tankvolumen,
+        adr
+      )
     )
   }, [formState])
 

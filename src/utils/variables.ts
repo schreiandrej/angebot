@@ -1,3 +1,5 @@
+export const currentMwstFactor = 1.19
+
 export const listOptions = [
   { id: 1, name: 'Kein Zuschlag', value: 0, unavailable: false },
   { id: 1, name: 'Teilmenge', value: 49, unavailable: false },
@@ -17,4 +19,6 @@ export const initialFormState = {
   zuschlag: 0,
   dieselzuschlag: 0,
   adr: 0,
+  tankvolumen: 0,
+  füllstand: 0,
 }

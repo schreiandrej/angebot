@@ -1,36 +1,30 @@
-import { IForm, IOptionsType } from 'src/types'
+import { currentMwstFactor } from './variables'
 
-export const transformPreis = (preis: string) => {
-  const replacedComma = preis.replace(',', '.')
-  return parseFloat(replacedComma) < 1
-    ? parseFloat(replacedComma)
-    : parseFloat(replacedComma) / 100
-}
-
-export const calculateTotalAmount = (
+export const calculate = (
   literpreis: number,
   liter: number,
   zuschlag: number,
   dieselzuschlag: number,
+  füllstand: number,
+  tankvolumen: number,
   adr: number
 ) => {
-  return (literpreis * liter + zuschlag + adr + dieselzuschlag) * 1.19
-}
+  const litermenge =
+    (literpreis * (tankvolumen * (füllstand / 100)) +
+      zuschlag +
+      adr +
+      dieselzuschlag) *
+    currentMwstFactor
 
-export const setStateOnSubmit = (
-  formState: IForm,
-  liter: string,
-  preis: string,
-  selectedOption: IOptionsType,
-  dieselzuschlag: number,
-  adr: string
-) => {
+  const gesamtpreis =
+    (literpreis * (liter !== 0 ? liter : litermenge) +
+      zuschlag +
+      adr +
+      dieselzuschlag) *
+    currentMwstFactor
+
   return {
-    ...formState,
-    liter: parseFloat(liter),
-    literpreis: parseFloat(JSON.stringify(transformPreis(preis))),
-    zuschlag: selectedOption.value,
-    dieselzuschlag: dieselzuschlag,
-    adr: Boolean(adr) === true ? 11 : 0,
+    litermenge,
+    gesamtpreis,
   }
 }

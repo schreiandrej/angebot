@@ -26,14 +26,14 @@
 //   )
 // }
 
-export function copyToClipboard(blob) {
+export function copyToClipboard(blob: any) {
   if (blob) {
     const clipboardItem = new ClipboardItem({ [blob.type]: blob })
     navigator.clipboard.write([clipboardItem])
   }
 }
 
-export function convertToPngAndCopyToClipboard(imgBlob) {
+export function convertToPngAndCopyToClipboard(imgBlob: any) {
   const imageUrl = window.URL.createObjectURL(imgBlob)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -45,17 +45,16 @@ export function convertToPngAndCopyToClipboard(imgBlob) {
     imageEl.crossOrigin = 'anonymous'
 
     imageEl.onload = ({ target }) => {
-      const { width, height } = target
+      const { width, height }: any = target
 
       canvas.width = width
-      canvas.height = height
-      ctx.drawImage(target, 0, 0, width, height)
+      canvas.height = height(ctx as any).drawImage(target, 0, 0, width, height)
       canvas.toBlob(copyToClipboard, 'image/png', 1)
     }
   }
 }
 
-export async function copyImg(imgSrc) {
+export async function copyImg(imgSrc: any) {
   const response = await fetch(`${imgSrc}?crossorigin`)
   const blob = await response.blob()
 

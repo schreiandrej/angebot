@@ -1,4 +1,4 @@
-const currentMwstFactor = 0.19 * 100
+import { currentMwstFactor } from './variables'
 
 export const calcPreisProLiter = (preisProLiter: number) => {
   return {

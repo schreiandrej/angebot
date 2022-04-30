@@ -9,7 +9,7 @@ interface Props {
 
 export const InputTankvolumen = ({ control }: Props) => {
   const [tankvolumenOption, setTankvolumenOption] = useState(
-    tankvolumenOptions[0]
+    tankvolumenOptions[1]
   )
   return (
     <>

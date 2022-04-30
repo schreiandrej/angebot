@@ -3,7 +3,7 @@ import {
   calcPreisGesamtmenge,
   calcPreisProLiter,
   calcZuschlag,
-} from '@/utils/calculations'
+} from '@/utils/outputCalculations'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 interface Props {

@@ -29,6 +29,6 @@
     "**/*.tsx",
     "tailwind.config.js",
     "postcss.config.js",
-    "src/utils/copyToClipboard.js"
+    "src/utils/copyToClipboard.ts"
   ]
 }
