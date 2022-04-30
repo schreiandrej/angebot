@@ -3,8 +3,7 @@ import {
   calcPreisGesamtmenge,
   calcPreisProLiter,
   calcZuschlag,
-} from '@/utils/outputCalculations'
-import { currentMwstFactor } from '@/utils/variables'
+} from '@/utils/calculations'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { IForm } from 'src/types'
 
@@ -28,20 +27,25 @@ export const OutputSection = ({ formState }: Props) => {
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
-            <th className='text-left'>Behältervolumen:</th>
-            <th className='text-right'></th>
-            <th className='text-right'> {tankvolumen} Liter</th>
-          </tr>
-          <tr className=''>
-            <th className='text-left'>Füllstand:</th>
-            <th className='text-right'></th>
-            <th className='text-right'> {füllstand} %</th>
-          </tr>
-          <tr className=''>
             <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
             <th className='text-right'> {liefermenge} Liter</th>
           </tr>
+          {füllstand !== null ||
+            (füllstand !== undefined && (
+              <>
+                <tr className='text-sm'>
+                  <td className='text-left'>Behältervolumen:</td>
+                  <td className='text-right'></td>
+                  <td className='text-right'> {tankvolumen} Liter</td>
+                </tr>
+                <tr className='text-sm'>
+                  <td className='text-left'>Füllstand:</td>
+                  <td className='text-right'></td>
+                  <td className='text-right'> {füllstand} %</td>
+                </tr>
+              </>
+            ))}
         </thead>
         <tbody className='font-base'>
           <tr className='text-xs'>
@@ -109,19 +113,33 @@ export const OutputSection = ({ formState }: Props) => {
           )}
           <tr className='border-t border-b-slate-200 font-bold'>
             <td className=''>Gesamtpreis:</td>
-            <CopyToClipboard text={calcGesamtPreis(liefermenge).netto}>
-              <td
-                role='nettoGesamtpreis'
-                className='text-right cursor-pointer hover:text-hover'
-              >
-                {calcGesamtPreis(liefermenge).netto}
-              </td>
-            </CopyToClipboard>
-            <CopyToClipboard text={calcGesamtPreis(liefermenge).brutto}>
-              <td className='text-right cursor-pointer hover:text-hover'>
-                {calcGesamtPreis(liefermenge).brutto}
-              </td>
-            </CopyToClipboard>
+
+            <td
+              role='nettoGesamtpreis'
+              className='text-right cursor-pointer hover:text-hover'
+            >
+              {
+                calcGesamtPreis(
+                  literpreis,
+                  liefermenge,
+                  mengenzuschlag,
+                  adrzuschlag,
+                  dieselzuschlag
+                ).netto
+              }
+            </td>
+
+            <td className='text-right cursor-pointer hover:text-hover'>
+              {
+                calcGesamtPreis(
+                  literpreis,
+                  liefermenge,
+                  mengenzuschlag,
+                  adrzuschlag,
+                  dieselzuschlag
+                ).brutto
+              }
+            </td>
           </tr>
         </tbody>
       </table>

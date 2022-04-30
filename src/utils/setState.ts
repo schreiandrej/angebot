@@ -1,4 +1,5 @@
 import { IForm, IFormData, IOptionsType } from 'src/types'
+import { currentMwstFactor } from './variables'
 
 export const setStateOnSubmit = (
   formState: IForm,
@@ -15,12 +16,42 @@ export const setStateOnSubmit = (
     vorkasse,
   } = formData
 
+  const getLiefermenge = (
+    vorkasse: string,
+    dieselzuschlag: string,
+    adrzuschlag: string,
+    literpreis: string,
+    liefermenge: string,
+    currentMwstFactor: number
+  ) => {
+    if (vorkasse !== '') {
+      return Number(
+        (
+          (Number(vorkasse) -
+            ((Boolean(dieselzuschlag) === true ? 4.2 : 0) +
+              (Boolean(adrzuschlag) === true ? 11 : 0) +
+              mengenzuschlag.value) *
+              currentMwstFactor) /
+          ((parseFloat(literpreis) / 100) * currentMwstFactor)
+        ).toFixed(0)
+      )
+    }
+    return Number(liefermenge)
+  }
+
   return {
     ...formState,
     literpreis: parseFloat(transformPreis(literpreis)),
     füllstand: Number(füllstand),
     tankvolumen: Number(tankvolumen.value),
-    liefermenge: parseFloat(liefermenge),
+    liefermenge: getLiefermenge(
+      vorkasse,
+      dieselzuschlag,
+      adrzuschlag,
+      literpreis,
+      liefermenge,
+      currentMwstFactor
+    ),
     mengenzuschlag: mengenzuschlag.value,
     dieselzuschlag: Boolean(dieselzuschlag) === true ? 4.2 : 0,
     adrzuschlag: Boolean(adrzuschlag) === true ? 11 : 0,

@@ -5,7 +5,6 @@ import {
 } from '@/utils/variables'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { copyTable } from '@/utils/copyTable'
 import {
   InputADRZuschlag,
   InputDieselzuschlag,
@@ -46,7 +45,6 @@ export const FormComponent = () => {
         setStateOnSubmit(formState, formData, tankvolumen, mengenzuschlag)
       )
 
-    console.log(formState)
     // copyTable()
   }
 
@@ -65,16 +63,18 @@ export const FormComponent = () => {
         </div>
         <div className='flex flex-col w-full gap-5'>
           <div className='flex flex-row gap-5'>
-            <InputZuschlag
-              control={control}
-              mengenzuschlag={mengenzuschlag}
-              setMengenzuschlag={setMengenzuschlag}
-            />
-            <InputTankvolumen
-              control={control}
-              tankvolumen={tankvolumen}
-              setTankvolumen={setTankvolumen}
-            />
+            <div className='flex flex-row w-full gap-3'>
+              <InputZuschlag
+                control={control}
+                mengenzuschlag={mengenzuschlag}
+                setMengenzuschlag={setMengenzuschlag}
+              />
+              <InputTankvolumen
+                control={control}
+                tankvolumen={tankvolumen}
+                setTankvolumen={setTankvolumen}
+              />
+            </div>
             <div className='flex flex-row w-full justify-end gap-3'>
               <InputADRZuschlag register={register} />
               <InputDieselzuschlag register={register} />

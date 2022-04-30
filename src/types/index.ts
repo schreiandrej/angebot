@@ -1,12 +1,12 @@
 export interface IForm {
   literpreis: number
   liefermenge: number
-  füllstand: number
+  füllstand: number | null
   tankvolumen: number
   mengenzuschlag: number
   dieselzuschlag: number
   adrzuschlag: number
-  vorkasse: number
+  vorkasse: number | null
 }
 
 export interface IFormData {
