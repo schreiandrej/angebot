@@ -14,11 +14,11 @@ export const tankvolumenOptions = [
 ]
 
 export const initialFormState = {
-  liter: 0,
   literpreis: 0,
-  zuschlag: 0,
-  dieselzuschlag: 0,
-  adr: 0,
-  tankvolumen: 0,
+  litermenge: 0,
   füllstand: 0,
+  tankvolumen: 0,
+  mengenzuschlag: 0,
+  dieselzuschlag: 0,
+  adrzuschlag: 0,
 }

@@ -1,19 +1,20 @@
 export interface IForm {
-  liter: number
   literpreis: number
-  zuschlag: number
-  dieselzuschlag: number
-  adr: number
-  tankvolumen: number
+  litermenge: number
   füllstand: number
+  tankvolumen: number
+  mengenzuschlag: number
+  dieselzuschlag: number
+  adrzuschlag: number
 }
 
-export interface IData {
-  preis: string
-  liter: string
-  adr: string
+export interface IFormData {
+  literpreis: string
+  litermenge: string
   füllstand: string
   tankvolumen: string
+  dieselzuschlag: string
+  adrzuschlag: string
 }
 
 export interface IOptionsType {

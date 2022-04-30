@@ -10,13 +10,9 @@ export const InputPreis = ({ register, errors }: Props) => {
         Preis/l
       </label>
       <input
-        type='number'
+        type='text'
         name='preis'
         id='preis'
-        // label='Preis/l'
-        step='0.01'
-        // inputStyles='w-full h-12'
-        // labelStyles='px-4'
         autoComplete='off'
         ref={register({
           required: 'Bitte ein Preis eingeben',

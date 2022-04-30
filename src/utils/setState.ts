@@ -1,23 +1,28 @@
-import { IForm, IOptionsType } from 'src/types'
+import { IForm, IFormData, IOptionsType } from 'src/types'
 
 export const setStateOnSubmit = (
   formState: IForm,
-  liter: string,
-  preis: string,
-  selectedOption: IOptionsType,
-  adr: string,
-  füllstand: string,
-  tankvolumen: string
+  formData: IFormData,
+  mengenzuschlag: IOptionsType
 ) => {
+  const {
+    literpreis,
+    litermenge,
+    füllstand,
+    tankvolumen,
+    dieselzuschlag,
+    adrzuschlag,
+  } = formData
+
   return {
     ...formState,
-    literpreis: parseFloat(JSON.stringify(transformPreis(preis))),
+    literpreis: parseFloat(JSON.stringify(transformPreis(literpreis))),
     füllstand: Number(füllstand) / 100,
     tankvolumen: Number(tankvolumen),
-    liter: parseFloat(liter),
-    zuschlag: selectedOption.value,
-    dieselzuschlag: 4.2,
-    adr: Boolean(adr) === true ? 11 : 0,
+    liter: parseFloat(litermenge),
+    zuschlag: mengenzuschlag.value,
+    dieselzuschlag: Number(dieselzuschlag),
+    adr: Boolean(adrzuschlag) === true ? 11 : 0,
   }
 }
 

@@ -4,26 +4,24 @@ import {
   calcPreisProLiter,
   calcZuschlag,
 } from '@/utils/outputCalculations'
+import { currentMwstFactor } from '@/utils/variables'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { IForm } from 'src/types'
 
 interface Props {
-  preisProLiter: number
-  liter: number
-  preis: number
-  zuschlag: number
-  dieselzuschlag: number
-  adr: number
+  formState: IForm
 }
 
-export const OutputSection = ({
-  preisProLiter,
-  liter,
-  preis,
-  zuschlag,
-  dieselzuschlag,
-  adr,
-}: Props) => {
-  const currentMwstFactor = 1.19
+export const OutputSection = ({ formState }: Props) => {
+  const {
+    literpreis,
+    litermenge,
+    füllstand,
+    tankvolumen,
+    mengenzuschlag,
+    dieselzuschlag,
+    adrzuschlag,
+  } = formState
 
   return (
     <section className='flex flex-col w-full items-center p-5'>
@@ -32,7 +30,7 @@ export const OutputSection = ({
           <tr className=''>
             <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
-            <th className='text-right'> {liter} Liter</th>
+            <th className='text-right'> {litermenge} Liter</th>
           </tr>
         </thead>
         <tbody className='font-base'>
@@ -50,42 +48,42 @@ export const OutputSection = ({
           <tr className=''>
             <td className=''>Preis/l:</td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisProLiter(preisProLiter).netto}
+              {calcPreisProLiter(literpreis).netto}
             </td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisProLiter(preisProLiter).brutto}
+              {calcPreisProLiter(literpreis).brutto}
             </td>
           </tr>
           <tr className=''>
             <td className=''>Flüssiggas:</td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisGesamtmenge(preisProLiter, liter).netto}
+              {calcPreisGesamtmenge(literpreis, litermenge).netto}
             </td>
             <td className='text-right cursor-pointer hover:text-hover'>
-              {calcPreisGesamtmenge(preisProLiter, liter).brutto}
+              {calcPreisGesamtmenge(literpreis, litermenge).brutto}
             </td>
           </tr>
 
-          {zuschlag !== 0 && (
+          {mengenzuschlag !== 0 && (
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcZuschlag(zuschlag).netto}
+                {calcZuschlag(mengenzuschlag).netto}
               </td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcZuschlag(zuschlag).brutto}
+                {calcZuschlag(mengenzuschlag).brutto}
               </td>
             </tr>
           )}
-          {adr !== 0 && (
+          {adrzuschlag !== 0 && (
             <>
               <tr className=''>
                 <td className=''>Gefahrgutzuschlag:</td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(adr).netto}
+                  {calcZuschlag(adrzuschlag).netto}
                 </td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(adr).brutto}
+                  {calcZuschlag(adrzuschlag).brutto}
                 </td>
               </tr>
               <tr className=''>
@@ -101,17 +99,17 @@ export const OutputSection = ({
           )}
           <tr className='border-t border-b-slate-200 font-bold'>
             <td className=''>Gesamtpreis:</td>
-            <CopyToClipboard text={(preis / currentMwstFactor).toFixed(2)}>
+            <CopyToClipboard text={(litermenge / currentMwstFactor).toFixed(2)}>
               <td
                 role='nettoGesamtpreis'
                 className='text-right cursor-pointer hover:text-hover'
               >
-                {calcGesamtPreis(preis).netto}
+                {calcGesamtPreis(litermenge).netto}
               </td>
             </CopyToClipboard>
-            <CopyToClipboard text={preis.toFixed(2)}>
+            <CopyToClipboard text={litermenge.toFixed(2)}>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcGesamtPreis(preis).brutto}
+                {calcGesamtPreis(litermenge).brutto}
               </td>
             </CopyToClipboard>
           </tr>
