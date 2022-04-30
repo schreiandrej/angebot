@@ -44,8 +44,6 @@ export const FormComponent = () => {
       setFormState(
         setStateOnSubmit(formState, formData, tankvolumen, mengenzuschlag)
       )
-
-    // copyTable()
   }
 
   return (

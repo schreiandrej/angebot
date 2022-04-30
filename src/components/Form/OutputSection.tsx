@@ -4,7 +4,6 @@ import {
   calcPreisProLiter,
   calcZuschlag,
 } from '@/utils/calculations'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { IForm } from 'src/types'
 
 interface Props {
