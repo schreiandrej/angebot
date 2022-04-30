@@ -29,8 +29,14 @@ export const FormComponent = () => {
   )
   const [formState, setFormState] = useState<IForm>(initialFormState)
 
-  const { handleSubmit, reset, register, control, errors, clearErrors } =
-    useForm()
+  const {
+    handleSubmit,
+    reset,
+    register,
+    control,
+    formState: { errors },
+    clearErrors,
+  } = useForm()
 
   const clearForm = () => {
     reset()
@@ -39,10 +45,10 @@ export const FormComponent = () => {
     setFormState(initialFormState)
   }
 
-  const onSubmit = (formData: IFormData) => {
-    if (formData)
+  const onSubmit = (data: any) => {
+    if (data)
       setFormState(
-        setStateOnSubmit(formState, formData, tankvolumen, mengenzuschlag)
+        setStateOnSubmit(formState, data, tankvolumen, mengenzuschlag)
       )
   }
 

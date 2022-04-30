@@ -10,13 +10,9 @@ export const InputFüllstand = ({ register }: Props) => {
       </label>
       <input
         type='text'
-        name='füllstand'
         id='füllstand'
         autoComplete='off'
-        ref={register({
-          min: 0,
-          max: 85,
-        })}
+        {...register('füllstand', { min: 0, max: 85 })}
       />
     </div>
   )

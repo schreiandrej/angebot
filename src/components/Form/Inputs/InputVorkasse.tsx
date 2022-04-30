@@ -11,10 +11,9 @@ export const InputVorkasse = ({ register, errors }: Props) => {
       </label>
       <input
         type='text'
-        name='vorkasse'
         id='vorkasse'
         autoComplete='off'
-        ref={register({})}
+        {...register('vorkasse')}
       />
       {errors?.literpreis && (
         <p className='absolute right-0 text-xs text-red-600 -top-5'>

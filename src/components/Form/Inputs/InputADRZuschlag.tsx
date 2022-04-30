@@ -8,10 +8,8 @@ export const InputADRZuschlag = ({ register }: Props) => {
       <input
         type='checkbox'
         id='adrzuschlag'
-        name='adrzuschlag'
-        data-testid='adrzuschlag'
         className={`text-gray-500 bg-transparent rounded-sm`}
-        ref={register}
+        {...register('adrzuschlag')}
         defaultChecked
       />
       <label htmlFor='adrzuschlag' className='text-xs'>

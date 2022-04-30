@@ -19,7 +19,6 @@ export const InputZuschlag = ({
     <>
       <Controller
         control={control}
-        role='mengenzuschlag'
         name='mengenzuschlag'
         defaultValue={mengenzuschlag}
         render={() => (

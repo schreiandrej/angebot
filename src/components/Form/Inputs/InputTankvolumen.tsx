@@ -19,7 +19,6 @@ export const InputTankvolumen = ({
     <>
       <Controller
         control={control}
-        role='tankvolumen'
         name='tankvolumen'
         defaultValue={tankvolumen}
         render={() => (

@@ -10,13 +10,9 @@ export const InputLiefermenge = ({ register }: Props) => {
       </label>
       <input
         type='text'
-        name='liefermenge'
         id='liefermenge'
         autoComplete='off'
-        ref={register({
-          min: 0,
-          max: 24000,
-        })}
+        {...register('liefermenge', { minLength: 0, maxLength: 10000 })}
       />
     </div>
   )

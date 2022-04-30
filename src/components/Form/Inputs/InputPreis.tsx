@@ -11,12 +11,9 @@ export const InputPreis = ({ register, errors }: Props) => {
       </label>
       <input
         type='text'
-        name='literpreis'
         id='literpreis'
         autoComplete='off'
-        ref={register({
-          required: 'Bitte ein Preis eingeben',
-        })}
+        {...register(`literpreis`, { required: true })}
       />
       {errors?.literpreis && (
         <p className='absolute right-0 text-xs text-red-600 -top-5'>
