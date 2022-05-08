@@ -23,12 +23,11 @@ import { setStateOnSubmit } from '@/utils/setState'
 import { RadioTankvolumen } from './Inputs/RadioTankvolumen'
 
 export const FormComponent = () => {
-  const [mengenzuschlag, setMengenzuschlag] = useState<IOptionsType>(
-    mengezuschlagOptions[0]
+  const [tankvolumen, setTankvolumen] = useState<number>(
+    tankvolumenOptions[1].value
   )
-  const [tankvolumen, setTankvolumen] = useState<IOptionsType>(
-    tankvolumenOptions[1]
-  )
+  const [emptyFieldsError, setEmptyFieldsError] = useState<boolean>(false)
+
   const [formState, setFormState] = useState<IForm>(initialFormState)
 
   const {
@@ -48,19 +47,41 @@ export const FormComponent = () => {
   }
 
   const onSubmit = (data: any) => {
-    if (data) setFormState(setStateOnSubmit(formState, data, tankvolumen))
+    console.log(data)
 
+    if (data) {
+      if (
+        data.liefermenge === '' &&
+        data.vorkasse === '' &&
+        data.füllstand === ''
+      ) {
+        setEmptyFieldsError(true)
+      } else {
+        setEmptyFieldsError(false)
+
+        setFormState(setStateOnSubmit(formState, data, tankvolumen))
+      }
+    }
     console.log(formState)
   }
 
   return (
     <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
+      {emptyFieldsError && (
+        <div className='absolute top-5 w-full mx-auto text-red-500 font-semibold'>
+          Bitte eines der Werte: Füllstand, Liefermenge oder Vorkasse eingeben.
+        </div>
+      )}
       <section className='flex flex-col gap-5'>
         <div className='flex flex-row w-full gap-6'>
           <div className='flex flex-col w-full gap-2'>
             <InputPreis register={register} errors={errors} />
             <InputFüllstand register={register} />
-            <RadioTankvolumen control={control} />
+            <RadioTankvolumen
+              control={control}
+              tankvolumen={tankvolumen}
+              setTankvolumen={setTankvolumen}
+            />
           </div>
           <div className='flex flex-row w-full gap-2'>
             <div className='flex flex-col w-full justify-between gap-2'>

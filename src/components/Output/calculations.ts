@@ -23,10 +23,7 @@ export const calcPreisGesamtmenge = (
 
 export const calcMengenzuschlag = (mengenzuschlag: number) => {
   return {
-    netto: `${
-      // mengenzuschlag ? mengenzuschlag.toFixed(2).replace('.', ',') :
-      0
-    } €`,
+    netto: `${mengenzuschlag.toFixed(2).replace('.', ',')} €`,
     brutto: `${(mengenzuschlag * currentMwstFactor)
       .toFixed(2)
       .replace('.', ',')} €`,
@@ -75,11 +72,12 @@ export const calcGesamtPreis = (
       .replace('.', ',')}
        €`,
     brutto: `${(
-      preis * lietermenge +
-      mengenzuschlag +
-      Number(gefahrgutzuschlag) +
-      Number(dieselzuschlag) -
-      guthaben * currentMwstFactor
+      (preis * lietermenge +
+        mengenzuschlag +
+        Number(gefahrgutzuschlag) +
+        Number(dieselzuschlag) -
+        guthaben) *
+      currentMwstFactor
     )
       .toFixed(2)
       .replace('.', ',')} €`,

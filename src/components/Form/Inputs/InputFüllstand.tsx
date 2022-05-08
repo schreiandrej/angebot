@@ -11,6 +11,7 @@ export const InputFüllstand = ({ register }: Props) => {
       <input
         type='text'
         id='füllstand'
+        tabIndex={3}
         autoComplete='off'
         {...register('füllstand', { min: 0, max: 85 })}
       />

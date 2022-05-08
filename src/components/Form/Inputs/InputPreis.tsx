@@ -12,6 +12,7 @@ export const InputPreis = ({ register, errors }: Props) => {
       <input
         type='text'
         id='literpreis'
+        tabIndex={1}
         autoComplete='off'
         {...register(`literpreis`, { required: true })}
       />

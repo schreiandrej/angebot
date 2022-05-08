@@ -1,10 +1,11 @@
+import { Dispatch, SetStateAction } from 'react'
 import { IForm, IFormData, IOptionsType } from 'src/types'
 import { currentMwstFactor } from './variables'
 
 export const setStateOnSubmit = (
   formState: IForm,
   formData: IFormData,
-  tankvolumen: IOptionsType
+  tankvolumen: number
 ) => {
   const {
     literpreis,
@@ -32,27 +33,24 @@ export const setStateOnSubmit = (
         (
           Number(vorkasse) -
           (Number(dieselzuschlag.replace(',', '.')) +
-            (Number(gefahrgutzuschlag) + Number(mengenzuschlag)) *
+            (Number(gefahrgutzuschlag.replace(',', '.')) +
+              Number(mengenzuschlag.replace(',', '.'))) *
               currentMwstFactor) /
             ((parseFloat(literpreis) / 100) * currentMwstFactor)
         ).toFixed(0)
       )
+    } else if (liefermenge === '' && füllstand !== '') {
+      return Math.floor(tankvolumen * ((85 - Number(füllstand)) / 100))
     }
 
-    let calcLiefermenge
-
-    if (liefermenge === null && füllstand !== undefined) {
-      calcLiefermenge = tankvolumen.value * ((85 - Number(füllstand)) / 100)
-    } else calcLiefermenge = liefermenge
-
-    return Number(calcLiefermenge)
+    return Number(liefermenge)
   }
 
   return {
     ...formState,
     literpreis: parseFloat(transformPreis(literpreis)),
     füllstand: Number(füllstand),
-    tankvolumen: Number(tankvolumen.value),
+    tankvolumen: Number(tankvolumen),
     liefermenge: getLiefermenge(
       vorkasse,
       mengenzuschlag,

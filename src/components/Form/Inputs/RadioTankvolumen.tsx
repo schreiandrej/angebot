@@ -1,15 +1,19 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { tankvolumenOptions } from '../../../utils/variables'
 import { Controller } from 'react-hook-form'
 
 interface Props {
   control: any
+  tankvolumen: number
+  setTankvolumen: Dispatch<SetStateAction<number>>
 }
 
-export const RadioTankvolumen = ({ control }: Props) => {
-  const [selected, setSelected] = useState(tankvolumenOptions[1].value)
-
+export const RadioTankvolumen = ({
+  control,
+  tankvolumen,
+  setTankvolumen,
+}: Props) => {
   return (
     <>
       <Controller
@@ -17,7 +21,7 @@ export const RadioTankvolumen = ({ control }: Props) => {
         name='tankvolumen'
         defaultValue={tankvolumenOptions[1].value}
         render={() => (
-          <RadioGroup value={selected} onChange={setSelected}>
+          <RadioGroup value={tankvolumen} onChange={setTankvolumen}>
             <RadioGroup.Label className=''>Tankvolumen</RadioGroup.Label>
             <div className='flex flex-row gap-4 w-full justify-between'>
               {tankvolumenOptions.map((tank) => (

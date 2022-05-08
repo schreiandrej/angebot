@@ -120,7 +120,7 @@ export const OutputSection = ({ formState }: Props) => {
                 <td className=''>Guthaben:</td>
                 <td className='text-right cursor-pointer hover:text-hover'></td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {calcGuthaben(guthaben)}
+                  {`- ${calcGuthaben(guthaben)}`}
                 </td>
               </tr>
             </>

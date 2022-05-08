@@ -13,6 +13,7 @@ export const InputVorkasse = ({ register, errors }: Props) => {
         type='text'
         id='vorkasse'
         autoComplete='off'
+        tabIndex={2}
         {...register('vorkasse')}
       />
       {errors?.literpreis && (
