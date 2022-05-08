@@ -23,14 +23,14 @@ export interface IOutput {
 }
 
 export interface IFormData {
-  literpreis: string
-  liefermenge: string
-  füllstand: string
-  mengenzuschlag: string
-  dieselzuschlag: string
-  gefahrgutzuschlag: string
-  vorkasse: string
-  guthaben: string
+  literpreis: number
+  liefermenge: number | string
+  füllstand: number | string
+  mengenzuschlag: number
+  dieselzuschlag: number
+  gefahrgutzuschlag: number
+  vorkasse: number | string
+  guthaben: number
 }
 
 export interface IOptionsType {

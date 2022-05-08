@@ -47,7 +47,20 @@ export const FormComponent = () => {
   }
 
   const onSubmit = (data: any) => {
-    console.log(data)
+    const transformData = (data: any) => {
+      const transformedData: any = {}
+
+      if (data.liefermenge.value !== '') {
+        for (const [key, value] of Object.entries(data)) {
+          if (typeof value === 'string' && value.length > 0) {
+            transformedData[key] = Number((value as string).replace(',', '.'))
+          } else {
+            transformedData[key] = value
+          }
+        }
+      }
+      return transformedData
+    }
 
     if (data) {
       if (
@@ -59,10 +72,11 @@ export const FormComponent = () => {
       } else {
         setEmptyFieldsError(false)
 
-        setFormState(setStateOnSubmit(formState, data, tankvolumen))
+        setFormState(
+          setStateOnSubmit(formState, transformData(data), tankvolumen)
+        )
       }
     }
-    console.log(formState)
   }
 
   return (

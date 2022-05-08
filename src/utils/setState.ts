@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
-import { IForm, IFormData, IOptionsType } from 'src/types'
+import { IForm, IFormData } from 'src/types'
 import { currentMwstFactor } from './variables'
 
 export const setStateOnSubmit = (
@@ -19,26 +18,21 @@ export const setStateOnSubmit = (
   } = formData
 
   const getLiefermenge = (
-    vorkasse: string,
-    mengenzuschlag: string,
-    dieselzuschlag: string,
-    gefahrgutzuschlag: string,
-    literpreis: string,
-    liefermenge: string,
-    füllstand: string,
+    vorkasse: number | string,
+    mengenzuschlag: number,
+    dieselzuschlag: number,
+    gefahrgutzuschlag: number,
+    literpreis: number,
+    liefermenge: number | string,
+    füllstand: number | string,
     currentMwstFactor: number
   ) => {
     if (vorkasse !== '') {
       return Number(
-        (
-          Number(vorkasse) -
-          (Number(dieselzuschlag.replace(',', '.')) +
-            (Number(gefahrgutzuschlag.replace(',', '.')) +
-              Number(mengenzuschlag.replace(',', '.'))) *
-              currentMwstFactor) /
-            ((parseFloat(literpreis) / 100) * currentMwstFactor)
-        ).toFixed(0)
-      )
+        (Number(vorkasse) / currentMwstFactor -
+          (dieselzuschlag + gefahrgutzuschlag + mengenzuschlag)) /
+          (literpreis / 100)
+      ).toFixed(0)
     } else if (liefermenge === '' && füllstand !== '') {
       return Math.floor(tankvolumen * ((85 - Number(füllstand)) / 100))
     }
@@ -50,7 +44,7 @@ export const setStateOnSubmit = (
     ...formState,
     literpreis: parseFloat(transformPreis(literpreis)),
     füllstand: Number(füllstand),
-    tankvolumen: Number(tankvolumen),
+    tankvolumen: tankvolumen,
     liefermenge: getLiefermenge(
       vorkasse,
       mengenzuschlag,
@@ -61,15 +55,15 @@ export const setStateOnSubmit = (
       füllstand,
       currentMwstFactor
     ),
-    mengenzuschlag: Number(mengenzuschlag.replace(',', '.')),
-    dieselzuschlag: Number(dieselzuschlag.replace(',', '.')),
-    gefahrgutzuschlag: Number(gefahrgutzuschlag.replace(',', '.')),
+    mengenzuschlag: mengenzuschlag,
+    dieselzuschlag: dieselzuschlag,
+    gefahrgutzuschlag: gefahrgutzuschlag,
     vorkasse: Number(vorkasse),
-    guthaben: Number(guthaben.replace(',', '.')),
+    guthaben: guthaben,
   }
 }
 
-export const transformPreis = (literpreis: string) => {
+export const transformPreis = (literpreis: number | string) => {
   const dezimalPreis =
     Number(literpreis) > 10 ? Number(literpreis) / 100 : Number(literpreis)
 
