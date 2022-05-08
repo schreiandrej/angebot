@@ -60,22 +60,26 @@ export const calcGesamtPreis = (
   lietermenge: number,
   mengenzuschlag: number,
   gefahrgutzuschlag: number | string,
-  dieselzuschlag: number | string
+  dieselzuschlag: number | string,
+  guthaben: number
 ) => {
   return {
-    netto: `${
+    netto: `${(
       preis * lietermenge +
       mengenzuschlag +
       Number(gefahrgutzuschlag) +
-      Number(dieselzuschlag).toFixed(2).replace('.', ',')
-    }
+      Number(dieselzuschlag) -
+      guthaben
+    )
+      .toFixed(2)
+      .replace('.', ',')}
        €`,
     brutto: `${(
-      (preis * lietermenge +
-        mengenzuschlag +
-        Number(gefahrgutzuschlag) +
-        Number(dieselzuschlag)) *
-      currentMwstFactor
+      preis * lietermenge +
+      mengenzuschlag +
+      Number(gefahrgutzuschlag) +
+      Number(dieselzuschlag) -
+      guthaben * currentMwstFactor
     )
       .toFixed(2)
       .replace('.', ',')} €`,

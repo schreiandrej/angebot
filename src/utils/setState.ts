@@ -65,9 +65,9 @@ export const setStateOnSubmit = (
     ),
     mengenzuschlag: Number(mengenzuschlag.replace(',', '.')),
     dieselzuschlag: Number(dieselzuschlag.replace(',', '.')),
-    gefahrgutzuschlag: Number(gefahrgutzuschlag),
+    gefahrgutzuschlag: Number(gefahrgutzuschlag.replace(',', '.')),
     vorkasse: Number(vorkasse),
-    guthaben: Number(guthaben),
+    guthaben: Number(guthaben.replace(',', '.')),
   }
 }
 

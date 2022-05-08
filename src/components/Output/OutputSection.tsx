@@ -117,7 +117,7 @@ export const OutputSection = ({ formState }: Props) => {
           {guthaben !== 0 && (
             <>
               <tr className=''>
-                <td className=''>guthaben:</td>
+                <td className=''>Guthaben:</td>
                 <td className='text-right cursor-pointer hover:text-hover'></td>
                 <td className='text-right cursor-pointer hover:text-hover'>
                   {calcGuthaben(guthaben)}
@@ -138,7 +138,8 @@ export const OutputSection = ({ formState }: Props) => {
                   liefermenge,
                   mengenzuschlag,
                   gefahrgutzuschlag,
-                  dieselzuschlag
+                  dieselzuschlag,
+                  guthaben
                 ).netto
               }
             </td>
@@ -150,7 +151,8 @@ export const OutputSection = ({ formState }: Props) => {
                   liefermenge,
                   mengenzuschlag,
                   gefahrgutzuschlag,
-                  dieselzuschlag
+                  dieselzuschlag,
+                  guthaben
                 ).brutto
               }
             </td>

@@ -48,9 +48,9 @@ export const FormComponent = () => {
   }
 
   const onSubmit = (data: any) => {
-    console.log(data)
-
     if (data) setFormState(setStateOnSubmit(formState, data, tankvolumen))
+
+    console.log(formState)
   }
 
   return (
