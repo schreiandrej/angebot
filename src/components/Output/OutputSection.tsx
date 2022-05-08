@@ -1,13 +1,16 @@
 import {
+  calcDieselzuschlag,
+  calcGefahrgutzuschlag,
   calcGesamtPreis,
+  calcGuthaben,
+  calcMengenzuschlag,
   calcPreisGesamtmenge,
   calcPreisProLiter,
-  calcZuschlag,
-} from '@/utils/calculations'
-import { IForm } from 'src/types'
+} from '@/components/Output/calculations'
+import { IOutput } from 'src/types'
 
 interface Props {
-  formState: IForm
+  formState: IOutput
 }
 
 export const OutputSection = ({ formState }: Props) => {
@@ -18,7 +21,8 @@ export const OutputSection = ({ formState }: Props) => {
     tankvolumen,
     mengenzuschlag,
     dieselzuschlag,
-    adrzuschlag,
+    gefahrgutzuschlag,
+    guthaben,
   } = formState
 
   return (
@@ -81,31 +85,42 @@ export const OutputSection = ({ formState }: Props) => {
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcZuschlag(mengenzuschlag).netto}
+                {calcMengenzuschlag(mengenzuschlag).netto}
               </td>
               <td className='text-right cursor-pointer hover:text-hover'>
-                {calcZuschlag(mengenzuschlag).brutto}
+                {calcMengenzuschlag(mengenzuschlag).brutto}
               </td>
             </tr>
           )}
-          {adrzuschlag !== 0 && (
+          {gefahrgutzuschlag !== 0 && (
             <>
               <tr className=''>
                 <td className=''>Gefahrgutzuschlag:</td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(adrzuschlag).netto}
+                  {calcGefahrgutzuschlag(gefahrgutzuschlag).netto}
                 </td>
                 <td className='text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(adrzuschlag).brutto}
+                  {calcGefahrgutzuschlag(gefahrgutzuschlag).brutto}
                 </td>
               </tr>
               <tr className=''>
                 <td className='pb-3'>Dieselzuschlag:</td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(dieselzuschlag).netto}
+                  {calcDieselzuschlag(dieselzuschlag).netto}
                 </td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {calcZuschlag(dieselzuschlag).brutto}
+                  {calcDieselzuschlag(dieselzuschlag).brutto}
+                </td>
+              </tr>
+            </>
+          )}
+          {guthaben !== 0 && (
+            <>
+              <tr className=''>
+                <td className=''>guthaben:</td>
+                <td className='text-right cursor-pointer hover:text-hover'></td>
+                <td className='text-right cursor-pointer hover:text-hover'>
+                  {calcGuthaben(guthaben)}
                 </td>
               </tr>
             </>
@@ -122,7 +137,7 @@ export const OutputSection = ({ formState }: Props) => {
                   literpreis,
                   liefermenge,
                   mengenzuschlag,
-                  adrzuschlag,
+                  gefahrgutzuschlag,
                   dieselzuschlag
                 ).netto
               }
@@ -134,7 +149,7 @@ export const OutputSection = ({ formState }: Props) => {
                   literpreis,
                   liefermenge,
                   mengenzuschlag,
-                  adrzuschlag,
+                  gefahrgutzuschlag,
                   dieselzuschlag
                 ).brutto
               }

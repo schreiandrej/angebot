@@ -4,39 +4,48 @@ import { currentMwstFactor } from './variables'
 export const setStateOnSubmit = (
   formState: IForm,
   formData: IFormData,
-  tankvolumen: IOptionsType,
-  mengenzuschlag: IOptionsType
+  tankvolumen: IOptionsType
 ) => {
   const {
     literpreis,
     liefermenge,
     füllstand,
+    mengenzuschlag,
     dieselzuschlag,
-    adrzuschlag,
+    gefahrgutzuschlag,
     vorkasse,
+    guthaben,
   } = formData
 
   const getLiefermenge = (
     vorkasse: string,
+    mengenzuschlag: string,
     dieselzuschlag: string,
-    adrzuschlag: string,
+    gefahrgutzuschlag: string,
     literpreis: string,
     liefermenge: string,
+    füllstand: string,
     currentMwstFactor: number
   ) => {
     if (vorkasse !== '') {
       return Number(
         (
-          (Number(vorkasse) -
-            ((Boolean(dieselzuschlag) === true ? 4.2 : 0) +
-              (Boolean(adrzuschlag) === true ? 11 : 0) +
-              mengenzuschlag.value) *
+          Number(vorkasse) -
+          (Number(dieselzuschlag.replace(',', '.')) +
+            (Number(gefahrgutzuschlag) + Number(mengenzuschlag)) *
               currentMwstFactor) /
-          ((parseFloat(literpreis) / 100) * currentMwstFactor)
+            ((parseFloat(literpreis) / 100) * currentMwstFactor)
         ).toFixed(0)
       )
     }
-    return Number(liefermenge)
+
+    let calcLiefermenge
+
+    if (liefermenge === null && füllstand !== undefined) {
+      calcLiefermenge = tankvolumen.value * ((85 - Number(füllstand)) / 100)
+    } else calcLiefermenge = liefermenge
+
+    return Number(calcLiefermenge)
   }
 
   return {
@@ -46,16 +55,19 @@ export const setStateOnSubmit = (
     tankvolumen: Number(tankvolumen.value),
     liefermenge: getLiefermenge(
       vorkasse,
+      mengenzuschlag,
       dieselzuschlag,
-      adrzuschlag,
+      gefahrgutzuschlag,
       literpreis,
       liefermenge,
+      füllstand,
       currentMwstFactor
     ),
-    mengenzuschlag: mengenzuschlag.value,
-    dieselzuschlag: Boolean(dieselzuschlag) === true ? 4.2 : 0,
-    adrzuschlag: Boolean(adrzuschlag) === true ? 11 : 0,
+    mengenzuschlag: Number(mengenzuschlag.replace(',', '.')),
+    dieselzuschlag: Number(dieselzuschlag.replace(',', '.')),
+    gefahrgutzuschlag: Number(gefahrgutzuschlag),
     vorkasse: Number(vorkasse),
+    guthaben: Number(guthaben),
   }
 }
 

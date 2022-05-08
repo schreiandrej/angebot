@@ -1,4 +1,4 @@
-import { IOptionsType } from '../../../types/'
+import { IOptionsType } from '../../../types'
 import { mengezuschlagOptions } from '@/utils/variables'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import { ListboxComponent } from '../../Listbox'
@@ -10,7 +10,7 @@ interface Props {
   setMengenzuschlag: Dispatch<SetStateAction<IOptionsType>>
 }
 
-export const InputZuschlag = ({
+export const SelectMengenzuschlag = ({
   control,
   mengenzuschlag,
   setMengenzuschlag,
@@ -24,7 +24,7 @@ export const InputZuschlag = ({
         render={() => (
           <ListboxComponent
             options={mengezuschlagOptions}
-            className='h-12'
+            className='h-12 py-3'
             selectedOption={mengenzuschlag}
             setSelectedOption={setMengenzuschlag}
           />
