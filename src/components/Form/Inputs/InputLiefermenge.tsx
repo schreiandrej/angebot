@@ -11,7 +11,7 @@ export const InputLiefermenge = ({ register }: Props) => {
       <input
         type='text'
         id='liefermenge'
-        tabIndex={4}
+        tabIndex={5}
         autoComplete='off'
         {...register('liefermenge', { minLength: 0, maxLength: 10000 })}
       />

@@ -14,6 +14,7 @@ export const InputMengenzuschlag = ({ register, errors }: Props) => {
       <input
         type='text'
         id='mengenzuschlag'
+        tabIndex={3}
         defaultValue={initialFormState.mengenzuschlag
           .toFixed(2)
           .replace('.', ',')}

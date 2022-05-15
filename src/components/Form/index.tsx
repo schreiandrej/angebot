@@ -83,7 +83,10 @@ export const FormComponent = () => {
 
         if (data.vorkasse !== '') {
           setAddMengenzuschlagInfo(true)
+        } else {
+          setAddMengenzuschlagInfo(false)
         }
+
         setFormState(
           setStateOnSubmit(formState, transformData(data), tankvolumen)
         )
