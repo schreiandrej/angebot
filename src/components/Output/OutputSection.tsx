@@ -34,21 +34,20 @@ export const OutputSection = ({ formState }: Props) => {
             <th className='text-right'></th>
             <th className='text-right'> {liefermenge} Liter</th>
           </tr>
-          {füllstand !== null ||
-            (füllstand !== undefined && (
-              <>
-                <tr className='text-sm'>
-                  <td className='text-left'>Behältervolumen:</td>
-                  <td className='text-right'></td>
-                  <td className='text-right'> {tankvolumen} Liter</td>
-                </tr>
-                <tr className='text-sm'>
-                  <td className='text-left'>Füllstand:</td>
-                  <td className='text-right'></td>
-                  <td className='text-right'> {füllstand} %</td>
-                </tr>
-              </>
-            ))}
+          <tr className='text-sm'>
+            <td className='text-left'>Behältervolumen:</td>
+            <td className='text-right'></td>
+            <td className='text-right'> {tankvolumen} Liter</td>
+          </tr>
+          {füllstand !== null && (
+            <>
+              <tr className='text-sm'>
+                <td className='text-left'>Füllstand:</td>
+                <td className='text-right'></td>
+                <td className='text-right'> {füllstand} %</td>
+              </tr>
+            </>
+          )}
         </thead>
         <tbody className='font-base'>
           <tr className='text-xs'>

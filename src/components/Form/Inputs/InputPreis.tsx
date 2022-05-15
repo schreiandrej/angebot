@@ -18,7 +18,7 @@ export const InputPreis = ({ register, errors }: Props) => {
       />
       {errors?.literpreis && (
         <p className='absolute right-0 text-xs text-red-600 -top-5'>
-          {errors.preis?.message}
+          Bitte geben Sie einen Preis/100 Liter an.
         </p>
       )}
     </div>

@@ -65,8 +65,7 @@ export const calcGesamtPreis = (
       preis * lietermenge +
       mengenzuschlag +
       Number(gefahrgutzuschlag) +
-      Number(dieselzuschlag) -
-      guthaben
+      Number(dieselzuschlag)
     )
       .toFixed(2)
       .replace('.', ',')}
@@ -75,8 +74,7 @@ export const calcGesamtPreis = (
       (preis * lietermenge +
         mengenzuschlag +
         Number(gefahrgutzuschlag) +
-        Number(dieselzuschlag) -
-        guthaben) *
+        Number(dieselzuschlag)) *
       currentMwstFactor
     )
       .toFixed(2)

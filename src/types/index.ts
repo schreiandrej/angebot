@@ -22,17 +22,6 @@ export interface IOutput {
   guthaben: number
 }
 
-export interface IFormData {
-  literpreis: number
-  liefermenge: number | string
-  füllstand: number | string
-  mengenzuschlag: number
-  dieselzuschlag: number
-  gefahrgutzuschlag: number
-  vorkasse: number | string
-  guthaben: number
-}
-
 export interface IOptionsType {
   id: number
   name: string

@@ -16,7 +16,7 @@ export const InputVorkasse = ({ register, errors }: Props) => {
         tabIndex={2}
         {...register('vorkasse')}
       />
-      {errors?.literpreis && (
+      {errors?.vorkasse && (
         <p className='absolute right-0 text-xs text-red-600 -top-5'>
           {errors.preis?.message}
         </p>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   initialFormState,
   mengezuschlagOptions,
@@ -17,9 +18,9 @@ import {
   InputGuthaben,
 } from './Inputs'
 import { OutputSection } from '../Output/OutputSection'
-import { IOptionsType, IForm, IFormData, IOutput } from '../../types'
+import { IOptionsType, IForm, IOutput } from '../../types'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
-import { setStateOnSubmit } from '@/utils/setState'
+import { setStateOnSubmit } from '@/utils/setStateOnSubmit'
 import { RadioTankvolumen } from './Inputs/RadioTankvolumen'
 
 export const FormComponent = () => {
@@ -27,6 +28,8 @@ export const FormComponent = () => {
     tankvolumenOptions[1].value
   )
   const [emptyFieldsError, setEmptyFieldsError] = useState<boolean>(false)
+  const [addMengenzuschlagInfo, setAddMengenzuschlagInfo] =
+    useState<boolean>(false)
 
   const [formState, setFormState] = useState<IForm>(initialFormState)
 
@@ -35,9 +38,14 @@ export const FormComponent = () => {
     reset,
     register,
     control,
+    setFocus,
     formState: { errors },
     clearErrors,
   } = useForm()
+
+  useEffect(() => {
+    setFocus('literpreis', { shouldSelect: true })
+  }, [setFocus])
 
   const clearForm = () => {
     reset()
@@ -48,17 +56,18 @@ export const FormComponent = () => {
 
   const onSubmit = (data: any) => {
     const transformData = (data: any) => {
-      const transformedData: any = {}
+      const transformedData: any = initialFormState
 
-      if (data.liefermenge.value !== '') {
-        for (const [key, value] of Object.entries(data)) {
-          if (typeof value === 'string' && value.length > 0) {
-            transformedData[key] = Number((value as string).replace(',', '.'))
-          } else {
-            transformedData[key] = value
-          }
+      for (const [key, value] of Object.entries(data)) {
+        if (typeof value === 'string' && value.length > 0) {
+          transformedData[key] = Number((value as string).replace(',', '.'))
+        } else if (key === 'guthaben' && value === '') {
+          transformedData[key] = 0
+        } else {
+          transformedData[key] = null
         }
       }
+
       return transformedData
     }
 
@@ -72,6 +81,9 @@ export const FormComponent = () => {
       } else {
         setEmptyFieldsError(false)
 
+        if (data.vorkasse !== '') {
+          setAddMengenzuschlagInfo(true)
+        }
         setFormState(
           setStateOnSubmit(formState, transformData(data), tankvolumen)
         )
@@ -80,10 +92,14 @@ export const FormComponent = () => {
   }
 
   return (
-    <form className='flex flex-col gap-8' onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className='relative flex flex-col gap-8'
+      onSubmit={handleSubmit(onSubmit)}
+    >
       {emptyFieldsError && (
-        <div className='absolute top-5 w-full mx-auto text-red-500 font-semibold'>
-          Bitte eines der Werte: Füllstand, Liefermenge oder Vorkasse eingeben.
+        <div className='absolute -top-10 right-0 text-sm  text-red-500 font-semibold'>
+          Bitte einen der Werte "Füllstand", "Liefermenge" oder "Vorkasse"
+          eingeben.
         </div>
       )}
       <section className='flex flex-col gap-5'>
@@ -104,7 +120,14 @@ export const FormComponent = () => {
               <InputGuthaben register={register} />
             </div>
             <div className='flex flex-col gap-3'>
-              <InputMengenzuschlag register={register} errors={errors} />
+              <div className='relative'>
+                {addMengenzuschlagInfo && formState.mengenzuschlag < 1 && (
+                  <p className='absolute flex w-full -top-5 text-xs   text-red-500 font-semibold'>
+                    Mengenzuschlag hinzufügen?
+                  </p>
+                )}
+                <InputMengenzuschlag register={register} errors={errors} />
+              </div>
               <InputGefahrgutzuschlag register={register} errors={errors} />
               <InputDieselzuschlag register={register} errors={errors} />
             </div>
