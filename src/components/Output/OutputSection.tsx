@@ -26,7 +26,7 @@ export const OutputSection = ({ formState }: Props) => {
   } = formState
 
   return (
-    <section className='flex flex-col w-full items-center p-5'>
+    <section className='flex flex-col w-full items-center p-5 text-sm'>
       <table className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
