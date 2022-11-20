@@ -7,10 +7,13 @@ export const mengezuschlagOptions = [
 ]
 
 export const tankvolumenOptions = [
+  { id: 1, name: '1200 l', value: 1200, unavailable: false },
   { id: 1, name: '1775 l', value: 1775, unavailable: false },
   { id: 2, name: '2700 l', value: 2700, unavailable: false },
+  { id: 2, name: '2750 l', value: 2750, unavailable: false },
   { id: 3, name: '4850 l', value: 4850, unavailable: false },
   { id: 4, name: '6400 l', value: 6400, unavailable: false },
+  { id: 4, name: '6800 l', value: 6800, unavailable: false },
 ]
 
 export const initialFormState = {

@@ -109,41 +109,41 @@ export const FormComponent = () => {
           eingeben.
         </div>
       )}
-      <section className='flex flex-col gap-5'>
+      <section className='flex flex-col gap-3'>
         <div className='flex flex-row w-full gap-6'>
           <div className='flex flex-col w-full gap-2'>
             <InputPreis register={register} errors={errors} />
             <InputFüllstand register={register} />
-            <RadioTankvolumen
-              control={control}
-              tankvolumen={tankvolumen}
-              setTankvolumen={setTankvolumen}
-            />
           </div>
-          <div className='flex flex-row w-full gap-2'>
-            <div className='flex flex-col w-full justify-between gap-2'>
-              <InputVorkasse register={register} errors={errors} />
-              <InputLiefermenge register={register} />
-              <InputGuthaben register={register} />
+          <div className='flex flex-col w-full gap-3'>
+            <InputVorkasse register={register} errors={errors} />
+            <InputLiefermenge register={register} />
+          </div>
+          <div className='flex flex-col w-full gap-3'>
+            <div className='relative'>
+              {addMengenzuschlagInfo && formState.mengenzuschlag < 1 && (
+                <p className='absolute flex w-full -top-5 text-xs   text-red-500 font-semibold'>
+                  Mengenzuschlag hinzufügen?
+                </p>
+              )}
+              <InputMengenzuschlag register={register} errors={errors} />
             </div>
-            <div className='flex flex-col gap-3'>
-              <InputGefahrgutzuschlag register={register} errors={errors} />
-              <InputDieselzuschlag register={register} errors={errors} />
-              <div className='relative'>
-                {addMengenzuschlagInfo && formState.mengenzuschlag < 1 && (
-                  <p className='absolute flex w-full -top-5 text-xs   text-red-500 font-semibold'>
-                    Mengenzuschlag hinzufügen?
-                  </p>
-                )}
-                <InputMengenzuschlag register={register} errors={errors} />
-              </div>
-            </div>
+            <InputGuthaben register={register} />
+          </div>
+          <div className='flex flex-col gap-3'>
+            <InputGefahrgutzuschlag register={register} errors={errors} />
+            <InputDieselzuschlag register={register} errors={errors} />
           </div>
         </div>
         <div className='flex w-full gap-3 h-full justify-end'>
           <InputCheckboxMengenzuschlag register={register} errors={errors} />
           <InputCheckboxADRZuschlag register={register} errors={errors} />
         </div>
+        <RadioTankvolumen
+          control={control}
+          tankvolumen={tankvolumen}
+          setTankvolumen={setTankvolumen}
+        />
       </section>
       <OutputSection formState={formState as IOutput} />
       <section className='flex flex-row gap-3 '>

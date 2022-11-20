@@ -39,7 +39,7 @@ export const RadioTankvolumen = ({
                       ? 'bg-slate-400 bg-opacity-75 text-white'
                       : 'bg-white'
                   }
-                    relative w-full flex cursor-pointer rounded-lg py-3 shadow-md focus:outline-none`
+                    relative w-full flex cursor-pointer rounded-lg py-2 shadow-md focus:outline-none`
                   }
                 >
                   {({ active, checked }) => (
