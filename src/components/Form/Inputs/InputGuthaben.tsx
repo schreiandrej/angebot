@@ -14,6 +14,7 @@ export const InputGuthaben = ({ register }: Props) => {
       <input
         type='text'
         id='guthaben'
+        tabIndex={5}
         defaultValue={initialFormState.guthaben.toFixed(2).replace('.', ',')}
         autoComplete='off'
         {...register('guthaben')}

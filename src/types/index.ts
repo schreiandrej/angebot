@@ -8,6 +8,8 @@ export interface IForm {
   gefahrgutzuschlag: number
   vorkasse: number | null
   guthaben: number
+  checkboxADRZuschlag: boolean
+  checkboxMengenzuschlag: boolean
 }
 
 export interface IOutput {
@@ -20,6 +22,8 @@ export interface IOutput {
   gefahrgutzuschlag: number
   vorkasse: number
   guthaben: number
+  checkboxADRZuschlag: boolean
+  checkboxMengenzuschlag: boolean
 }
 
 export interface IOptionsType {

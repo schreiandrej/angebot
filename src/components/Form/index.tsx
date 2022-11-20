@@ -1,9 +1,5 @@
 import { useEffect } from 'react'
-import {
-  initialFormState,
-  mengezuschlagOptions,
-  tankvolumenOptions,
-} from '@/utils/variables'
+import { initialFormState, tankvolumenOptions } from '@/utils/variables'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
@@ -12,16 +8,18 @@ import {
   InputFüllstand,
   InputLiefermenge,
   InputPreis,
-  InputTankvolumen,
   InputVorkasse,
   InputMengenzuschlag,
   InputGuthaben,
+  InputCheckboxMengenzuschlag,
+  InputCheckboxADRZuschlag,
 } from './Inputs'
 import { OutputSection } from '../Output/OutputSection'
 import { IOptionsType, IForm, IOutput } from '../../types'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
 import { setStateOnSubmit } from '@/utils/setStateOnSubmit'
 import { RadioTankvolumen } from './Inputs/RadioTankvolumen'
+import { copyTable } from '@/utils/copyTagle'
 
 export const FormComponent = () => {
   const [tankvolumen, setTankvolumen] = useState<number>(
@@ -63,6 +61,8 @@ export const FormComponent = () => {
           transformedData[key] = Number((value as string).replace(',', '.'))
         } else if (key === 'guthaben' && value === '') {
           transformedData[key] = 0
+        } else if (typeof value === 'boolean') {
+          transformedData[key] = value
         } else {
           transformedData[key] = null
         }
@@ -94,6 +94,10 @@ export const FormComponent = () => {
     }
   }
 
+  useEffect(() => {
+    copyTable()
+  }, [formState])
+
   return (
     <form
       className='relative flex flex-col gap-8'
@@ -123,6 +127,8 @@ export const FormComponent = () => {
               <InputGuthaben register={register} />
             </div>
             <div className='flex flex-col gap-3'>
+              <InputGefahrgutzuschlag register={register} errors={errors} />
+              <InputDieselzuschlag register={register} errors={errors} />
               <div className='relative'>
                 {addMengenzuschlagInfo && formState.mengenzuschlag < 1 && (
                   <p className='absolute flex w-full -top-5 text-xs   text-red-500 font-semibold'>
@@ -131,10 +137,12 @@ export const FormComponent = () => {
                 )}
                 <InputMengenzuschlag register={register} errors={errors} />
               </div>
-              <InputGefahrgutzuschlag register={register} errors={errors} />
-              <InputDieselzuschlag register={register} errors={errors} />
             </div>
           </div>
+        </div>
+        <div className='flex w-full gap-3 h-full justify-end'>
+          <InputCheckboxMengenzuschlag register={register} errors={errors} />
+          <InputCheckboxADRZuschlag register={register} errors={errors} />
         </div>
       </section>
       <OutputSection formState={formState as IOutput} />

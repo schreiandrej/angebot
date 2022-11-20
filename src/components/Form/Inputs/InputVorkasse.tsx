@@ -13,7 +13,7 @@ export const InputVorkasse = ({ register, errors }: Props) => {
         type='text'
         id='vorkasse'
         autoComplete='off'
-        tabIndex={2}
+        tabIndex={3}
         {...register('vorkasse')}
       />
       {errors?.vorkasse && (

@@ -8,6 +8,8 @@ import { InputDieselzuschlag } from './InputDieselzuschlag'
 import { InputVorkasse } from './InputVorkasse'
 import { InputGuthaben } from './InputGuthaben'
 import { InputMengenzuschlag } from './InputMengenzuschlag'
+import { InputCheckboxMengenzuschlag } from './InputCheckboxMengenzuschlag'
+import { InputCheckboxADRZuschlag } from './InputCheckboxADRZuschlag'
 
 export {
   InputLiefermenge,
@@ -20,4 +22,6 @@ export {
   InputVorkasse,
   InputGuthaben,
   SelectMengenzuschlag,
+  InputCheckboxMengenzuschlag,
+  InputCheckboxADRZuschlag,
 }

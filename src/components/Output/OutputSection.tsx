@@ -23,11 +23,13 @@ export const OutputSection = ({ formState }: Props) => {
     dieselzuschlag,
     gefahrgutzuschlag,
     guthaben,
+    checkboxADRZuschlag,
+    checkboxMengenzuschlag,
   } = formState
 
   return (
     <section className='flex flex-col w-full items-center p-5 text-sm'>
-      <table className='w-4/5'>
+      <table id='table' className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
             <th className='text-left'>Liefermenge:</th>
@@ -80,7 +82,7 @@ export const OutputSection = ({ formState }: Props) => {
             </td>
           </tr>
 
-          {mengenzuschlag !== 0 && (
+          {checkboxMengenzuschlag && (
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
               <td className='text-right cursor-pointer hover:text-hover'>
@@ -91,7 +93,7 @@ export const OutputSection = ({ formState }: Props) => {
               </td>
             </tr>
           )}
-          {gefahrgutzuschlag !== 0 && (
+          {checkboxADRZuschlag && (
             <>
               <tr className=''>
                 <td className=''>Gefahrgutzuschlag:</td>
@@ -138,7 +140,9 @@ export const OutputSection = ({ formState }: Props) => {
                   mengenzuschlag,
                   gefahrgutzuschlag,
                   dieselzuschlag,
-                  guthaben
+                  guthaben,
+                  checkboxADRZuschlag,
+                  checkboxMengenzuschlag
                 ).netto
               }
             </td>
@@ -151,7 +155,9 @@ export const OutputSection = ({ formState }: Props) => {
                   mengenzuschlag,
                   gefahrgutzuschlag,
                   dieselzuschlag,
-                  guthaben
+                  guthaben,
+                  checkboxADRZuschlag,
+                  checkboxMengenzuschlag
                 ).brutto
               }
             </td>

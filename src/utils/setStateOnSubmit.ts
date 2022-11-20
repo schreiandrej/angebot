@@ -17,6 +17,8 @@ export const setStateOnSubmit = (
     gefahrgutzuschlag,
     vorkasse,
     guthaben,
+    checkboxADRZuschlag,
+    checkboxMengenzuschlag,
   } = formData
 
   const calcLiefermenge = getLiefermenge(
@@ -43,5 +45,7 @@ export const setStateOnSubmit = (
     gefahrgutzuschlag: gefahrgutzuschlag,
     vorkasse: Number(vorkasse),
     guthaben: guthaben,
+    checkboxADRZuschlag: checkboxADRZuschlag,
+    checkboxMengenzuschlag: checkboxMengenzuschlag,
   }
 }

@@ -7,10 +7,11 @@ export const ButtonDelete = ({ deleteResults }: ButtonDeleteProps) => {
     <button
       id='deleteButton'
       title='Delete Button'
-      className={`bg-transparent font-semibold p-2 border border-gray-400 rounded-lg focus:outline-none active:border-gray-600 hover:border-gray-600 group w-1/2`}
+      className={`bg-transparent font-semibold p-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-1 active:border-gray-600 hover:border-gray-600 group w-1/2`}
       type='button'
       onClick={deleteResults}
       role='button'
+      tabIndex={7}
     >
       <div className='flex flex-row justify-center'>
         <span>clear</span>
