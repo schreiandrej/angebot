@@ -4,7 +4,7 @@ export async function copyTable() {
   let range, sel
 
   // Ensure that range and selection are supported by the browsers
-  if (document.createRange && window.getSelection && elTable) {
+  if (elTable && document.createRange && window.getSelection) {
     range = document.createRange()
     sel = window.getSelection()
     // unselect any element in the page
