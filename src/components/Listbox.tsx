@@ -17,7 +17,7 @@ export const ListboxComponent = ({
     <Listbox
       as='div'
       value={selectedOption.value}
-      onChange={(e) => {
+      onChange={(e: any) => {
         setSelectedOption(e)
       }}
       className='relative w-full'

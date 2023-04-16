@@ -19,7 +19,7 @@ export const RadioTankvolumen = ({
       <Controller
         control={control}
         name='tankvolumen'
-        defaultValue={tankvolumenOptions[1].value}
+        defaultValue={tankvolumenOptions[2].value}
         render={() => (
           <RadioGroup value={tankvolumen} onChange={setTankvolumen}>
             <RadioGroup.Label className=''>Tankvolumen</RadioGroup.Label>

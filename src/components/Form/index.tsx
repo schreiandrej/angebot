@@ -23,7 +23,7 @@ import { copyTable } from '@/utils/copyTagle'
 
 export const FormComponent = () => {
   const [tankvolumen, setTankvolumen] = useState<number>(
-    tankvolumenOptions[1].value
+    tankvolumenOptions[2].value
   )
   const [emptyFieldsError, setEmptyFieldsError] = useState<boolean>(false)
   const [addMengenzuschlagInfo, setAddMengenzuschlagInfo] =
