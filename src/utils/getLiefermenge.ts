@@ -3,7 +3,7 @@ export const getLiefermenge = (
   liefermenge: number | null,
   füllstand: number | null,
   mengenzuschlag: number,
-  dieselzuschlag: number,
+  energiezuschlag: number,
   gefahrgutzuschlag: number,
   vorkasse: number | null,
   guthaben: number,
@@ -15,7 +15,7 @@ export const getLiefermenge = (
       Math.floor(
         (Number(vorkasse) +
           guthaben -
-          (dieselzuschlag + gefahrgutzuschlag + mengenzuschlag) *
+          (energiezuschlag + gefahrgutzuschlag + mengenzuschlag) *
             currentMwstFactor) /
           currentMwstFactor /
           (literpreis / 100)

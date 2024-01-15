@@ -4,7 +4,7 @@ import { SelectMengenzuschlag } from './SelectMengenzuschlag'
 import { InputTankvolumen } from './InputTankvolumen'
 import { InputGefahrgutzuschlag } from './InputGefahrgutzuschlag'
 import { InputFüllstand } from './InputFüllstand'
-import { InputDieselzuschlag } from './InputDieselzuschlag'
+import { InputEnergiezuschlag } from './InputEnergiezuschlag'
 import { InputVorkasse } from './InputVorkasse'
 import { InputGuthaben } from './InputGuthaben'
 import { InputMengenzuschlag } from './InputMengenzuschlag'
@@ -18,7 +18,7 @@ export {
   InputTankvolumen,
   InputGefahrgutzuschlag,
   InputFüllstand,
-  InputDieselzuschlag,
+  InputEnergiezuschlag,
   InputVorkasse,
   InputGuthaben,
   SelectMengenzuschlag,

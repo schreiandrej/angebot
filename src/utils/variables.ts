@@ -22,7 +22,7 @@ export const initialFormState = {
   füllstand: null,
   tankvolumen: 0,
   mengenzuschlag: 69.0,
-  dieselzuschlag: 6.5,
+  energiezuschlag: 6.5,
   gefahrgutzuschlag: 16.8,
   vorkasse: null,
   guthaben: 0,

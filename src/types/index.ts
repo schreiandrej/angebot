@@ -4,7 +4,7 @@ export interface IForm {
   füllstand: number | null
   tankvolumen: number
   mengenzuschlag: number
-  dieselzuschlag: number
+  energiezuschlag: number
   gefahrgutzuschlag: number
   vorkasse: number | null
   guthaben: number
@@ -18,7 +18,7 @@ export interface IOutput {
   füllstand: number
   tankvolumen: number
   mengenzuschlag: number
-  dieselzuschlag: number
+  energiezuschlag: number
   gefahrgutzuschlag: number
   vorkasse: number
   guthaben: number

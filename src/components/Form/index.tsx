@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   InputGefahrgutzuschlag,
-  InputDieselzuschlag,
+  InputEnergiezuschlag,
   InputFüllstand,
   InputLiefermenge,
   InputPreis,
@@ -19,7 +19,7 @@ import { IOptionsType, IForm, IOutput } from '../../types'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
 import { setStateOnSubmit } from '@/utils/setStateOnSubmit'
 import { RadioTankvolumen } from './Inputs/RadioTankvolumen'
-import { copyTable } from '@/utils/copyTagle'
+import { copyTable } from '@/utils/copyTable'
 
 export const FormComponent = () => {
   const [tankvolumen, setTankvolumen] = useState<number>(
@@ -132,7 +132,7 @@ export const FormComponent = () => {
           </div>
           <div className='flex flex-col gap-3'>
             <InputGefahrgutzuschlag register={register} errors={errors} />
-            <InputDieselzuschlag register={register} errors={errors} />
+            <InputEnergiezuschlag register={register} errors={errors} />
           </div>
         </div>
         <div className='flex w-full gap-3 h-full justify-end'>

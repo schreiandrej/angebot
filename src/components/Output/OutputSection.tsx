@@ -1,5 +1,5 @@
 import {
-  calcDieselzuschlag,
+  calcEnergiezuschlag,
   calcGefahrgutzuschlag,
   calcGesamtPreis,
   calcGuthaben,
@@ -20,7 +20,7 @@ export const OutputSection = ({ formState }: Props) => {
     füllstand,
     tankvolumen,
     mengenzuschlag,
-    dieselzuschlag,
+    energiezuschlag,
     gefahrgutzuschlag,
     guthaben,
     checkboxADRZuschlag,
@@ -105,12 +105,12 @@ export const OutputSection = ({ formState }: Props) => {
                 </td>
               </tr>
               <tr className=''>
-                <td className='pb-3'>Dieselzuschlag:</td>
+                <td className='pb-3'>Energiezuschlag:</td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {calcDieselzuschlag(dieselzuschlag).netto}
+                  {calcEnergiezuschlag(energiezuschlag).netto}
                 </td>
                 <td className='pb-3 text-right cursor-pointer hover:text-hover'>
-                  {calcDieselzuschlag(dieselzuschlag).brutto}
+                  {calcEnergiezuschlag(energiezuschlag).brutto}
                 </td>
               </tr>
             </>
@@ -139,7 +139,7 @@ export const OutputSection = ({ formState }: Props) => {
                   liefermenge,
                   mengenzuschlag,
                   gefahrgutzuschlag,
-                  dieselzuschlag,
+                  energiezuschlag,
                   guthaben,
                   checkboxADRZuschlag,
                   checkboxMengenzuschlag
@@ -154,7 +154,7 @@ export const OutputSection = ({ formState }: Props) => {
                   liefermenge,
                   mengenzuschlag,
                   gefahrgutzuschlag,
-                  dieselzuschlag,
+                  energiezuschlag,
                   guthaben,
                   checkboxADRZuschlag,
                   checkboxMengenzuschlag

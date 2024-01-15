@@ -39,10 +39,10 @@ export const calcGefahrgutzuschlag = (gefahrgutzuschlag: number | string) => {
   }
 }
 
-export const calcDieselzuschlag = (dieselzuschlag: number | string) => {
+export const calcEnergiezuschlag = (energiezuschlag: number | string) => {
   return {
-    netto: `${Number(dieselzuschlag).toFixed(2).replace('.', ',')} €`,
-    brutto: `${(Number(dieselzuschlag) * currentMwstFactor)
+    netto: `${Number(energiezuschlag).toFixed(2).replace('.', ',')} €`,
+    brutto: `${(Number(energiezuschlag) * currentMwstFactor)
       .toFixed(2)
       .replace('.', ',')} €`,
   }
@@ -57,7 +57,7 @@ export const calcGesamtPreis = (
   lietermenge: number,
   mengenzuschlag: number,
   gefahrgutzuschlag: number | string,
-  dieselzuschlag: number | string,
+  energiezuschlag: number | string,
   guthaben: number,
   checkboxADRZuschlag: boolean,
   checkboxMengenzuschlag: boolean
@@ -66,7 +66,7 @@ export const calcGesamtPreis = (
     preis * lietermenge +
     (checkboxMengenzuschlag ? mengenzuschlag : 0) +
     (checkboxADRZuschlag
-      ? Number(gefahrgutzuschlag) + Number(dieselzuschlag)
+      ? Number(gefahrgutzuschlag) + Number(energiezuschlag)
       : 0) -
     guthaben
 
