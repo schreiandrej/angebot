@@ -1,4 +1,4 @@
-export const currentMwstFactor = 1.07
+export const currentMwstFactor = 1.19
 
 export const mengezuschlagOptions = [
   { id: 1, name: 'Kein Mengenzuschlag', value: 0, unavailable: false },
