@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect } from 'react'
-import { initialFormState, tankvolumenOptions } from '@/utils/variables'
+import { initialFormState, tankvolumenOptions } from 'app/utils/variables'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
@@ -17,9 +19,9 @@ import {
 import { OutputSection } from '../Output/OutputSection'
 import { IOptionsType, IForm, IOutput } from '../../types'
 import { ButtonSubmit, ButtonDelete } from '../Buttons'
-import { setStateOnSubmit } from '@/utils/setStateOnSubmit'
+import { setStateOnSubmit } from 'app/utils/setStateOnSubmit'
 import { RadioTankvolumen } from './Inputs/RadioTankvolumen'
-import { copyTable } from '@/utils/copyTable'
+import { copyTable } from 'app/utils/copyTable'
 
 export const FormComponent = () => {
   const [tankvolumen, setTankvolumen] = useState<number>(

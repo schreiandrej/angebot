@@ -16,7 +16,7 @@
         "src/models/*"
       ],
       "@/utils/*": [
-        "src/utils/*"
+        "app/utils/*"
       ],
       "@/hooks/*": [
         "src/hooks/*"
@@ -33,7 +33,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": [
     "node_modules",
@@ -45,6 +50,7 @@
     "**/*.tsx",
     "tailwind.config.js",
     "postcss.config.js",
-    "src/utils/copyToClipboard.ts"
+    "app/utils/copyToClipboard.ts",
+    ".next/types/**/*.ts"
   ]
 }

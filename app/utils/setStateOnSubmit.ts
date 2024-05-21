@@ -1,4 +1,4 @@
-import { IForm } from 'src/types'
+import { IForm } from 'app/types'
 import { getLiefermenge } from './getLiefermenge'
 import { transformPreis } from './transformpreis'
 import { currentMwstFactor } from './variables'

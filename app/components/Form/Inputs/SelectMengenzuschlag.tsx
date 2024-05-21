@@ -1,5 +1,5 @@
 import { IOptionsType } from '../../../types'
-import { mengezuschlagOptions } from '@/utils/variables'
+import { mengezuschlagOptions } from 'app/utils/variables'
 import { Control, Controller, FieldValues } from 'react-hook-form'
 import { ListboxComponent } from '../../Listbox'
 import { Dispatch, SetStateAction } from 'react'

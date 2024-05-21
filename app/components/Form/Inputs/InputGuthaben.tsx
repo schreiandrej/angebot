@@ -1,4 +1,4 @@
-import { initialFormState } from '@/utils/variables'
+import { initialFormState } from 'app/utils/variables'
 
 interface Props {
   register: any

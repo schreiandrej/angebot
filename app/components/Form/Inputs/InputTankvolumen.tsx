@@ -1,7 +1,7 @@
-import { tankvolumenOptions } from '@/utils/variables'
+import { tankvolumenOptions } from 'app/utils/variables'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { Controller } from 'react-hook-form'
-import { IOptionsType } from 'src/types'
+import { IOptionsType } from 'app/types'
 import { ListboxComponent } from '../../Listbox'
 
 interface Props {

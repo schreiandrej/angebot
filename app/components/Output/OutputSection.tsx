@@ -6,8 +6,8 @@ import {
   calcMengenzuschlag,
   calcPreisGesamtmenge,
   calcPreisProLiter,
-} from '@/components/Output/calculations'
-import { IOutput } from 'src/types'
+} from './calculations'
+import { IOutput } from 'app/types'
 
 interface Props {
   formState: IOutput
