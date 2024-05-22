@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import {
   calcEnergiezuschlag,
   calcGefahrgutzuschlag,
@@ -6,11 +7,12 @@ import {
   calcMengenzuschlag,
   calcPreisGesamtmenge,
   calcPreisProLiter,
-} from './calculations'
-import { IOutput } from 'app/types'
+} from '../lib/calculations'
+import { FormState } from 'app/page'
+import { copyTable } from '@/lib/utils'
 
-interface Props {
-  formState: IOutput
+type Props = {
+  formState: FormState
 }
 
 export const OutputSection = ({ formState }: Props) => {
@@ -23,30 +25,36 @@ export const OutputSection = ({ formState }: Props) => {
     energiezuschlag,
     gefahrgutzuschlag,
     guthaben,
-    checkboxADRZuschlag,
-    checkboxMengenzuschlag,
+    gefahrgutzuschlag_checkbox,
+    mengenzuschlag_checkbox,
   } = formState
 
+  console.log(formState)
+
+  useEffect(() => {
+    copyTable()
+  }, [formState])
+
   return (
-    <section className='flex flex-col w-full items-center p-5 text-sm'>
+    <section className='flex flex-col max-w-4xl w-full items-center text-sm'>
       <table id='table' className='w-4/5'>
         <thead className='border-b border-b-slate-200'>
           <tr className=''>
             <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
-            <th className='text-right'> {liefermenge} Liter</th>
+            <th className='text-right'> {liefermenge || 0} Liter</th>
           </tr>
           <tr className='text-sm'>
             <td className='text-left'>Behältervolumen:</td>
             <td className='text-right'></td>
-            <td className='text-right'> {tankvolumen} Liter</td>
+            <td className='text-right'> {tankvolumen || 0} Liter</td>
           </tr>
           {füllstand !== null && (
             <>
               <tr className='text-sm'>
                 <td className='text-left'>Füllstand:</td>
                 <td className='text-right'></td>
-                <td className='text-right'> {füllstand} %</td>
+                <td className='text-right'> {füllstand || 0} %</td>
               </tr>
             </>
           )}
@@ -82,7 +90,7 @@ export const OutputSection = ({ formState }: Props) => {
             </td>
           </tr>
 
-          {checkboxMengenzuschlag && (
+          {mengenzuschlag_checkbox && (
             <tr className=''>
               <td className=''>Teilmengenzuschlag:</td>
               <td className='text-right cursor-pointer hover:text-hover'>
@@ -93,7 +101,7 @@ export const OutputSection = ({ formState }: Props) => {
               </td>
             </tr>
           )}
-          {checkboxADRZuschlag && (
+          {gefahrgutzuschlag_checkbox && (
             <>
               <tr className=''>
                 <td className=''>Gefahrgutzuschlag:</td>
@@ -115,7 +123,7 @@ export const OutputSection = ({ formState }: Props) => {
               </tr>
             </>
           )}
-          {guthaben !== 0 && (
+          {guthaben && (
             <>
               <tr className=''>
                 <td className=''>Guthaben:</td>
@@ -141,8 +149,8 @@ export const OutputSection = ({ formState }: Props) => {
                   gefahrgutzuschlag,
                   energiezuschlag,
                   guthaben,
-                  checkboxADRZuschlag,
-                  checkboxMengenzuschlag
+                  gefahrgutzuschlag_checkbox,
+                  mengenzuschlag_checkbox
                 ).netto
               }
             </td>
@@ -156,8 +164,8 @@ export const OutputSection = ({ formState }: Props) => {
                   gefahrgutzuschlag,
                   energiezuschlag,
                   guthaben,
-                  checkboxADRZuschlag,
-                  checkboxMengenzuschlag
+                  gefahrgutzuschlag_checkbox,
+                  mengenzuschlag_checkbox
                 ).brutto
               }
             </td>

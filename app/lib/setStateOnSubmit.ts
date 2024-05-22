@@ -1,11 +1,10 @@
-import { IForm } from 'app/types'
+import { FormType } from 'app/types'
 import { getLiefermenge } from './getLiefermenge'
-import { transformPreis } from './transformpreis'
-import { currentMwstFactor } from './variables'
+import { currentMwstFactor } from './constants'
 
 export const setStateOnSubmit = (
-  formState: IForm,
-  formData: IForm,
+  formState: FormType,
+  formData: FormType,
   tankvolumen: number
 ) => {
   const {
@@ -36,7 +35,7 @@ export const setStateOnSubmit = (
 
   return {
     ...formState,
-    literpreis: parseFloat(transformPreis(literpreis)),
+    literpreis: literpreis,
     füllstand: füllstand,
     tankvolumen: tankvolumen,
     liefermenge: calcLiefermenge,

@@ -1,26 +1,12 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
     "importHelpers": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/models/*": [
-        "src/models/*"
-      ],
-      "@/utils/*": [
-        "app/utils/*"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ]
+      "@/components/*": ["app/components/*"],
+      "@/lib/*": ["app/lib/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -40,17 +26,14 @@
       }
     ]
   },
-  "exclude": [
-    "node_modules",
-    ".next"
-  ],
+  "exclude": ["node_modules", ".next"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "tailwind.config.js",
     "postcss.config.js",
-    "app/utils/copyToClipboard.ts",
+    "app/lib/copyToClipboard.ts",
     ".next/types/**/*.ts"
   ]
 }

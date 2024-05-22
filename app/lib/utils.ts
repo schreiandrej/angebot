@@ -1,3 +1,16 @@
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+
+export const formatNumber = (num: number) =>
+  new Intl.NumberFormat('de-DE', {
+    maximumFractionDigits: 2,
+    minimumFractionDigits: 2,
+  }).format(num)
+
 export async function copyTable() {
   const elTable = document.querySelector('table')
 
