@@ -41,8 +41,7 @@ const formSchema = z.object({
   füllstand: z
     .number()
     .max(85, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' })
-    .min(0, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' })
-    .nullable(),
+    .min(0, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' }),
   tankvolumen: z
     .string()
     .min(1, { message: 'Bitte ein Tankvolumen auswählen!' }),
@@ -62,7 +61,7 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
     defaultValues: {
       literpreis: '',
       liefermenge: '',
-      füllstand: null,
+      füllstand: 0,
       tankvolumen: '',
       mengenzuschlag: formatNumber(initialValues.mengenzuschlag),
       energiezuschlag: formatNumber(initialValues.energiezuschlag),
@@ -108,9 +107,9 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
 
       data['liefermenge'] = data['vorkasse']
         ? (data['liefermenge'] = berechneteVorkasseLiefermenge)
-        : data.füllstand
-          ? Math.floor((data.tankvolumen * (85 - data.füllstand)) / 100)
-          : data.liefermenge
+        : data.liefermenge
+          ? data.liefermenge
+          : Math.floor((data.tankvolumen * (85 - data.füllstand)) / 100)
 
       return data
     }
@@ -158,6 +157,7 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
                       </div>
                       <Input
                         placeholder='Füllstand'
+                        type='number'
                         {...field}
                         onChange={(e) => {
                           const value = e.target.value
@@ -352,8 +352,8 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
                 </FormItem>
               )}
             />
-            <div className='w-full flex flex-row-reverse justify-end gap-7'>
-              <Button className='w-full' type='submit'>
+            <div className='w-full flex flex-row-reverse justify-between gap-2'>
+              <Button className='w-full flex' type='submit'>
                 Berechne
               </Button>
               <Button
@@ -365,7 +365,7 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
                   form.resetField('liefermenge')
                   form.resetField('guthaben')
                 }}
-                className='w-full'
+                className='w-full flex'
               >
                 <RotateCcwIcon size={16} />
               </Button>
