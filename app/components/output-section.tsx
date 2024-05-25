@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import {
   calcEnergiezuschlag,
   calcGefahrgutzuschlag,
@@ -9,7 +8,6 @@ import {
   calcPreisProLiter,
 } from '../lib/calculations'
 import { FormState } from 'app/page'
-import { copyTable } from '@/lib/utils'
 
 type Props = {
   formState: FormState
@@ -29,12 +27,6 @@ export const OutputSection = ({ formState }: Props) => {
     mengenzuschlag_checkbox,
   } = formState
 
-  console.log(formState)
-
-  useEffect(() => {
-    copyTable()
-  }, [formState])
-
   return (
     <section className='flex flex-col max-w-4xl w-full items-center text-sm'>
       <table id='table' className='w-4/5'>
@@ -42,7 +34,10 @@ export const OutputSection = ({ formState }: Props) => {
           <tr className=''>
             <th className='text-left'>Liefermenge:</th>
             <th className='text-right'></th>
-            <th className='text-right'> {liefermenge || 0} Liter</th>
+            <th className='text-right'>
+              {' '}
+              {liefermenge?.toFixed(0) || 0} Liter
+            </th>
           </tr>
           <tr className='text-sm'>
             <td className='text-left'>Behältervolumen:</td>
@@ -58,16 +53,17 @@ export const OutputSection = ({ formState }: Props) => {
               </tr>
             </>
           )}
+          <tr className='w-full h-5'></tr>
         </thead>
         <tbody className='font-base'>
           <tr className='text-xs'>
             <td className=''></td>
 
-            <td className='text-right cursor-pointer hover:text-hover  pt-2'>
+            <td className='text-right cursor-pointer hover:text-hover pt-2 font-semibold'>
               zzgl. MwSt.
             </td>
 
-            <td className='text-right cursor-pointer hover:text-hover pt-2'>
+            <td className='text-right cursor-pointer hover:text-hover pt-2 font-semibold'>
               inkl. MwSt.
             </td>
           </tr>

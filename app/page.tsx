@@ -6,9 +6,6 @@ import { initialValues } from './lib/constants'
 import { OutputSection } from './components/output-section'
 import { copyTable } from './lib/utils'
 
-const dynamic = 'force-dynamic'
-const revalidate = 0
-
 export type FormState = {
   literpreis: number | null
   liefermenge: number | null
@@ -25,15 +22,18 @@ export type FormState = {
 
 export default function Page() {
   const [formState, setFormState] = useState<FormState>(initialValues)
-
+  const [updateTimeStamp, setUpdateTimestamp] = useState<number>(0)
   useEffect(() => {
     copyTable()
-  }, [formState])
+  }, [updateTimeStamp])
 
   return (
     <main className='flex flex-col w-full h-screen items-center'>
       <section className='flex items-center justify-center w-full bg-accent h-full'>
-        <FormComponent formState={formState} setFormState={setFormState} />
+        <FormComponent
+          setFormState={setFormState}
+          setUpdateTimestamp={setUpdateTimestamp}
+        />
       </section>
       <section className='flex items-center justify-center w-full bg-background h-full'>
         <OutputSection formState={formState} />

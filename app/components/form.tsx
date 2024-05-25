@@ -13,7 +13,11 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from './ui/input'
-import { initialValues, tankvolumenOptions } from '@/lib/constants'
+import {
+  currentMwstFactor,
+  initialValues,
+  tankvolumenOptions,
+} from '@/lib/constants'
 import {
   Select,
   SelectTrigger,
@@ -24,16 +28,21 @@ import {
 import { Checkbox } from './ui/checkbox'
 import { formatNumber } from '@/lib/utils'
 import { FormState } from 'app/page'
+import { RotateCcwIcon } from 'lucide-react'
 
 type Props = {
-  formState: FormState
   setFormState: (formState: FormState) => void
+  setUpdateTimestamp: (timestamp: number) => void
 }
 
 const formSchema = z.object({
   literpreis: z.string().min(1, { message: 'Bitte einen Preis eingeben!' }),
   liefermenge: z.string(),
-  füllstand: z.string(),
+  füllstand: z
+    .number()
+    .max(85, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' })
+    .min(0, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' })
+    .nullable(),
   tankvolumen: z
     .string()
     .min(1, { message: 'Bitte ein Tankvolumen auswählen!' }),
@@ -46,14 +55,14 @@ const formSchema = z.object({
   mengenzuschlag_checkbox: z.boolean(),
 })
 
-export function FormComponent({ formState, setFormState }: Props) {
+export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       literpreis: '',
       liefermenge: '',
-      füllstand: '',
+      füllstand: null,
       tankvolumen: '',
       mengenzuschlag: formatNumber(initialValues.mengenzuschlag),
       energiezuschlag: formatNumber(initialValues.energiezuschlag),
@@ -68,32 +77,55 @@ export function FormComponent({ formState, setFormState }: Props) {
   // 2. Define a submit handler.
   function onSubmit(formValues: z.infer<typeof formSchema>) {
     const transformData = (formData: z.infer<typeof formSchema>) => {
-      const transformedData: any = initialValues
+      const data: any = initialValues
 
       for (const [key, value] of Object.entries(formData)) {
         if (typeof value === 'string' && value.length > 0) {
-          transformedData[key] = Number((value as string).replace(',', '.'))
+          data[key] = Number((value as string).replace(',', '.'))
         } else if (typeof value === 'boolean') {
-          transformedData[key] = value
+          data[key] = value
         } else {
-          transformedData[key] = null
+          data[key] = null
         }
       }
 
-      transformedData['liefermenge'] =
-        (transformedData.tankvolumen * (85 - transformedData.füllstand)) / 100
+      data['mengenzuschlag'] = data.mengenzuschlag_checkbox
+        ? data.mengenzuschlag
+        : 0
+      data['gefahrgutzuschlag'] = data.gefahrgutzuschlag_checkbox
+        ? data.gefahrgutzuschlag
+        : 0
+      data['energiezuschlag'] = data.gefahrgutzuschlag_checkbox
+        ? data.energiezuschlag
+        : 0
 
-      return transformedData
+      const berechneteVorkasseLiefermenge =
+        (data['vorkasse'] / currentMwstFactor -
+          data['mengenzuschlag'] -
+          data['gefahrgutzuschlag'] -
+          data['energiezuschlag']) /
+        (data['literpreis'] / 100)
+
+      data['liefermenge'] = data['vorkasse']
+        ? (data['liefermenge'] = berechneteVorkasseLiefermenge)
+        : data.füllstand
+          ? Math.floor((data.tankvolumen * (85 - data.füllstand)) / 100)
+          : data.liefermenge
+
+      return data
     }
+
+    const timestampt = new Date().getTime()
+    setUpdateTimestamp(timestampt)
 
     setFormState(transformData(formValues))
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
-        <div className='w-full flex felx-row gap-5'>
-          <div className='flex flex-col gap-3'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='relative'>
+        <div className='w-full flex felx-row gap-7'>
+          <div className='flex flex-col gap-7'>
             <FormField
               control={form.control}
               name='literpreis'
@@ -124,7 +156,18 @@ export function FormComponent({ formState, setFormState }: Props) {
                       <div className='absolute right-3 top-1/2 -translate-y-1/2 text-primary/50'>
                         %
                       </div>
-                      <Input placeholder='Füllstand' {...field} />
+                      <Input
+                        placeholder='Füllstand'
+                        {...field}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (value === null) {
+                            field.onChange(0)
+                          } else {
+                            field.onChange(Number(value))
+                          }
+                        }}
+                      />
                     </div>
                   </FormControl>
                   <FormMessage />
@@ -150,7 +193,7 @@ export function FormComponent({ formState, setFormState }: Props) {
               )}
             />
           </div>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-7'>
             <FormField
               control={form.control}
               name='vorkasse'
@@ -188,13 +231,13 @@ export function FormComponent({ formState, setFormState }: Props) {
               )}
             />
           </div>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-7'>
             <FormField
               control={form.control}
               name='gefahrgutzuschlag'
               render={({ field }) => (
                 <FormItem>
-                  <div className='flex flex-row justify-between items-center'>
+                  <div className='flex flex-row justify-between items-center pr-1'>
                     <FormLabel>Gefahrgutzuschlag</FormLabel>
                     <FormField
                       control={form.control}
@@ -247,7 +290,7 @@ export function FormComponent({ formState, setFormState }: Props) {
               name='mengenzuschlag'
               render={({ field }) => (
                 <FormItem>
-                  <div className='flex flex-row justify-between items-center'>
+                  <div className='flex flex-row justify-between items-center pr-1'>
                     <FormLabel>Mengenzuschlag</FormLabel>
                     <FormField
                       control={form.control}
@@ -278,7 +321,7 @@ export function FormComponent({ formState, setFormState }: Props) {
               )}
             />
           </div>
-          <div className='flex flex-col gap-3'>
+          <div className='flex flex-col gap-7 justify-between'>
             <FormField
               control={form.control}
               name='tankvolumen'
@@ -288,7 +331,7 @@ export function FormComponent({ formState, setFormState }: Props) {
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      // defaultValue={field.value}
                     >
                       <SelectTrigger className='w-[184px]'>
                         <SelectValue
@@ -309,10 +352,25 @@ export function FormComponent({ formState, setFormState }: Props) {
                 </FormItem>
               )}
             />
+            <div className='w-full flex flex-row-reverse justify-end gap-7'>
+              <Button className='w-full' type='submit'>
+                Berechne
+              </Button>
+              <Button
+                type='reset'
+                onClick={() => {
+                  form.resetField('vorkasse')
+                  form.resetField('literpreis')
+                  form.resetField('füllstand')
+                  form.resetField('liefermenge')
+                  form.resetField('guthaben')
+                }}
+                className='w-full'
+              >
+                <RotateCcwIcon size={16} />
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className='w-full flex justify-end'>
-          <Button type='submit'>Berechne</Button>
         </div>
       </form>
     </Form>

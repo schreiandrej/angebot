@@ -14,23 +14,23 @@ const formatCurrency = (
 
 export const calcPreisProLiter = (preisProLiter: number | null) => {
   return {
-    netto: formatCurrency(preisProLiter || 0, 4, 4),
+    netto: formatCurrency(preisProLiter || 0, 2, 4),
     brutto: formatCurrency(
       preisProLiter ? preisProLiter * currentMwstFactor : 0,
-      4,
+      2,
       4
     ),
   }
 }
 
 export const calcPreisGesamtmenge = (
-  preisProLiter: number | null,
+  preis: number | null,
   liefermenge: number | null
 ) => {
   return {
-    netto: formatCurrency((preisProLiter || 0) * (liefermenge || 0)),
+    netto: formatCurrency(((preis || 0) * (liefermenge || 0)) / 100),
     brutto: formatCurrency(
-      (preisProLiter || 0) * (liefermenge || 0) * currentMwstFactor
+      (((preis || 0) * (liefermenge || 0)) / 100) * currentMwstFactor
     ),
   }
 }
@@ -71,14 +71,14 @@ export const calcGesamtPreis = (
   checkboxMengenzuschlag: boolean
 ) => {
   const nettoGesamtpreis =
-    (preis || 0) * (litermenge || 0) +
+    ((preis || 0) / 100) * (litermenge || 0) +
     (checkboxMengenzuschlag ? mengenzuschlag : 0) +
     (checkboxADRZuschlag
       ? Number(gefahrgutzuschlag) + Number(energiezuschlag)
-      : 0) -
-    (guthaben || 0)
+      : 0)
 
-  const bruttoGesamtpreis = nettoGesamtpreis * currentMwstFactor
+  const bruttoGesamtpreis =
+    nettoGesamtpreis * currentMwstFactor - (guthaben || 0)
 
   return {
     netto: formatCurrency(nettoGesamtpreis),
