@@ -9,7 +9,7 @@ import { copyTable } from './lib/utils'
 export type FormState = {
   literpreis: number | null
   liefermenge: number | null
-  füllstand: number | null
+  füllstand: number
   tankvolumen: number | null
   mengenzuschlag: number
   energiezuschlag: number

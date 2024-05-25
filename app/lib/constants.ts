@@ -19,7 +19,7 @@ export const tankvolumenOptions = [
 export const initialValues = {
   literpreis: null,
   liefermenge: null,
-  füllstand: null,
+  füllstand: 0,
   tankvolumen: null,
   mengenzuschlag: 69.0,
   energiezuschlag: 6.5,
