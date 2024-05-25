@@ -17,7 +17,8 @@ export default function RootLayout({
     <html lang='de'>
       <body>
         {/* Layout UI */}
-        <main>{children}</main>
+        <main>{children}</main>^
+        <Analytics />
       </body>
     </html>
   )
