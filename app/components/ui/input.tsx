@@ -8,6 +8,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
+        onFocus={(e) => {
+          e.target.select()
+        }}
         type={type}
         autoComplete='off'
         className={cn(

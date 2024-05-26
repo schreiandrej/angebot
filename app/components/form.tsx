@@ -158,6 +158,7 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
                       <Input
                         placeholder='Füllstand'
                         type='number'
+                        className='appearance-none'
                         {...field}
                         onChange={(e) => {
                           const value = e.target.value
