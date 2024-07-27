@@ -38,10 +38,7 @@ type Props = {
 const formSchema = z.object({
   literpreis: z.string().min(1, { message: 'Bitte einen Preis eingeben!' }),
   liefermenge: z.string(),
-  füllstand: z
-    .number()
-    .max(85, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' })
-    .min(0, { message: 'Bitte einen Wert zwischen 0 und 85 eingeben!' }),
+  füllstand: z.string(),
   tankvolumen: z
     .string()
     .min(1, { message: 'Bitte ein Tankvolumen auswählen!' }),
@@ -61,7 +58,7 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
     defaultValues: {
       literpreis: '',
       liefermenge: '',
-      füllstand: 0,
+      füllstand: '',
       tankvolumen: '',
       mengenzuschlag: formatNumber(initialValues.mengenzuschlag),
       energiezuschlag: formatNumber(initialValues.energiezuschlag),
@@ -106,11 +103,12 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
         (data['literpreis'] / 100)
 
       data['liefermenge'] = data['vorkasse']
-        ? (data['liefermenge'] = berechneteVorkasseLiefermenge)
+        ? berechneteVorkasseLiefermenge
         : data.liefermenge
           ? data.liefermenge
           : Math.floor((data.tankvolumen * (85 - data.füllstand)) / 100)
 
+      console.log(data.füllstand)
       return data
     }
 
@@ -157,17 +155,9 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
                       </div>
                       <Input
                         placeholder='Füllstand'
-                        type='number'
+                        type='string'
                         className='appearance-none'
                         {...field}
-                        onChange={(e) => {
-                          const value = e.target.value
-                          if (value === null) {
-                            field.onChange(0)
-                          } else {
-                            field.onChange(Number(value))
-                          }
-                        }}
                       />
                     </div>
                   </FormControl>
