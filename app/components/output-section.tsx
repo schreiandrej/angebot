@@ -29,7 +29,7 @@ export const OutputSection = ({ formState }: Props) => {
 
   return (
     <section className='flex flex-col max-w-4xl w-full items-center text-sm'>
-      <table id='table' className='w-4/5 rounded-lg'>
+      <table id='table' className='w-4/5 border border-slate-500 rounded-lg'>
         <thead className='border-transparent'>
           <tr className=''>
             <th className='text-left'>Liefermenge:</th>
