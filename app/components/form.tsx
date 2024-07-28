@@ -108,7 +108,6 @@ export function FormComponent({ setFormState, setUpdateTimestamp }: Props) {
           ? data.liefermenge
           : Math.floor((data.tankvolumen * (85 - data.füllstand)) / 100)
 
-      console.log(data.füllstand)
       return data
     }
 

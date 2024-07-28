@@ -14,6 +14,19 @@ export const formatNumber = (num: number) =>
 export async function copyTable() {
   const elTable = document.querySelector('table')
 
+  if (elTable) {
+    // Add inline CSS styles to the table
+    elTable.style.borderCollapse = 'collapse'
+    elTable.style.border = '1px solid red'
+
+    const cells = elTable.querySelectorAll('th, td')
+    cells.forEach((cell: Element) => {
+      const cellElement = cell as HTMLElement
+      cellElement.style.border = '1px solid red'
+      cellElement.style.padding = '5px'
+    })
+  }
+
   let range, sel
 
   // Ensure that range and selection are supported by the browsers
