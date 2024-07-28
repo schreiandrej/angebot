@@ -33,12 +33,12 @@ export async function copyTable() {
 
     // Add inline CSS styles to the table
     elTable.style.borderCollapse = 'collapse'
-    elTable.style.border = '1px solid black'
+    elTable.style.border = '1px solid transparent'
     elTable.style.borderRadius = '10px'
 
     cells.forEach((cell: Element) => {
       const cellElement = cell as HTMLElement
-      cellElement.style.border = '1px solid black'
+      cellElement.style.border = '1px solid transparent'
       cellElement.style.padding = '5px'
       cellElement.style.borderRadius = '10px'
     })
