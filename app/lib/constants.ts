@@ -22,7 +22,7 @@ export const initialValues = {
   füllstand: 0,
   tankvolumen: null,
   mengenzuschlag: 69.0,
-  energiezuschlag: 6.5,
+  energiezuschlag: 7.5,
   gefahrgutzuschlag: 16.8,
   vorkasse: null,
   guthaben: null,
